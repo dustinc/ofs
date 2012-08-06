@@ -21,5 +21,8 @@ controller.load = function(template, req, res, next) {
 
 controller.index = function(req, res, next) {
   res.render('home');
-  //res.send('hi');
+};
+
+controller.test = function(req, res, next) {
+  res.send('test');
 };
