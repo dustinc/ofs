@@ -21,6 +21,5 @@ app.listen(port);
 console.log('OFS App',
   app.set('version'),
   app.set('env'),
-  app.set('host')//,
- // app.address().port
+  app.set('host')
 );
