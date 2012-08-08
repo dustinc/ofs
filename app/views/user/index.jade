@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  h2 Add new
+  form(action='/user/create', method='put', id='create')
+    label First Name
+    input(type='text', name='user[name][first]')
+    label Last Name
+    input(type='text', name='user[name][last]')
+
+    label Email
+    input(type='text', name='user[email]')
+
+    input(type='submit', value='Save')
+
+  if users.length
+    ul.list
+      each user in users
+        li: a(href="/user/#{user._id}") #{user.name.first}
+          #{user.email}

@@ -1,0 +1,7 @@
+extends ../layout
+
+block content
+  h2 #{user.name.first} #{user.name.last} 
+  a(href="/user/#{user._id}/edit") Edit
+  a(href="/user/#{user._id}/delete") Delete
+  p Email: #{user.email}
