@@ -33,6 +33,7 @@ module.exports = function(app) {
     this
       .set('views', __dirname + '/../app/views')
       .set('view engine', 'jade')
+      .set('view options', {layout:false})
       .use(less({src: __dirname + '/../public'}))
       .use(express.static(__dirname + '/../public'));
   });
