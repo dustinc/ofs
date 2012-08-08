@@ -11,8 +11,6 @@ const express       = require('express'),
       config        = require('./config'),
       routes        = require('./routes'),
       environments  = require('./environments');
-//      errors        = require('./errors'),
-//      hooks         = require('./hooks');
 
 
 /**
@@ -30,10 +28,6 @@ module.exports = function() {
   environments(app);
 
   routes(app);
-
- // errors(app);
-
-//  hooks(app);
 
   return app;
 
