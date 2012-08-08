@@ -16,7 +16,7 @@ var User = module.exports = new Schema({
 });
 
 User.statics.getUsers = function(callback) {
-  return this.find().sort('_id','descending').limit(15).find({}, callback);
+  return this.find().sort('name.first','ascending');
 };
 
 User.pre('save', function(next) {
