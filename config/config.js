@@ -41,8 +41,9 @@ module.exports = function(app) {
   // db reference
 
   app.configure(function() {
-    app.set('db', {'main': db})
-    app.set('version', '0.0.1')
+    this
+      .set('db', {'main': db, 'users': db.model('User')})
+      .set('version', '0.0.1');
   });
 
   return app;
