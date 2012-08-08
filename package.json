@@ -1,17 +1,23 @@
 {
-  "name": "OFS",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app"
-  },
-  "dependencies": {
-    "express": "3.0.0rc1",
-    "express-mongoose" : "*",
-    "express-expose" : "*",
-    "mongoose" : "*",
-    "jade": "*",
-    "less-middleware": "*"
-  },
-  "main": "./index.js"
+    "name"        : "OFS"
+  , "version"     : "0.0.1"
+  , "homepage"    : "http://onlinefacultysupport.com/"
+  , "description" : "Stuffs written by others will soon be here."
+  , "repository"  : "git@github.com:dustinc/ofs.git"
+  , "author"      : "Dustin Coffey <coffey.dustin@gmail.com>"
+  , "dependencies": {
+        "express"           : "2.5.4"
+      , "express-messages"  : "0.0.x"
+      , "express-resource"  : "0.2.4"
+      , "express-mongoose"  : "0.0.x"
+      , "express-expose"    : "0.2.2"
+      , "less-middleware"   : "0.1.4"
+      , "mongoose"          : "2.5.10"
+      , "jade"              : "0.25.x"
+    }
+  , "main"    : "./index.js"
+  , "engines" : { 
+      "node": "0.6.x" 
+    , "npm" : "1.0.x"
+    }
 }
