@@ -63,6 +63,7 @@ controller.update = function(req, res, next) {
     _user.name.first = user.name.first;
     _user.name.last = user.name.last;
     _user.email = user.email;
+    _user.username = user.username;
     _user.password = user.password;
 
     _user.save(function(err) {

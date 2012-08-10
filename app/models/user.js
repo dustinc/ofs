@@ -18,6 +18,11 @@ var User = module.exports = new Schema({
     required: true, 
     index: {unique: true, sparse: true}
   },
+  username: {
+    type: String,
+    required: true,
+    index: {unique: true, sparse: true}
+  },
   password: String
 });
 
