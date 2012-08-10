@@ -36,6 +36,14 @@ User.virtual('name.full').get(function() {
   return this.name.first + ' ' + this.name.last;
 });
 
+User.virtual('firstname').get(function() {
+  return this.name.first;
+});
+
+User.virtual('lastname').get(function() {
+  return this.name.last;
+});
+
 // return all users
 
 User.statics.getUsers = function(callback) {
