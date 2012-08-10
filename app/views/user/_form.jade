@@ -1,19 +1,29 @@
-- user = typeof(user) != 'undefined' ? user : {};
+- if(typeof user != 'undefined')
+  - var user = user;
+  - var post_action = 'edit';
+- else
+  - var user = {};
+  - var post_action = 'create';
 
-form(action='/user/edit', method='post', id='create')
+form(action='/user/'+post_action, method='post', id='create')
   
+  - if(typeof user != 'undefined')
+    input(type='hidden', name='user[_id]', value=user._id)
+
   label First Name
-  input(type='text', name='user[name][first]', value=user.name.first)
+  input(type='text', name='user[name][first]', value=user.firstname)
  
   label Last Name
-  input(type='text', name='user[name][last]', value=user.name.last)
+  input(type='text', name='user[name][last]', value=user.lastname)
 
   label Email
   input(type='text', name='user[email]', value=user.email)
 
+  label Username
+  input(type='text', name='user[username]', value=user.username)
+
   label Password
   input(type='password', name='user[password]', value=user.password)
 
-  input(type='hidden', name='user[_id]', value=user._id)
 
   input(type='submit', value='Save')
