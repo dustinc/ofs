@@ -32,7 +32,7 @@ controller.show = function(req, res, next) {
 controller.create = function(req, res, next) {
   
   var User = db.main.model('User'),
-      user = new User(req.param('user'));
+      user = new User(req.body.user);
   
   user.save(function(err) {
     console.log('saving in controller...');
