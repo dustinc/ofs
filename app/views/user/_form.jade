@@ -1,0 +1,19 @@
+- user = typeof(user) != 'undefined' ? user : {};
+
+form(action='/user/edit', method='post', id='create')
+  
+  label First Name
+  input(type='text', name='user[name][first]', value=user.name.first)
+ 
+  label Last Name
+  input(type='text', name='user[name][last]', value=user.name.last)
+
+  label Email
+  input(type='text', name='user[email]', value=user.email)
+
+  label Password
+  input(type='password', name='user[password]', value=user.password)
+
+  input(type='hidden', name='user[_id]', value=user._id)
+
+  input(type='submit', value='Save')
