@@ -20,7 +20,7 @@ controller.load = function(template, req, res, next) {
 
 
 controller.index = function(req, res, next) {
-  res.render('home');
+  res.render('home', {title: 'My Site Title'});
 };
 
 controller.test = function(req, res, next) {
