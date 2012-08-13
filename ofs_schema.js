@@ -6,25 +6,26 @@
  */
 LookupCollection:
 {
-  
-  user_types: Array [Administrator, Teacher, Institution],
-  
-  degree_types: Array [Associates, Bachelors, Masters, Doctorate],
-  
-  research_type: Array [Publication, Presentation],
-  publication_type: Array [Quantitative, Qualitative, Mixed Methods],
-  service_type: Array [Dissertation/Thesis, University/College],
-  
-  
-  
-};//end lookup collection
+  name: String, // user_types
+  values: Array // [Administrator, Teacher, Institution]
+}//end lookup collection
+
+/*
+LookupCollection Values:
+  user_types: [Administrator, Teacher, Institution],
+  degree_types: [Associates, Bachelors, Masters, Doctorate],
+  research_types: [Publication, Presentation],
+  publication_types: [Quantitative, Qualitative, Mixed Methods],
+  service_types: [Dissertation/Thesis, University/College],
+*/
 
 User:
 {
   username: String,
   password: String,
   email: String,
-  type: String
+  type: String,
+  last_login: Date
 };//end user
 
 InstitutionProfile:
