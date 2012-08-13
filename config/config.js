@@ -24,7 +24,7 @@ module.exports = function(app) {
       .use(express.cookieParser())
       .use(express.bodyParser())
       .use(express.errorHandler({dumpException: true, showStack: true}))
-      .use(express.session({secret: 'ballsack'}));
+      .use(express.session({ secret: 'shh, secret stuffs'}));
   });
   
   // template engine
