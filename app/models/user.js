@@ -1,7 +1,7 @@
 
 var Schema = require('mongoose').Schema,
-      ObjectId = Schema.ObjectId,
-      TimeStamp = require('./timestamp');
+    ObjectId = Schema.ObjectId,
+    TimeStamp = require('./timestamp');
 
 
 /*
