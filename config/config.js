@@ -37,12 +37,20 @@ module.exports = function(app) {
       .use(less({src: __dirname + '/../public'}))
       .use(express.static(__dirname + '/../public'));
   });
+
+  app.set('title', 'OFS');
   
   // db reference
 
   app.configure(function() {
     this
-      .set('db', {'main': db, 'users': db.model('User')})
+      .set('db',
+        {
+          'main': db,
+          'users': db.model('User'),
+          'lookups': db.model('Lookup')
+        }
+      )
       .set('version', '0.0.1');
   });
 

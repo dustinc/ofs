@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+  h2= lookup.name
+  a(href="/lookup/#{lookup.name}/edit") Edit
+
+  if lookup.values.length
+    ul
+      each value in lookup.values
+        li #{value}

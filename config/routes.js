@@ -2,6 +2,7 @@ module.exports = function(app) {
   
   var home = require('../app/controllers/home')(app);
   var user = require('../app/controllers/user')(app);
+  var lookup = require('../app/controllers/lookup')(app);
   
   var db = app.set('db');
   
@@ -17,6 +18,13 @@ module.exports = function(app) {
   
   app.post('/user/create', user.create);
   app.post('/user/edit', user.update);
+
+  app.get('/lookup', lookup.index);
+  app.get('/lookup/create', lookup.create);
+  app.get('/lookup/:name', lookup.show);
+  app.get('/lookup/:name/edit', lookup.edit);
+  app.get('/lookup/:name/update', lookup.update);
+  app.get('/lookup/:name/remove', lookup.delete);
 
 };
 

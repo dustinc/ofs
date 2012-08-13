@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  h2 Edit #{lookup.name}
+
+  form(action='/lookup/#{lookup.name}/update', method='put')
+    div
+      label Name
+      input(type='text', name='lookup[name]', value=lookup.name)
+    
+    if lookup.values.length
+      
+      div#lookup_values_edit
+        label Values
+        a(href='#').add_new Add New
+        ul
+          each value in lookup.values
+            li
+              a(href='#').remove Remove 
+              input(type='text', name='lookup[values]', value=value)
+    input(type='hidden', name='lookup[_id]', value=lookup._id)
+    input(type='submit', value='Save')
+
+  script(src='/scripts/lookups.js')

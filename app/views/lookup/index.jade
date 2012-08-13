@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h2 Available Lookups
+  
+  form(action='/lookup/create', method='put')
+    
+    label Name
+    input(type='text', name='lookup[name]')
+
+    label Values
+    input(type='text', name='lookup[values]')
+
+    input(type='submit', value='Save')
+  
+  if lookups
+    each lookup in lookups
+      h4: a(href='/lookup/#{lookup.name}') #{lookup.name}
+      if lookup.values.length
+        ul
+          each value in lookup.values
+            li #{value}
+        
