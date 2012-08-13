@@ -2,9 +2,9 @@
 // dependencies
 
 const express   = require('express'),
-      less      = require('less-middleware'),
-      expose    = require('express-expose'),
-      mongoose  = require('mongoose');
+      stylus    = require('stylus');
+      mongoose  = require('mongoose'),
+      _         = require('underscore');
 
 // exports
 
@@ -34,7 +34,7 @@ module.exports = function(app) {
       .set('views', __dirname + '/../app/views')
       .set('view engine', 'jade')
       .set('view options', {layout:false})
-      .use(less({src: __dirname + '/../public'}))
+      .use(stylus.middleware({src: __dirname + '/../public'}))
       .use(express.static(__dirname + '/../public'));
   });
 

@@ -5,7 +5,6 @@
 
 
 const express       = require('express'),
-      less          = require('less-middleware'),
       mongoose      = require('mongoose'),
       models        = require('./models'),
       config        = require('./config'),
