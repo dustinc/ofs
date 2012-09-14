@@ -1,5 +1,28 @@
 extends layout
 
 block content
-  h1 Howdy
-  p Welcome to Joy
+	#header
+		h1 
+			a(href='/', title='Online Faculty Support')
+				img(src='', alt='Online Faculty Support')
+				
+		#login
+			form#top-login-form(action='POST')
+				input(type='text', id='user-name', name='User Name')
+				input(type='text', id='password', name='Password')
+				input(type='submit', id='login', name='Login')
+
+	nav
+		ul
+			li
+				a(href='#') Adjunct Search
+				a(href='#') Job Listings
+				a(href='#') Tutorials &#38; Templates
+				a(href='#') Discussion Boards
+				a(href='#') Personalized Help
+
+	#tagline Supporting online faculty to ensure success for all students.
+
+	section#help-colleges-find-you
+		h2 Help Colleges Find You
+		p Update your information on our secure and searchable database to be connected with the right job.
