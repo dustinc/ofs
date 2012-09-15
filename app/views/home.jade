@@ -1,108 +1,108 @@
 extends layout
 
 block content
-	#header
-		h1 
-			a(href='/', title='Online Faculty Support')
-				img(src='', alt='Online Faculty Support')
-				
-		#login
-			form#top-login-form(action='POST')
-				input(type='text', id='user-name', name='User Name')
-				input(type='text', id='password', name='Password')
-				input(type='submit', id='login', name='Login')
+  #header
+    h1 
+      a(href='/', title='Online Faculty Support')
+        img(src='', alt='Online Faculty Support')
+        
+    #login
+      form#top-login-form(action='POST')
+        input(type='text', id='user-name', name='User Name')
+        input(type='text', id='password', name='Password')
+        input(type='submit', id='login', name='Login')
 
-	nav
-		include _menu.jade
+  nav
+    include _menu.jade
 
-	#tagline Supporting online faculty to ensure success for all students.
+  #tagline Supporting online faculty to ensure success for all students.
 
-	section#help-colleges-find-you
-		h2 Help Colleges Find You
-		p Update your information on our secure and searchable database to be connected with the right job.
-		a(href='#')#build-button Build Your Profile Today
-		a(href='#')#view-link View the Database
-		img(src='', alt='Partial view of the database')
-		
-	#fab-four	
-		section#learn-the-basics
-			h2 Learn the Basics
-			p 
-				| Get tutorials and view templates, learn the tools of the trade, and more with our 
-				a(href='') beginners' guides
-				| . We also offer 
-				a(href='') personalized help
-				|  with everything from writing your cirriculum vidae to creating your class online.
-				img(src='', alt='College students learn computer skills')
-			
-		section#expand-your-skills
-			h2 Expand Your Skills
-			p
-				| So you've been working online for a while now, but you'd like to streamline your processes or polish up your CV? Our 
-				a(href='') advanced articles 
-				|  are written just for you. Our experienced experts also offer 
-				a(href='') personalized help 
-				|  to make your CV and classes shine.
-				img(src='', alt='Middle-aged students study the computer')
-			
-		section#join-a-community
-			h2 Join a Community
-			p
-				| Thanks to our 
-				a(href='') discussion boards
-				| , you'll have access to a community of helpful, experienced individuals. Share ideas, post questions, or just commiserate about the long hours; our discussion boards are here for you!
-				img(src='', alt='Study group collaborates in a circle')
-			
-		section#find-a-position
-			h2 Find a Position
-			p
-				a(href='') Create a profile
-				|  and get added to our 
-				a(href='') adjunct database
-				| . Upload your resum&#233;, CV, and cover letter, and let the institutions find you! We also have a growing database of 
-				a(href='') job listings
-				|  searchable by location, hiring requirements, and more.
-				img(src='', alt='Happy teacher poses in classroom')
-		
-	#social-ctas
-		section#join-our-newsletter
-			h2 Join Our Newsletter
-			p Stay up to date on the latest resources and job postings.
-			form(action='POST')
-				input(type='text')
-				input(type='submit', value='Sign Up')
-				
-		section#find-us-on-facebook
-			h2 Find Us on Facebook
-			p Never miss an article.
-			a(href='')
-				img(src='' alt='Facebook icon')
-				
-block footer				
-	#pre-footer
-		section
-			h3 More Information
-			ul
-				li: a(href='') About OnlineFacultySupport.com
-				li: a(href='') Membership Benefits
-				li: a(href='') Resources for Institutions
-				
-		section
-			h3 Top Articles
-			ul
-				li: a(href='') How to Write a Stand-Out CV
-				li: a(href='') Generating Interest in Online Discussions
-				li: a(href='') Lorem Ipsum
-				
-		section
-			h3 Popular Discussions
-			ul
-				li: a(href='') Lorem ipsum dolor sit amet
-				li: a(href='') Ut felis arcu
-				li: a(href='') Etiam condimentum sem scelerisque
-				
-	footer
-		| Copyright&#169;2012 OnlineFacultySupport.com &#124; Design by 
-		a(href='http://readydesigns.com') Ready Designs
-		
-		
+  section#help-colleges-find-you
+    h2 Help Colleges Find You
+    p Update your information on our secure and searchable database to be connected with the right job.
+    a(href='#')#build-button Build Your Profile Today
+    a(href='#')#view-link View the Database
+    img(src='', alt='Partial view of the database')
+    
+  #fab-four  
+    section#learn-the-basics
+      h2 Learn the Basics
+      p 
+        | Get tutorials and view templates, learn the tools of the trade, and more with our 
+        a(href='') beginners' guides
+        | . We also offer 
+        a(href='') personalized help
+        |  with everything from writing your cirriculum vidae to creating your class online.
+        img(src='', alt='College students learn computer skills')
+      
+    section#expand-your-skills
+      h2 Expand Your Skills
+      p
+        | So you've been working online for a while now, but you'd like to streamline your processes or polish up your CV? Our 
+        a(href='') advanced articles 
+        |  are written just for you. Our experienced experts also offer 
+        a(href='') personalized help 
+        |  to make your CV and classes shine.
+        img(src='', alt='Middle-aged students study the computer')
+      
+    section#join-a-community
+      h2 Join a Community
+      p
+        | Thanks to our 
+        a(href='') discussion boards
+        | , you'll have access to a community of helpful, experienced individuals. Share ideas, post questions, or just commiserate about the long hours; our discussion boards are here for you!
+        img(src='', alt='Study group collaborates in a circle')
+      
+    section#find-a-position
+      h2 Find a Position
+      p
+        a(href='') Create a profile
+        |  and get added to our 
+        a(href='') adjunct database
+        | . Upload your resum&#233;, CV, and cover letter, and let the institutions find you! We also have a growing database of 
+        a(href='') job listings
+        |  searchable by location, hiring requirements, and more.
+        img(src='', alt='Happy teacher poses in classroom')
+    
+  #social-ctas
+    section#join-our-newsletter
+      h2 Join Our Newsletter
+      p Stay up to date on the latest resources and job postings.
+      form(action='POST')
+        input(type='text')
+        input(type='submit', value='Sign Up')
+        
+    section#find-us-on-facebook
+      h2 Find Us on Facebook
+      p Never miss an article.
+      a(href='')
+        img(src='' alt='Facebook icon')
+        
+block footer        
+  #pre-footer
+    section
+      h3 More Information
+      ul
+        li: a(href='') About OnlineFacultySupport.com
+        li: a(href='') Membership Benefits
+        li: a(href='') Resources for Institutions
+        
+    section
+      h3 Top Articles
+      ul
+        li: a(href='') How to Write a Stand-Out CV
+        li: a(href='') Generating Interest in Online Discussions
+        li: a(href='') Lorem Ipsum
+        
+    section
+      h3 Popular Discussions
+      ul
+        li: a(href='') Lorem ipsum dolor sit amet
+        li: a(href='') Ut felis arcu
+        li: a(href='') Etiam condimentum sem scelerisque
+        
+  footer
+    | Copyright&#169;2012 OnlineFacultySupport.com &#124; Design by 
+    a(href='http://readydesigns.com') Ready Designs
+    
+    
