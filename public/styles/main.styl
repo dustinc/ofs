@@ -1,0 +1,308 @@
+/** Eric Meyer's CSS Reset **/
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td 
+  margin 0
+  padding 0
+  border 0
+  outline 0
+  font-weight inherit
+  font-style inherit
+  font-size 100%
+  font-family inherit
+  vertical-align baseline
+ 
+/* remember to define focus styles! */
+a, *focus, *active  
+  outline 0
+ 
+/* for FireFox */
+input[type="submit"]-moz-focus-inner, input[type="button"]-moz-focus-inner
+  border  0px
+  
+/* for IE8 */
+input[type="submit"]focus, input[type="button"]focus
+  outline  none
+  
+body  
+  line-height 1
+  color black
+  background white
+ 
+ol, ul  
+  list-style none
+ 
+/* tables still need 'cellspacing="0"' in the markup */
+table  
+  border-collapse separate
+  border-spacing 0
+ 
+caption, th, td  
+  text-align left
+  font-weight normal
+ 
+blockquote:before, blockquote:after,
+q:before, q:after  
+  content ""
+ 
+blockquote, q  
+  quotes "" ""
+ 
+/** End Meyer Reset **/
+
+/** BEGIN @FONT-FACE **/
+@font-face  
+    font-family 'AngelinaRegular'
+    src url('/fonts/angelina-webfont/angelina-webfont.eot')
+    src url('/fonts/angelina-webfont/angelina-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/angelina-webfont/angelina-webfont.woff') format('woff'),
+         url('/fonts/angelina-webfont/angelina-webfont.ttf') format('truetype'),
+         url('/fonts/angelina-webfont/angelina-webfont.svg#AngelinaRegular') format('svg')
+    font-weight normal
+    font-style normal
+
+@font-face 
+    font-family 'BergamoStdRegular'
+    src url('BergamoStd-Regular-webfont.eot')
+    src url('BergamoStd-Regular-webfont.eot?iefix') format('eot'),
+         url('BergamoStd-Regular-webfont.woff') format('woff'),
+         url('BergamoStd-Regular-webfont.ttf') format('truetype'),
+         url('BergamoStd-Regular-webfont.svg#webfontJwE6WVIU') format('svg')
+    font-weight normal
+    font-style normal
+    
+@font-face 
+    font-family 'BergamoStdItalic'
+    src url('BergamoStd-Italic-webfont.eot')
+    src url('BergamoStd-Italic-webfont.eot?iefix') format('eot'),
+         url('BergamoStd-Italic-webfont.woff') format('woff'),
+         url('BergamoStd-Italic-webfont.ttf') format('truetype'),
+         url('BergamoStd-Italic-webfont.svg#webfontYjq6Uu7v') format('svg')
+    font-weight normal
+    font-style normal
+    
+@font-face 
+    font-family 'BergamoStdBold'
+    src url('BergamoStd-Bold-webfont.eot')
+    src url('BergamoStd-Bold-webfont.eot?iefix') format('eot'),
+         url('BergamoStd-Bold-webfont.woff') format('woff'),
+         url('BergamoStd-Bold-webfont.ttf') format('truetype'),
+         url('BergamoStd-Bold-webfont.svg#webfont4jVlxogg') format('svg')
+    font-weight normal
+    font-style normal
+    
+@font-face 
+    font-family 'BergamoStdBoldItalic'
+    src url('BergamoStd-BoldItalic-webfont.eot')
+    src url('BergamoStd-BoldItalic-webfont.eot?iefix') format('eot'),
+         url('BergamoStd-BoldItalic-webfont.woff') format('woff'),
+         url('BergamoStd-BoldItalic-webfont.ttf') format('truetype'),
+         url('BergamoStd-BoldItalic-webfont.svg#webfontWQ48hIB4') format('svg')
+    font-weight normal
+    font-style normal
+
+/** END @FONT-FACE **/
+
+/** Clearfix **/
+.clearfix:after
+  content "."
+  display block
+  height 0
+  clear both
+  visibility hidden
+ 
+/** End Clearfix **/
+
+/** Begin Font Fix */
+body  
+  font-size 62.5%
+ 
+input, select, th, td, p  
+  font-size 1em
+ 
+/** End Font Fix **/
+
+/** HTML5 **/
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section   
+  display block  
+
+/** ACCESSIBILITY **/
+#skip  
+  font-family Arial, sans-serif
+  position absolute
+  left 0
+  top 0
+  width 100%
+  margin-left 0
+  text-align center
+  font-size 2.0em
+
+  #skip a  
+    position absolute
+    left -9999px
+    top -75px
+    display block
+   
+  #skip a:focus, #skip a:active  
+    position relative
+    left 0
+    z-index 9999
+    width 400px
+    margin 0 auto
+    padding 10px 10px
+    background #fff
+    border 1px solid #dedede
+    outline none
+    
+.accessibility  
+  position absolute
+  
+/** END ACCESSIBILITY **/
+
+/* VARIABLES */
+$teal = #008f96
+$darkgray = #3b3b3b
+$midgray = #565656
+$lightgray = #9b9b9b
+
+$sansfont = arial, 'sans serif'
+$scriptfont = AngelinaRegular, 'brush script std', serif
+$seriffont = BergamoStdRegular, times, 'times new roman', serif
+
+$border = 2px solid $midgray
+/* END VARIABLES */
+
+/** BEGIN DOCUMENT CSS **/
+body
+  $darkgray
+  font-family $sansfont
+  line-height 1.6em
+
+#container 
+  width 900px
+  margin 0 auto
+  
+h2 
+  font-family $seriffont
+  line-height 1.6em
+  
+/* NAV */
+nav
+  font-size 19.5px
+  text-align center
+  margin 10px 0
+
+nav ul li
+  display inline
+  margin 0 10px
+  
+nav a 
+  text-decoration none
+  color $darkgray
+  
+nav a:hover 
+  color $teal
+  
+/* HOME PAGE */
+/* tagline */
+#tagline
+  background-color $teal
+  font-family $scriptfont
+  font-size 3.0em
+  color #fff
+  text-align center
+  padding 50px
+  border $border
+
+/* home-points */
+#home-points section
+  border $border
+  padding 10px 15px
+
+#home-points img 
+  display block
+
+/* help-colleges-find-you */
+#home-points section#help-colleges-find-you 
+  text-align center
+  margin-bottom 20px
+  padding 0 15px
+
+#help-colleges-find-you h2
+  font-size 3.0em
+  
+#help-colleges-find-you img 
+  margin 0 auto
+
+/* fab-four */
+#fab-four section 
+  text-align left
+  width 416px
+  float left
+  
+#fab-four div 
+  width 200px
+  float left
+  
+#fab-four img 
+  float right
+  
+#fab-four p, #social-ctas p
+  font-size 1.2em
+  
+#fab-four h2, #social-ctas h2
+  font-size 2.5em
+  
+/* social-ctas */
+#social-ctas
+  margin 20px 0
+
+#social-ctas section
+  text-align center
+  width 416px
+  float left
+  height 120px
+
+#social-ctas img 
+  margin 0 auto
+  
+/* END HOME PAGE */
+
+/* pre-footer */
+#pre-footer
+  background-color $teal
+  color #fff
+  padding 20px 15px
+  border $border
+  
+#pre-footer section
+  width 288px
+  float left
+  
+#pre-footer h3
+  font-family $scriptfont
+  font-size 2.2em
+  
+#pre-footer ul 
+  font-size 1.2em
+  
+#pre-footer li
+  margin 10px 0
+  
+#pre-footer a 
+  color #fff
+  text-decoration none
+  
+#pre-footer a:hover
+  text-decoration underline
+  
+footer
+  text-align center
+  padding 20px
