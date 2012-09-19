@@ -8,10 +8,11 @@ block content
     section#help-colleges-find-you
       h2 Help Colleges Find You
       p Update your information on our secure and searchable database to be connected with the right job.
-      a(href='#')#build-button Build Your Profile Today
-      |  
-      a(href='#')#view-link View the Database
-      img(src='/images/', alt='Partial view of the database')
+      p
+        a(href='#')#build-button Build Your Profile Today
+        |  
+        a(href='#')#view-link View the Database
+      img(src='/images/database-screenshot.png', alt='Partial view of the database')
       
     #fab-four.clearfix
       section#learn-the-basics
@@ -62,14 +63,14 @@ block content
         h2 Join Our Newsletter
         p Stay up to date on the latest resources and job postings.
         form(action='POST')
-          input(type='text')
-          input(type='submit', value='Sign Up')
+          input(type='text', value='email address')
+          input(type='submit', id='social-input', value='Sign Up')
           
       section#find-us-on-facebook
         h2 Find Us on Facebook
         p Never miss an article.
-        a(href='')
-          img(src='', alt='Facebook icon')
+        a(href='/')
+          img(src='/images/facebook-icon.png', alt='Facebook icon')
         
 block footer        
   #pre-footer.clearfix
