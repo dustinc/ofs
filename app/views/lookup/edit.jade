@@ -3,7 +3,7 @@ extends ../layout
 block content
   h2 Edit #{lookup.name}
 
-  form(action='/lookup/#{lookup.name}/update', method='put')
+  form(action='/lookup/#{lookup.name}/update', method='post')
     div
       label Name
       input(type='text', name='lookup[name]', value=lookup.name)
