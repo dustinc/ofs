@@ -7,7 +7,7 @@ var controller = {},
 
 module.exports = function(_app) {
   app = _app;
-//  db = app.set('db');
+  db = app.set('db');
   return controller;
 };
 
