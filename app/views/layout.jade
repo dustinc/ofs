@@ -4,6 +4,11 @@ html
     title OnlineFacultySupport.com
     link(rel='stylesheet', href='/styles/main.css')
     script(src='/scripts/jquery-1.8.0.min.js')
+    
+    - if(typeof(scripts) != 'undefined')
+      for scrpt in scripts
+        script(src=scrpt)
+    
   body
     #container
       #header
