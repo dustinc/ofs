@@ -1,5 +1,4 @@
 
-
 var controller = {},
     app,
     db;
@@ -23,6 +22,7 @@ controller.index = function(req, res, next) {
   res.render('home', {title: 'My Site Title'});
 };
 
-controller.test = function(req, res, next) {
-  res.send('test');
+controller.signup = function(req, res, next) {
+  var Lookup = db.lookups;
+  return res.render('signup', {user_types: Lookup.load('User Types')});
 };

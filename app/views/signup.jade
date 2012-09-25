@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1 Create New Account
+
+  form(action='/user/create', method='post')
+
+    input(type='hidden', name='user[user_type]', value='Teacher')
+
+    div
+      label Email:
+      input(type='text', name='user[email]')
+
+    div
+      label Username:
+      input(type='text', name='user[username]')
+
+    div
+      label Password:
+      input(type='password', name='user[password]')
+    div
+      label Confirm Password:
+      input(type='password', name='user[confirm_password]')
+
+    input(type='submit', value='Save')
