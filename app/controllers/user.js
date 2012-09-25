@@ -17,13 +17,7 @@ module.exports = function(_app) {
 
 controller.index = function(req, res, next) {
   return res.render('user/index',
-    {users: db.users.getUsers()}
-  );
-};
-
-controller.show = function(req, res, next) {
-  return res.render('user/show',
-    {user: db.users.findOne({_id: req.param('id')}) }
+    {user: db.users.findOne({'_id': req.param('user_id')}) }
   );
 };
 
@@ -35,29 +29,27 @@ controller.create = function(req, res, next) {
       user = new User(req.body.user);
   
   user.save(function(err) {
-    console.log('saving in controller...');
-    if(!err) {
-      console.log('saved');
-    } else {
-      console.log(err + ' <- error saving');
-    }
+    if(err) next(err);
+    return res.render('user/' + user._id, {user: user});
   });
-  return res.render('user/index', {users: db.users.getUsers()});
+
 };
 
 // load user form
 
 controller.edit = function(req, res, next) {
-  var user = db.users.findById(req.param('id'));
-  return res.render('user/edit', {user: user})
+  var user = db.users.findById(req.param('user_id')),
+      Lookup = db.lookups;
+
+  return res.render('user/edit', {user: user, user_types: Lookup.load('User Types')});
 };
 
 // update user info
 
 controller.update = function(req, res, next) {
   var user = req.body.user;
-  
-  return db.users.findOne({ _id: user._id}, function(err, _user) {
+
+  db.users.findOne({ _id: user._id}, function(err, _user) {
     if(err) return next(err);
 
     _user.name.first = user.name.first;
