@@ -14,8 +14,8 @@ var User = module.exports = new Schema({
     last: String
   },
   email: {
-    type: String, 
-    required: true, 
+    type: String,
+    required: true,
     index: {unique: true, sparse: true}
   },
   username: {
@@ -23,7 +23,9 @@ var User = module.exports = new Schema({
     required: true,
     index: {unique: true, sparse: true}
   },
-  password: String
+  password: String,
+  user_type: {type: String, required: true},
+  roles: Array
 });
 
 // timestamp plugin
@@ -52,27 +54,24 @@ User.virtual('lastname').get(function() {
 // return all users
 
 User.statics.getUsers = function(callback) {
-  return this.find().sort('name.first','ascending');
+  return this.find();
 };
 
 
 // pre init
 
 User.pre('init', function(next) {
-  console.log('Initializing...');
   next();
 });
 
 // pre save
 
 User.pre('save', function(next) {
-  console.log('Saving...');
   next();
 });
 
 // pre remove
 
 User.pre('remove', function(next) {
-  console.log('Removing...');
   next();
 });
