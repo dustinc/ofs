@@ -48,7 +48,8 @@ module.exports = function(app) {
         {
           'main': db,
           'users': db.model('User'),
-          'lookups': db.model('Lookup')
+          'lookups': db.model('Lookup'),
+          'teachers': db.model('Teacher')
         }
       )
       .set('version', '0.0.1');
