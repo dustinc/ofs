@@ -76,3 +76,125 @@ controller.delete = function(req, res, next) {
     return res.redirect('/user');
   });
 };
+
+
+/*
+ * User Profile
+ */
+
+// Index
+controller.profile = function(req, res, next) {
+  var user = db.users.findOne({'_id': req.param('user_id')}),
+      Profile = db.teachers,
+      Lookup = db.lookups;
+
+  //'teachers' needs to be dynamic
+  Profile.findOne({'user_id': req.param('user_id')}, function(err, _profile) {
+    if(err) return next(err);
+
+    if(null == _profile) {
+      _profile = new Profile();
+    }
+
+    Lookup.loadProfileLookups('Teacher', function(err, _lookups) {
+      if(err) return next(err);
+
+      _profile.lookups = _lookups;
+
+      return res.render('profile', {user: user, profile: _profile});
+    });
+
+  });
+
+};
+
+// Edit
+controller.profile.edit = function(req, res, next) {
+  var user = db.users.findOne({'_id': req.param('user_id')}),
+      Profile = db.teachers,
+      Lookup = db.lookups;
+
+  Profile.findOne({'user_id': req.param('user_id')}, function(err, _profile) {
+    if(err) return next(err);
+
+    if(null == _profile) {
+      _profile = new Profile();
+    }
+
+    Lookup.loadProfileLookups('Teacher', function(err, _lookups) {
+      if(err) return next(err);
+
+      _profile.lookups = _lookups;
+
+      return res.render('profile/edit', {user: user, profile: _profile});
+    });
+
+
+  });
+};
+
+// Save
+controller.profile.save = function(req, res, next) {
+  var Profile = db.main.model('Teacher'),
+      p = req.body.profile;
+
+  db.main.model('Teacher').findOne({'_id': p._id}, function(err, _profile) {
+    if(err) return next(err);
+
+    if(null == _profile) {
+      // Save New
+
+      _profile = new Profile(p);
+
+      _profile.save(function(err) {
+        if(err) return next(err);
+
+        return res.redirect('/user/' + _profile.user_id + '/profile/');
+      });
+
+    } else {
+      // Update Existing
+
+      // Education
+      _profile.education.degrees                = p.education.degrees;
+      _profile.education.certificates           = p.education.certificates;
+      _profile.education.licenses               = p.education.licenses;
+      _profile.education.other                  = p.education.other;
+
+      // Experience
+      _profile.experience.years_teaching        = p.experience.years_teaching;
+      _profile.experience.delivery_mode         = p.experience.delivery_mode;
+      _profile.experience.years_teaching_online = p.experience.years_teaching_online;
+      _profile.experience.courses_taught        = p.experience.courses_taught;
+      _profile.experience.eligible_areas        = p.experience.eligible_areas;
+
+      // Publication
+      _profile.publication.publication_type     = p.publication.publication_type;
+      _profile.publication.total                = p.publication.total;
+      _profile.publication.past_three_years     = p.publication.past_three_years;
+      _profile.publication.reviewer             = p.publication.reviewer;
+      _profile.publication.reviewer_total       = p.publication.reviewer_total;
+
+      // Presentation
+      _profile.presentation.total               = p.presentation.total;
+      _profile.presentation.past_three_years    = p.presentation.past_three_years;
+      _profile.presentation.reviewer            = p.presentation.reviewer;
+      _profile.presentation.reviewer_total      = p.presentation.reviewer_total;
+
+      // The Rest
+      _profile.services                         = p.services;
+      _profile.positions_desired                = p.positions_desired;
+      _profile.institution                      = p.institution;
+      _profile.course                           = p.course;
+
+      // Save
+      _profile.save(function(err) {
+        if(err) return next(err);
+        return res.redirect('/user/'+_profile.user_id+'/profile/');
+      });
+
+    }// end else
+
+  });
+
+};

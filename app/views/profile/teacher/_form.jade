@@ -1,0 +1,222 @@
+
+//- MIXINS
+
+
+//- Degree Mixin
+
+mixin degree(dcnt, degree)
+  div
+    label Degree
+    select(name='profile[education][degrees][#{dcnt}][degree_type]')
+      option(value='')
+      for degree_type in profile.lookups.degrees.values
+        option(value=degree_type, selected=degree_type == degree.degree_type) #{degree_type}
+
+    label Field of Study
+    input(type='text', name='profile[education][degrees][#{dcnt}][field]', value=degree.field)
+
+    label Year Obtained
+    input(type='text', name='profile[education][degrees][#{dcnt}][year]', value=degree.year)
+
+//- Certificate Mixin
+
+mixin certificate(ccnt, cert)
+  div
+    label Certificate
+    input(type='text', name='profile[education][certificates][#{ccnt}][name]', value=cert.name)
+    label Certificate Date
+    input(type='text', name='profile[education][certificates][#{ccnt}][year]', value=cert.year)
+
+//- License Mixin
+
+mixin license(lcnt, lic)
+      div
+        label License
+        input(type='text', name='profile[education][licenses][#{lcnt}][name]', value=lic.name)
+        label License Date
+        input(type='text', name='profile[education][licenses][#{lcnt}][year]', value=lic.year)
+
+//- Service Mixin
+
+mixin service(scnt, service)
+  div
+    label Type
+    select(name='profile[services][#{scnt}][service_type]')
+      option(value='')
+      for service_type in profile.lookups.service_types.values
+        option(value=service_type, selected=service_type == service.service_type) #{service_type}
+  div
+    label Name
+    input(type='text', name='profile[services][#{scnt}][name]', value=service.name)
+  div
+    label Description
+    input(type='text', name='profile[services][#{scnt}][description]', value=service.description)
+  div
+    label Year
+    input(type='text', name='profile[services][#{scnt}][year]', value=service.year)
+
+
+//- START FORM
+
+form(action='/user/'+user.id+'/profile/save', method='post')
+  - if(typeof profile.id != '')
+    input(type='hidden', name='profile[_id]', value=profile.id)
+
+  input(type='hidden', name='profile[user_id]', value=user.id)
+
+  fieldset
+    legend Education
+    
+    //- DEGREES
+    for degree, dcnt in profile.education.degrees
+      +degree(dcnt, degree)
+    else
+      +degree(0, {})
+
+    //- CERTS
+    for cert, ccnt in profile.education.certificates
+      +certificate(ccnt, cert)
+    else
+      +certificate(0, {})
+
+    //- LICENSES
+    for lic, lcnt in profile.education.licenses
+      +license(lcnt, lic)
+    else
+      +license(0, {})
+
+    div
+      label Other Education
+      input(type='text', name='profile[education][other]', value=profile.education.other)
+
+  fieldset
+    legend Experience
+
+    div
+      label Years Teaching
+      select(name='profile[experience][years_teaching]')
+        option(value='')
+        for v in profile.schema.path('experience.years_teaching').enumValues
+          option(value='#{v}', selected=v == profile.experience.years_teaching) #{v}
+
+    div
+      label Delivery Mode
+      select(name='profile[experience][delivery_mode]')
+        option(value='')
+        for v in profile.schema.path('experience.delivery_mode').enumValues
+          option(value='#{v}', selected=v == profile.experience.delivery_mode) #{v}
+
+    div
+      label Years Teaching Online
+      select(name='profile[experience][years_teaching_online]')
+        option(value='')
+        for v in profile.schema.path('experience.years_teaching_online').enumValues
+          option(value='#{v}', selected=v == profile.experience.years_teaching_online) #{v}
+
+    div
+      label Courses Taught
+      input(type='text', name='profile[experience][courses_taught]', value=profile.experience.courses_taught)
+
+    div
+      label Eligible Areas
+      input(type='text', name='profile[experience][eligible_areas]', value=profile.experience.eligible_areas)
+
+  fieldset
+    legend Research
+
+    div
+      p Publications
+      label Quantitative
+      input(type='checkbox', name='profile[publication][publication_type][]', value='Quantitative', checked=(profile.publication.publication_type.indexOf('Quantitative') != -1))
+      label Qualitative
+      input(type='checkbox', name='profile[publication][publication_type][]', value='Qualitative', checked=(profile.publication.publication_type.indexOf('Qualitative') != -1))
+      label Mixed Methods
+      input(type='checkbox', name='profile[publication][publication_type][]', value='Mixed Methods', checked=(profile.publication.publication_type.indexOf('Mixed Methods') != -1))
+
+    div
+      label Publication Total
+      select(name='profile[publication][total]')
+        option(value='')
+        - for(var i=1; i<50; i++)
+          option(value=i, selected=i == profile.publication.total) #{i}
+        option(value='99') 50+
+
+    div
+      label Publication Past 3 Years
+      select(name='profile[publication][past_three_years]')
+        option(value='')
+        - for(var i=1; i<50; i++)
+          option(value=i, selected=i == profile.publication.past_three_years) #{i}
+
+    div
+      label Publication Reviewer
+      input(type='checkbox', name='profile[publication][reviewer]', checked=profile.publication.reviewer)
+
+    div
+      label Publication Reviewer Total
+      select(name='profile[publication][reviewer_total]')
+        option(value='')
+        - for(var i=1; i<50; i++)
+          option(value=i, selected=i == profile.publication.reviewer_total) #{i}
+        option(value='99') 50+
+
+    p Presentations
+    div
+      label Presentation Total
+      select(name='profile[presentation][total]')
+        option(value='')
+        - for(var i=1; i<50; i++)
+          option(value=i, selected=i == profile.presentation.total) #{i}
+        option(value='99') 50+
+
+    div
+      label Past 3 Years
+      select(name='profile[presentation][past_three_years]')
+        option(value='')
+        - for(var i=1; i<50; i++)
+          option(value=i, selected=i == profile.presentation.past_three_years) #{i}
+        option(value='99') 50+
+
+    div
+      label Reviewer
+      input(type='checkbox', name='profile[presentation][reviewer]', checked=profile.presentation.reviewer)
+
+    div
+      label Reviewer Total
+      select(name='profile[presentation][reviewer_total]')
+        option(value='')
+        - for(var i=1; i<50; i++)
+          option(value=i, selected=i == profile.presentation.reviewer_total) #{i}
+        option(value='99') 50+
+
+
+  fieldset
+    legend Services
+
+    for service, scnt in profile.services
+      +service(scnt, service)
+    else
+      +service(0, {})
+
+  fieldset
+    legend Position
+    div
+      label Position Desired
+      input(type='text', name='profile[positions_desired]', value=profile.positions_desired)
+
+    div
+      label Institution
+      select(name='profile[institution]')
+        option(value='')
+        for v in profile.schema.path('institution').enumValues
+          option(value=v, selected=v == profile.institution) #{v}
+        
+
+    div
+      label Course
+      select(name='profile[course]')
+        option(value='')
+        for v in profile.schema.path('course').enumValues
+          option(value=v, selected=v == profile.course) #{v}
+
+  input(type='submit', value='save')
