@@ -1,7 +1,8 @@
-extends ../layout
+extends index
 
-block content
-  
-  h2 Edit #{user.name.first} #{user.name.last}
-  
-  != partial('_form', {user: user})
+block sub_content
+
+  ul.sub_menu
+    li: a(href="/user/#{user._id}") Cancel
+
+  include _form

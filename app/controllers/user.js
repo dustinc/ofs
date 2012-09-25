@@ -1,11 +1,11 @@
 
-// globals
+// Globals
 
 var controller = {},
     app,
     db;
 
-// constructor
+// Constructor
 
 module.exports = function(_app) {
   app = _app;
@@ -13,7 +13,7 @@ module.exports = function(_app) {
   return controller;
 };
 
-// index
+// Index
 
 controller.index = function(req, res, next) {
   return res.render('user/index',
@@ -24,10 +24,10 @@ controller.index = function(req, res, next) {
 // create new user
 
 controller.create = function(req, res, next) {
-  
+
   var User = db.main.model('User'),
       user = new User(req.body.user);
-  
+
   user.save(function(err) {
     if(err) next(err);
     return res.render('user/' + user._id, {user: user});
@@ -57,19 +57,20 @@ controller.update = function(req, res, next) {
     _user.email = user.email;
     _user.username = user.username;
     _user.password = user.password;
+    _user.user_type = user.user_type;
 
     _user.save(function(err) {
       if(err) return next(err);
+      return res.redirect('/user/' + _user._id);
     });
-    
-    return res.redirect('/user/' + user._id);
+
   });
 };
 
 // delete user
 
 controller.delete = function(req, res, next) {
-  return db.users.findOne({ _id: req.param('id') }, function(err, _user) {
+  return db.users.findOne({ _id: req.param('user_id') }, function(err, _user) {
     if(err) return next(err);
     _user.remove();
     return res.redirect('/user');

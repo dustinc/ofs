@@ -1,29 +1,49 @@
 - if(typeof user != 'undefined')
   - var user = user;
-  - var post_action = 'edit';
+  - var post_action = user.id + '/update';
 - else
   - var user = {};
   - var post_action = 'create';
 
-form(action='/user/'+post_action, method='post', id='create')
-  
+form(action='/user/'+post_action, method='post')
+
   - if(typeof user != 'undefined')
-    input(type='hidden', name='user[_id]', value=user._id)
+    input(type='hidden', name='user[_id]', value=user.id)
 
-  label First Name
-  input(type='text', name='user[name][first]', value=user.firstname)
- 
-  label Last Name
-  input(type='text', name='user[name][last]', value=user.lastname)
+  input(type='hidden', name='user[user_type]', value='Teacher')
 
-  label Email
-  input(type='text', name='user[email]', value=user.email)
+  div
+    label First Name:
+    input(type='text', name='user[name][first]', value=user.firstname)
 
-  label Username
-  input(type='text', name='user[username]', value=user.username)
+  div
+    label Last Name:
+    input(type='text', name='user[name][last]', value=user.lastname)
 
-  label Password
-  input(type='password', name='user[password]', value=user.password)
+  div
+    label Email:
+    input(type='text', name='user[email]', value=user.email)
 
+  div
+    label Username:
+    input(type='text', name='user[username]', value=user.username)
+
+  - if(typeof user != 'undefined')
+    div
+      label Current Password:
+      input(type='password', name='user[current_password]')
+    div
+      label New Password:
+      input(type='password', name='user[password]')
+    div
+      label Confirm New Password:
+      input(type='password', name='user[confirm_password]')
+  - else
+    div
+      label Password:
+      input(type='password', name='user[password]')
+    div
+      label Confirm Password:
+      input(type='password', name='user[confirm_password]')
 
   input(type='submit', value='Save')
