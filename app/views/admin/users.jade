@@ -1,0 +1,12 @@
+extend index
+
+block sub_content
+  h3 Users
+
+  for user in users
+    h4: a(href='#', id=user.username, class='toggle') #{user.username}
+    div(class=user.username + ' hide')
+      p Email: #{user.email}
+      p Name: #{user.firstname} #{user.lastname}
+  else
+    p No Users

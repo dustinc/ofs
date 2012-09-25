@@ -1,0 +1,23 @@
+li.quick-edit
+
+    if lookup_value != ''
+      span.value #{lookup_value}
+
+      span.element.hide
+        input(type='text', value=lookup_value)
+
+        span.tools
+          a(href='#').save save
+          a(href='#').cancel cancel
+          a(href='#').remove remove
+    else
+      span.value.hide #{lookup_value}
+
+      span.element
+        input(type='text', value=lookup_value)
+
+        span.tools
+          a(href='#').save save
+          a(href='#').cancel_remove cancel
+
+

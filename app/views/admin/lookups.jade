@@ -1,0 +1,21 @@
+extend index
+
+
+mixin quick_edit_li(lookup_value)
+  !=partial('quick_edit_li', {lookup_value: lookup_value})
+
+block sub_content
+  h3 Lookups
+  
+  for lookup in lookups
+    l_name = lookup.name.toLowerCase().replace(' ', '_')
+    
+    h4: a(href='#', id=l_name, class='toggle') #{lookup.name}
+    div(class=l_name + ' hide')
+      input(type='hidden', name='lookup_name', value=lookup.name)
+      ul.lookups
+        li: a(href='#').add add new
+        for v in lookup.values
+          +quick_edit_li(v)
+  else
+    p No Lookups
