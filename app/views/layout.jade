@@ -11,16 +11,20 @@ html
     
   body
     #container
-      #header
+      #header.clearfix
         h1 
           a(href='/', title='Online Faculty Support')
             img(src='/images/onlinefacultysupport-logo.png', alt='Online Faculty Support')
             
         #login
           form#top-login-form(action='POST')
-            input(type='text', id='user-name', name='User Name')
-            input(type='text', id='password', name='Password')
-            input(type='submit', id='login', name='Login')
+            input(type='text', id='user-name', name='User Name', value='User Name')
+            input(type='text', id='password', name='Password', value='Password')
+            input(type='submit', id='login-button', name='Login', value='Login')
+          .clearfix
+          p
+            a(href='/') Create an account
+            |  to start building your profile.
     
       block menu_main
         nav

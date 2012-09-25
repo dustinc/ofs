@@ -172,6 +172,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* VARIABLES */
 $teal = #008f96
+$lightteal = #4cbdc3
+$darkteal = #006368
 $darkgray = #3b3b3b
 $midgray = #565656
 $lightgray = #9b9b9b
@@ -185,17 +187,76 @@ $border = 2px solid $midgray
 
 /** BEGIN DOCUMENT CSS **/
 body
-  $darkgray
+  color $darkgray
   font-family $sansfont
   line-height 1.6em
 
 #container 
   width 900px
-  margin 0 auto
+  margin 10px auto 0
+  
+a
+  color $teal
+  
+a:hover
+  color $darkteal
   
 h2 
   font-family $seriffont
   line-height 1.6em
+
+fieldset
+  border 1px solid black
+
+input
+  margin 0 5px
+  padding 2px 5px
+  border 1px solid $lightgray
+  
+input[type='submit']
+  background $lightgray
+  color $darkgray
+  border 0
+  outline 0
+  padding 4px 6px
+  
+input[type='submit']:hover
+  background-color #ccc
+  cursor pointer
+  
+/* HEADER */
+#header h1 
+  display block
+  width 540px
+  height 142px
+  float left
+
+/* LOGIN */
+#login
+  width 360px
+  float right
+  color $lightgray
+  
+#login form
+  float right
+  
+#login input 
+  color $lightgray
+  
+#login input#login-button
+  margin-right 0
+  color $darkgray
+  
+#login p 
+  font-size 1.2em
+  line-height 2.5em
+  text-align right
+  
+#login p a 
+  color $lightgray
+  
+#login p a:hover
+  color $darkgray
   
 /* NAV */
 nav
@@ -222,7 +283,7 @@ nav a:hover
   font-size 3.0em
   color #fff
   text-align center
-  padding 50px
+  padding 35px 50px
   border $border
 
 /* home-points */
@@ -238,18 +299,48 @@ nav a:hover
   text-align center
   margin-bottom 20px
   padding 0 15px
+  border-width 0 2px 2px
 
 #help-colleges-find-you h2
   font-size 3.0em
   
+#help-colleges-find-you p
+  font-size 1.4em
+  margin-bottom 30px
+  
+a#build-button
+  background $teal
+  color #fff
+  font-size 1.5em
+  padding 10px
+  margin 0 10px
+  text-decoration none
+  
+a#build-button:hover
+  cursor pointer
+  background-color $lightteal
+  	
 #help-colleges-find-you img 
   margin 0 auto
+  padding-top 5px
 
 /* fab-four */
 #fab-four section 
   text-align left
-  width 416px
+  width 417px
   float left
+
+#home-points section#learn-the-basics
+  border-width 2px 1px 1px 2px
+  
+#home-points section#expand-your-skills
+  border-width 2px 2px 1px 1px
+  
+#home-points section#join-a-community
+  border-width 1px 1px 2px 2px
+  
+#home-points section#find-a-position
+  border-width 1px 2px 2px 1px
   
 #fab-four div 
   width 200px
@@ -270,12 +361,38 @@ nav a:hover
 
 #social-ctas section
   text-align center
-  width 416px
+  width 417px
   float left
-  height 120px
+  height 150px
+  
+#social-ctas p 
+  font-size 1.6em
+  
+#home-points section#join-our-newsletter
+  border-width 2px 1px 2px 2px
+  
+#home-points section#join-our-newsletter input[type='text']
+  display block
+  width 250px
+  margin 20px auto 0
+  font-size 1.6em
+  
+#home-points section#join-our-newsletter input[type='submit']
+  display block
+  margin 10px auto
+  padding 5px 15px
+  background-color $teal
+  color #fff
+  font-size 1.6em
+  
+#home-points section#join-our-newsletter input[type='submit']:hover
+  background-color $lightteal
+  
+#home-points section#find-us-on-facebook
+  border-width 2px 2px 2px 1px
 
 #social-ctas img 
-  margin 0 auto
+  margin 10px auto
   
 /* END HOME PAGE */
 
@@ -287,7 +404,8 @@ nav a:hover
   border $border
   
 #pre-footer section
-  width 288px
+  width 268px
+  padding 0 10px
   float left
   
 #pre-footer h3
@@ -307,10 +425,12 @@ nav a:hover
 #pre-footer a:hover
   text-decoration underline
   
+/* FOOTER */
 footer
   text-align center
   padding 20px
-
-
-fieldset
-  border 1px solid black
+  font-family $seriffont
+  font-size 1.2em
+  
+footer a
+  color $darkgray
