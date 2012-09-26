@@ -30,7 +30,7 @@ controller.create = function(req, res, next) {
 
   user.save(function(err) {
     if(err) next(err);
-    return res.render('user/' + user._id, {user: user});
+    return res.redirect('/user/' + user._id);
   });
 
 };
