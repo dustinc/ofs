@@ -3,10 +3,7 @@ extend ../layout
 block content
   h2 Admin
 
-  ul.admin_menu
-    li: a(href='/admin') Admin Home
-    li: a(href='/admin/users') Users
-    li: a(href='/admin/lookups') Lookups
+  include _menu
 
   div#admin_sub_content
     block sub_content
