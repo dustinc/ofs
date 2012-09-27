@@ -16,12 +16,18 @@ module.exports = function(_app) {
 // Index
 
 controller.index = function(req, res, next) {
-  return res.render('user/index',
+  return res.render('user/index', { users: db.users.find(), scripts: ['/scripts/admin.js'] } );
+};
+
+// Show
+
+controller.show = function(req, res, next) {
+  return res.render('user/show',
     {user: db.users.findOne({'_id': req.param('user_id')}) }
   );
 };
 
-// create new user
+// Create
 
 controller.create = function(req, res, next) {
 
@@ -35,16 +41,16 @@ controller.create = function(req, res, next) {
 
 };
 
-// load user form
+// Edit
 
 controller.edit = function(req, res, next) {
   var user = db.users.findById(req.param('user_id')),
-      Lookup = db.lookups;
+      user_types = db.lookups.find('User Types');
 
-  return res.render('user/edit', {user: user, user_types: Lookup.load('User Types')});
+  return res.render('user/edit', {user: user, user_types: user_types});
 };
 
-// update user info
+// Update
 
 controller.update = function(req, res, next) {
   var user = req.body.user;
@@ -67,7 +73,7 @@ controller.update = function(req, res, next) {
   });
 };
 
-// delete user
+// Delete
 
 controller.delete = function(req, res, next) {
   return db.users.findOne({ _id: req.param('user_id') }, function(err, _user) {
