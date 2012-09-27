@@ -34,5 +34,11 @@ Lookup.pre('remove', function(next) {
 // POST Hooks
 
 Lookup.post('init', function() {
-
+  if(this.values.length) {
+    for(var i in this.values) {
+      if(typeof this.values[i] == 'object' && this.values[i].hasOwnProperty('name')) {
+        this[this.values[i].name.toLowerCase().replace(' ', '_')] = this.values[i];
+      }
+    }
+  }
 });
