@@ -9,8 +9,8 @@ mixin degree(dcnt, degree)
     label Degree
     select(name='profile[education][degrees][#{dcnt}][degree_type]')
       option(value='')
-      for degree_type in profile.lookups.degrees.values
-        option(value=degree_type, selected=degree_type == degree.degree_type) #{degree_type}
+      for degree_type in lookups.degree_types.values
+        option(value=degree_type, selected=degree_type == degree_type.degree_type) #{degree_type}
 
     label Field of Study
     input(type='text', name='profile[education][degrees][#{dcnt}][field]', value=degree.field)
@@ -43,7 +43,7 @@ mixin service(scnt, service)
     label Type
     select(name='profile[services][#{scnt}][service_type]')
       option(value='')
-      for service_type in profile.lookups.service_types.values
+      for service_type in lookups.service_types.values
         option(value=service_type, selected=service_type == service.service_type) #{service_type}
   div
     label Name
@@ -66,7 +66,7 @@ form(action='/user/'+user.id+'/profile/save', method='post')
 
   fieldset
     legend Education
-    
+
     //- DEGREES
     for degree, dcnt in profile.education.degrees
       +degree(dcnt, degree)
@@ -96,21 +96,21 @@ form(action='/user/'+user.id+'/profile/save', method='post')
       label Years Teaching
       select(name='profile[experience][years_teaching]')
         option(value='')
-        for v in profile.schema.path('experience.years_teaching').enumValues
+        for v in lookups.years_teaching.values
           option(value='#{v}', selected=v == profile.experience.years_teaching) #{v}
 
     div
       label Delivery Mode
       select(name='profile[experience][delivery_mode]')
         option(value='')
-        for v in profile.schema.path('experience.delivery_mode').enumValues
+        for v in lookups.delivery_modes.values
           option(value='#{v}', selected=v == profile.experience.delivery_mode) #{v}
 
     div
       label Years Teaching Online
       select(name='profile[experience][years_teaching_online]')
         option(value='')
-        for v in profile.schema.path('experience.years_teaching_online').enumValues
+        for v in lookups.years_teaching.values
           option(value='#{v}', selected=v == profile.experience.years_teaching_online) #{v}
 
     div
@@ -208,15 +208,15 @@ form(action='/user/'+user.id+'/profile/save', method='post')
       label Institution
       select(name='profile[institution]')
         option(value='')
-        for v in profile.schema.path('institution').enumValues
+        for v in lookups.institution_types.values
           option(value=v, selected=v == profile.institution) #{v}
-        
+
 
     div
       label Course
       select(name='profile[course]')
         option(value='')
-        for v in profile.schema.path('course').enumValues
+        for v in lookups.course_types.values
           option(value=v, selected=v == profile.course) #{v}
 
   input(type='submit', value='save')

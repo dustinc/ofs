@@ -1,79 +1,75 @@
 
 div#profile-info
-  
+
   div#education
     h3 Education
-    
+
     h4 Degrees
     for degree in profile.education.degrees
       p #{degree.degree_type} #{degree.field} #{degree.year}
     else
       p: a(href='#') Add a degree
-    
-    
+
+
     h4 Certificates
     for cert in profile.education.certificates
       p #{cert.name} #{cert.year}
     else
       p: a(href='#') Add a certificate
-    
+
     h4 Licenses
     for lic in profile.education.licenses
       p #{lic.name} #{lic.year}
     else
       p: a(href='#') Add a license
-    
+
     h4 Other
     if profile.education.other
       p #{profile.education.other}
     else
       p: a(href='#') Add a other education
-  
+
   div#teaching
     h3 Teaching Experience
-    
+
     p Years Teaching: #{profile.experience.years_teaching}
-    
+
     p Delivery Mode: #{profile.experience.delivery_mode}
-    
+
     p Years Teaching Online: #{profile.experience.years_teaching_online}
-    
+
     p Courses Taught: #{profile.experience.courses_taught}
-    
+
     p Eligible Areas: #{profile.experience.eligible_areas}
-  
+
   div#research
     h3 Research
-    
+
     h4 Publications
     p Types of Research: #{profile.publication.publication_type}
     p Total Publications: #{profile.publication.total}
     p Publications in past 3 years: #{profile.publication.past_three_years}
     p Publications Reviewer: #{profile.publication.reviewer}
     p Publications Reviewer Total: #{profile.publication.reviwer_total}
-    
+
     h4 Presentations
     p Total Presentations: #{profile.presentation.total}
     p Presentations in past 3 years: #{profile.presentation.past_three_years}
     p Presentations Reviewer: #{profile.presentation.reviewer}
     p Presentations Reviewer Total: #{profile.presentation.reviewer_total}
-  
+
   div#service
     h3 Service
-    
+
     for service in profile.services
       p #{service.service_type} #{service.description} #{service.year}
     else
       p: a(href='#') Add service
-  
-  
+
+
   div#position
     h3 Position
-    
+
     p Position Desired: #{profile.position_desired}
     p Institution: #{profile.institution}
     p Course: #{profile.course}
-    
-    
-    
-    
