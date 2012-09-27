@@ -24,13 +24,10 @@ controller.create = function(req, res, next) {
       lookup = new Lookup(req.param('lookup'));
 
   lookup.save(function(err) {
-    if(!err) {
-      console.log('saving lookup...');
-    } else {
-      console.log('error saving... ' + err);
-    }
+    if(err) return next(err);
+
+    return res.redirect('/lookup/'+lookup.name);
   });
-  return res.send('lookup/create');
 };
 
 // Show single lookup details
@@ -69,7 +66,6 @@ controller.update = function(req, res, next) {
 
       return res.redirect('/lookup/'+_lookup.name);
     });
-
 
   });
 
