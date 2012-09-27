@@ -1,17 +1,12 @@
 extends ../layout
 
 block content
-  h2 #{user.name.full}
+  h2 Users
 
-  block user_menu
-    ul.sub_menu
-      li: a(href="/user/#{user._id}") Account
-      li: a(href="/user/#{user._id}/profile") Profile
-
-
-  block sub_content
-    
-    ul.sub_menu
-      li: a(href="/user/#{user._id}/edit") Edit Account
-    
-    p Email: #{user.email}
+  for user in users
+    h4: a(href='#', id=user.username, class='toggle') #{user.username}
+    div(class=user.username + ' hide')
+      p Email: #{user.email}
+      p Name: #{user.firstname} #{user.lastname}
+  else
+    p No Users

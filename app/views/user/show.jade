@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  h2 #{user.name.full}
+
+  block user_menu
+    ul.sub_menu
+      li: a(href="/user/#{user._id}") Account
+      li: a(href="/user/#{user._id}/profile") Profile
+
+
+  block sub_content
+    
+    ul.sub_menu
+      li: a(href="/user/#{user._id}/edit") Edit Account
+    
+    p Email: #{user.email}
