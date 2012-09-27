@@ -1,7 +1,7 @@
-extends ../layout
+extends ../admin/index
 
-block content
-  h2 Users
+block sub_content
+  h3 Users
 
   for user in users
     h4: a(href='#', id=user.username, class='toggle') #{user.username}
