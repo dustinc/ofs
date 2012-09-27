@@ -11,19 +11,22 @@ module.exports = function(app) {
   app.get('/', main.index);
   app.get('/about', main.load.bind(null, 'about'));
   app.get('/signup', main.signup);
+  app.get('/forums', function(req, res, next) {return res.send('forums');});
+  app.get('/templates-and-tutorials', function(req, res, next) {return res.send('templates-and-tutorials');});
+  app.get('/personalized-help', function(req, res, next) {return res.send('personalized-help');});
 
-
+  // searches
+  app.get('/search/adjunct', main.adjunct_search);
+  app.get('/search/jobs', main.job_search);
 
   // admin
   app.get('/admin', admin.index);
-  app.get('/admin/users', admin.users);
-  app.get('/admin/lookups', admin.lookups);
+  app.get('(?:\/admin)?/users?', user.index);
   app.get('/admin/quick_edit_li', admin.quick_edit_li);
 
   // users
-
-  app.get('/user/:user_id', user.index);
-  app.get('/user/:id/edit', user.edit);
+  app.get('/user/:user_id', user.show);
+  app.get('/user/:user_id/edit', user.edit);
   app.get('/user/:user_id/save', user.save);
   app.get('/user/:user_id/delete', user.delete);
   app.post('/user/create', user.create);
@@ -35,11 +38,11 @@ module.exports = function(app) {
   app.post('/user/:user_id/profile/save', user.profile.save);
 
   // lookups
-  app.get('/lookup', lookup.index);
-  app.get('/lookup/create', lookup.create);
-  app.get('/lookup/:name', lookup.show);
-  app.get('/lookup/:name/edit', lookup.edit);
-  app.post('/lookup/:name/update', lookup.update);
-  app.get('/lookup/:name/remove', lookup.delete);
+  app.get('(?:\/admin)?/lookups?', lookup.index);
+  app.get('(?:\/admin)?/lookups?/create', lookup.create);
+  app.get('(?:\/admin)?/lookups?/:name', lookup.show);
+  app.get('(?:\/admin)?/lookups?/:name/edit', lookup.edit);
+  app.post('(?:\/admin)?/lookups?/:name/update', lookup.update);
+  app.get('(?:\/admin)?/lookups?/:name/remove', lookup.delete);
 
 };
