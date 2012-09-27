@@ -6,6 +6,7 @@ block sub_content
   for user in users
     h4: a(href='#', id=user.username, class='toggle') #{user.username}
     div(class=user.username + ' hide')
+      a(href='/user/#{user._id}') edit
       p Email: #{user.email}
       p Name: #{user.firstname} #{user.lastname}
   else
