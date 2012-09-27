@@ -10,7 +10,7 @@ mixin degree(dcnt, degree)
     select(name='profile[education][degrees][#{dcnt}][degree_type]')
       option(value='')
       for degree_type in lookups.degree_types.values
-        option(value=degree_type, selected=degree_type == degree_type.degree_type) #{degree_type}
+        option(value=degree_type, selected=degree_type == degree.degree_type) #{degree_type}
 
     label Field of Study
     input(type='text', name='profile[education][degrees][#{dcnt}][field]', value=degree.field)
