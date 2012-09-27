@@ -7,17 +7,32 @@ block content
     div
       label Name
       input(type='text', name='lookup[name]', value=lookup.name)
-    
-    if lookup.values.length
-      
-      div#lookup_values_edit
-        label Values
-        a(href='#').add_new Add New
-        ul
-          each value in lookup.values
+
+
+    div#lookup_values_edit
+      label Values
+      a(href='#').add_new Add New
+      ul
+        for value, i in lookup.values
+          if value.name
             li
-              a(href='#').remove Remove 
+              a(href='#').remove remove
+              input(type='text', name='lookup[values][#{i}][name]', value=value.name)
+              for v in value.values
+                input(type='text', name='lookup[values][#{i}][values][]', value=v)
+              a(href='#').expand expand
+          else
+            li
+              a(href='#').remove remove
               input(type='text', name='lookup[values]', value=value)
+              a(href='#').expand expand
+        else
+          li
+            a(href='#').remove remove
+            input(type='text', name='lookup[values]',)
+            a(href='#').expand expand
+
+
     input(type='hidden', name='lookup[_id]', value=lookup._id)
     input(type='submit', value='Save')
 

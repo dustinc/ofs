@@ -19,7 +19,6 @@ controller.index = function(req, res, next) {
 // Create new
 
 controller.create = function(req, res, next) {
-
   var Lookup = db.main.model('Lookup'),
       lookup = new Lookup(req.param('lookup'));
 

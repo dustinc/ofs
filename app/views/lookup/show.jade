@@ -4,7 +4,14 @@ block content
   h2= lookup.name
   a(href="/lookup/#{lookup.name}/edit") Edit
 
-  if lookup.values.length
+  if lookup.values
     ul
-      each value in lookup.values
-        li #{value}
+      for value in lookup.values
+        if value.name
+          li #{value.name}
+            ul
+              for v in value.values
+                li #{v}
+        else
+          li #{value}
+
