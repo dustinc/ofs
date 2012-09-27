@@ -21,8 +21,9 @@ controller.index = function(req, res, next) {
 };
 
 controller.users = function(req, res, next) {
+  var users = db.users.find();
   return res.render('admin/users',
-    {users: db.users.getUsers(), scripts: scripts}
+    {users: users, scripts: scripts}
   );
 };
 
