@@ -10,7 +10,7 @@ try {
 //require('./lib/exceptions');
 
 if(!process.env.NODE_ENV) {
-  process.env.NODE_ENV = "local";
+  process.env.NODE_ENV = "development";
 }
 
 var app = require('./config/app')();

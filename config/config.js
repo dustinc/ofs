@@ -52,7 +52,6 @@ module.exports = function(app) {
           'teachers': db.model('Teacher')
         }
       )
-      .set('version', '0.0.1');
   });
 
   return app;
