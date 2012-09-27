@@ -23,6 +23,6 @@ controller.index = function(req, res, next) {
 };
 
 controller.signup = function(req, res, next) {
-  var Lookup = db.lookups;
-  return res.render('signup', {user_types: Lookup.load('User Types')});
+  var user_types = db.lookups.findOne({name: 'User Types'});
+  return res.render('signup', {user_types: user_types});
 };
