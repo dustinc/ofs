@@ -92,23 +92,18 @@ controller.delete = function(req, res, next) {
 controller.profile = function(req, res, next) {
   var user = db.users.findOne({'_id': req.param('user_id')}),
       Profile = db.teachers,
-      Lookup = db.lookups;
+      lookups = db.lookups.findOne({name: 'Teacher Lookups'});
 
-  //'teachers' needs to be dynamic
+  // get profile
   Profile.findOne({'user_id': req.param('user_id')}, function(err, _profile) {
     if(err) return next(err);
 
     if(null == _profile) {
       _profile = new Profile();
     }
-
-    Lookup.loadProfileLookups('Teacher', function(err, _lookups) {
-      if(err) return next(err);
-
-      _profile.lookups = _lookups;
-
-      return res.render('profile', {user: user, profile: _profile});
-    });
+    return res.render('profile',
+      {user: user, profile: _profile, lookups: lookups}
+    );
 
   });
 
@@ -118,7 +113,7 @@ controller.profile = function(req, res, next) {
 controller.profile.edit = function(req, res, next) {
   var user = db.users.findOne({'_id': req.param('user_id')}),
       Profile = db.teachers,
-      Lookup = db.lookups;
+      lookups = db.lookups.findOne({name: 'Teacher Lookups'});
 
   Profile.findOne({'user_id': req.param('user_id')}, function(err, _profile) {
     if(err) return next(err);
@@ -127,14 +122,7 @@ controller.profile.edit = function(req, res, next) {
       _profile = new Profile();
     }
 
-    Lookup.loadProfileLookups('Teacher', function(err, _lookups) {
-      if(err) return next(err);
-
-      _profile.lookups = _lookups;
-
-      return res.render('profile/edit', {user: user, profile: _profile});
-    });
-
+    return res.render('profile/edit', {user: user, profile: _profile, lookups: lookups});
 
   });
 };
