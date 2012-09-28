@@ -1,5 +1,8 @@
 extends layout
 
+block divider
+  //- block left deliberately empty
+
 block content
   
   #home-points
@@ -8,6 +11,7 @@ block content
     section#help-colleges-find-you
       h2 Help Colleges Find You
       p Update your information on our secure and searchable database to be connected with the right job.
+      p
         a(href='/signup')#build-button Build Your Profile Today
         |  
         a(href='#')#view-link View the Database
@@ -70,32 +74,5 @@ block content
         p Never miss an article.
         a(href='/')
           img(src='/images/facebook-icon.png', alt='Facebook icon')
-        
-block footer        
-  #pre-footer.clearfix
-    section
-      h3 More Information
-      ul
-        li: a(href='') About OnlineFacultySupport.com
-        li: a(href='') Membership Benefits
-        li: a(href='') Resources for Institutions
-        
-    section
-      h3 Top Articles
-      ul
-        li: a(href='') How to Write a Stand-Out CV
-        li: a(href='') Generating Interest in Online Discussions
-        li: a(href='') Lorem Ipsum
-        
-    section
-      h3 Popular Discussions
-      ul
-        li: a(href='') Lorem ipsum dolor sit amet
-        li: a(href='') Ut felis arcu
-        li: a(href='') Etiam condimentum sem scelerisque
-        
-  footer
-    | Copyright&#169;2012 OnlineFacultySupport.com &#124; Design by 
-    a(href='http://readydesigns.com') Ready Designs
     
     

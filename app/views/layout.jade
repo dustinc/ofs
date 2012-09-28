@@ -30,6 +30,36 @@ html
         nav
           != partial('_menu')
           
+      block divider
+        .top-divider
+          
       block content
      
       block footer
+        #pre-footer.clearfix
+          section
+            h3 More Information
+            ul
+              li: a(href='') About OnlineFacultySupport.com
+              li: a(href='') Membership Benefits
+              li: a(href='') Resources for Institutions
+              
+          section
+            h3 Top Articles
+            ul
+              li: a(href='') How to Write a Stand-Out CV
+              li: a(href='') Generating Interest in Online Discussions
+              li: a(href='') Lorem Ipsum
+              
+          section
+            h3 Popular Discussions
+            ul
+              li: a(href='') Lorem ipsum dolor sit amet
+              li: a(href='') Ut felis arcu
+              li: a(href='') Etiam condimentum sem scelerisque
+              
+        footer
+          | Copyright&#169;2012 OnlineFacultySupport.com &#124; Design by 
+          a(href='http://readydesigns.com') Ready Designs 
+          | &#124; Framework by 
+          a(href='http://www.linkedin.com/in/dustincoffey') CASS Solutions

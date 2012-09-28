@@ -70,41 +70,41 @@ blockquote, q
 
 @font-face 
     font-family 'BergamoStdRegular'
-    src url('BergamoStd-Regular-webfont.eot')
-    src url('BergamoStd-Regular-webfont.eot?iefix') format('eot'),
-         url('BergamoStd-Regular-webfont.woff') format('woff'),
-         url('BergamoStd-Regular-webfont.ttf') format('truetype'),
-         url('BergamoStd-Regular-webfont.svg#webfontJwE6WVIU') format('svg')
+    src url('/fonts/bergamo-std-webfont/BergamoStd-Regular-webfont.eot')
+    src url('/fonts/bergamo-std-webfont/BergamoStd-Regular-webfont.eot?iefix') format('eot'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Regular-webfont.woff') format('woff'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Regular-webfont.ttf') format('truetype'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Regular-webfont.svg#webfontJwE6WVIU') format('svg')
     font-weight normal
     font-style normal
     
 @font-face 
     font-family 'BergamoStdItalic'
-    src url('BergamoStd-Italic-webfont.eot')
-    src url('BergamoStd-Italic-webfont.eot?iefix') format('eot'),
-         url('BergamoStd-Italic-webfont.woff') format('woff'),
-         url('BergamoStd-Italic-webfont.ttf') format('truetype'),
-         url('BergamoStd-Italic-webfont.svg#webfontYjq6Uu7v') format('svg')
+    src url('/fonts/bergamo-std-webfont/BergamoStd-Italic-webfont.eot')
+    src url('/fonts/bergamo-std-webfont/BergamoStd-Italic-webfont.eot?iefix') format('eot'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Italic-webfont.woff') format('woff'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Italic-webfont.ttf') format('truetype'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Italic-webfont.svg#webfontYjq6Uu7v') format('svg')
     font-weight normal
     font-style normal
     
 @font-face 
     font-family 'BergamoStdBold'
-    src url('BergamoStd-Bold-webfont.eot')
-    src url('BergamoStd-Bold-webfont.eot?iefix') format('eot'),
-         url('BergamoStd-Bold-webfont.woff') format('woff'),
-         url('BergamoStd-Bold-webfont.ttf') format('truetype'),
-         url('BergamoStd-Bold-webfont.svg#webfont4jVlxogg') format('svg')
+    src url('/fonts/bergamo-std-webfont/BergamoStd-Bold-webfont.eot')
+    src url('/fonts/bergamo-std-webfont/BergamoStd-Bold-webfont.eot?iefix') format('eot'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Bold-webfont.woff') format('woff'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Bold-webfont.ttf') format('truetype'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-Bold-webfont.svg#webfont4jVlxogg') format('svg')
     font-weight normal
     font-style normal
     
 @font-face 
     font-family 'BergamoStdBoldItalic'
-    src url('BergamoStd-BoldItalic-webfont.eot')
-    src url('BergamoStd-BoldItalic-webfont.eot?iefix') format('eot'),
-         url('BergamoStd-BoldItalic-webfont.woff') format('woff'),
-         url('BergamoStd-BoldItalic-webfont.ttf') format('truetype'),
-         url('BergamoStd-BoldItalic-webfont.svg#webfontWQ48hIB4') format('svg')
+    src url('/fonts/bergamo-std-webfont/BergamoStd-BoldItalic-webfont.eot')
+    src url('/fonts/bergamo-std-webfont/BergamoStd-BoldItalic-webfont.eot?iefix') format('eot'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-BoldItalic-webfont.woff') format('woff'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-BoldItalic-webfont.ttf') format('truetype'),
+         url('/fonts/bergamo-std-webfont/BergamoStd-BoldItalic-webfont.svg#webfontWQ48hIB4') format('svg')
     font-weight normal
     font-style normal
 
@@ -328,6 +328,8 @@ a#build-button:hover
 #fab-four section 
   text-align left
   width 417px
+  height 175px
+  overflow hidden
   float left
 
 #home-points section#learn-the-basics
@@ -353,11 +355,11 @@ a#build-button:hover
   font-size 1.2em
   
 #fab-four h2, #social-ctas h2
-  font-size 2.5em
+  font-size 2.4em
   
 /* social-ctas */
 #social-ctas
-  margin 20px 0
+  margin-top 20px
 
 #social-ctas section
   text-align center
@@ -396,12 +398,14 @@ a#build-button:hover
   
 /* END HOME PAGE */
 
+/* FOOTER */
 /* pre-footer */
 #pre-footer
   background-color $teal
   color #fff
   padding 20px 15px
   border $border
+  margin-top 20px
   
 #pre-footer section
   width 268px
@@ -425,12 +429,40 @@ a#build-button:hover
 #pre-footer a:hover
   text-decoration underline
   
-/* FOOTER */
+/* copyright footer */
 footer
   text-align center
   padding 20px
   font-family $seriffont
-  font-size 1.2em
+  font-size 1.3em
   
 footer a
   color $darkgray
+  
+/* END FOOTER */
+  
+/* GENERAL PAGES */
+.top-divider
+  background $teal
+  width 100%
+  height 25px
+  border $border
+  
+h2.pageheader 
+  font-family $seriffont
+  text-align center
+  font-size 3.0em
+  
+#page-content
+  border $border
+  border-top none
+  
+#sub-content p
+  padding 10px
+  font-size 1.3em
+  
+/* END GENERAL PAGES */
+
+/* ADMIN */
+
+  

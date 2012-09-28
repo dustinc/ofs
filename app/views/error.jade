@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  
+  .error
+    #page-content
+    
+      if error != '404'
+    
+        h2.pageheader Server Error
+
+        div#sub-content
+          block sub_content
+            p
+              | Sorry, the server has encountered an error.
+      
+      else
+        h2.pageheader Page Not Found
+
+        div#sub-content
+          block sub_content
+            p
+              | Sorry, this is a 404 error, which means you're looking for something that isn't here.
