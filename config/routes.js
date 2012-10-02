@@ -45,4 +45,8 @@ module.exports = function(app) {
   app.post('(?:\/admin)?/lookups?/:name/update', lookup.update);
   app.get('(?:\/admin)?/lookups?/:name/remove', lookup.delete);
 
+  app.get('/*', function(req, res, next) {
+    res.status(404).render('error', {error: '404'});
+  });
+
 };
