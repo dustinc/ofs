@@ -122,7 +122,7 @@ controller.profile.edit = function(req, res, next) {
       _profile = new Profile();
     }
 
-    return res.render('profile/edit', {user: user, profile: _profile, lookups: lookups});
+    return res.render('profile/edit', {user: user, profile: _profile, lookups: lookups, scripts: ['/scripts/ofs.js']});
 
   });
 };
