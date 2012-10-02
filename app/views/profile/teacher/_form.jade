@@ -5,7 +5,7 @@
 //- Degree Mixin
 
 mixin degree(dcnt, degree)
-  div
+  div.degree.item
     label Degree
     select(name='profile[education][degrees][#{dcnt}][degree_type]')
       option(value='')
@@ -17,43 +17,56 @@ mixin degree(dcnt, degree)
 
     label Year Obtained
     input(type='text', name='profile[education][degrees][#{dcnt}][year]', value=degree.year)
+    
+    img(src='/images/remove_button.png', title='Remove Degree', width='23px').remove_item
+
 
 //- Certificate Mixin
 
 mixin certificate(ccnt, cert)
-  div
+  div.cert.item
     label Certificate
     input(type='text', name='profile[education][certificates][#{ccnt}][name]', value=cert.name)
     label Certificate Date
     input(type='text', name='profile[education][certificates][#{ccnt}][year]', value=cert.year)
+    
+    img(src='/images/remove_button.png', title='Remove Certificate', width='23px').remove_item
+
+
 
 //- License Mixin
 
 mixin license(lcnt, lic)
-      div
+      div.license.item
         label License
         input(type='text', name='profile[education][licenses][#{lcnt}][name]', value=lic.name)
         label License Date
         input(type='text', name='profile[education][licenses][#{lcnt}][year]', value=lic.year)
+        
+        img(src='/images/remove_button.png', title='Remove License', width='23px').remove_item
+
 
 //- Service Mixin
 
 mixin service(scnt, service)
-  div
-    label Type
-    select(name='profile[services][#{scnt}][service_type]')
-      option(value='')
-      for service_type in lookups.service_types.values
-        option(value=service_type, selected=service_type == service.service_type) #{service_type}
-  div
-    label Name
-    input(type='text', name='profile[services][#{scnt}][name]', value=service.name)
-  div
-    label Description
-    input(type='text', name='profile[services][#{scnt}][description]', value=service.description)
-  div
-    label Year
-    input(type='text', name='profile[services][#{scnt}][year]', value=service.year)
+  div.service.item
+    div
+      label Type
+      select(name='profile[services][#{scnt}][service_type]')
+        option(value='')
+        for service_type in lookups.service_types.values
+          option(value=service_type, selected=service_type == service.service_type) #{service_type}
+    div
+      label Name
+      input(type='text', name='profile[services][#{scnt}][name]', value=service.name)
+    div
+      label Description
+      input(type='text', name='profile[services][#{scnt}][description]', value=service.description)
+    div
+      label Year
+      input(type='text', name='profile[services][#{scnt}][year]', value=service.year)
+    
+    img(src='/images/remove_button.png', title='Remove Service', width='23px').remove_item
 
 
 //- START FORM
@@ -68,22 +81,31 @@ form(action='/user/'+user.id+'/profile/save', method='post')
     legend Education
 
     //- DEGREES
-    for degree, dcnt in profile.education.degrees
-      +degree(dcnt, degree)
-    else
-      +degree(0, {})
+    div#degrees.item_list
+      for degree, dcnt in profile.education.degrees
+        +degree(dcnt, degree)
+      else
+        +degree(0, {})
+
+      img(src='/images/add_button.png', title='Add Degree', width='33px').add_item
 
     //- CERTS
-    for cert, ccnt in profile.education.certificates
-      +certificate(ccnt, cert)
-    else
-      +certificate(0, {})
+    div#certs.item_list
+      for cert, ccnt in profile.education.certificates
+        +certificate(ccnt, cert)
+      else
+        +certificate(0, {})
+
+      img(src='/images/add_button.png', title='Add Certificate', width='33px').add_item
 
     //- LICENSES
-    for lic, lcnt in profile.education.licenses
-      +license(lcnt, lic)
-    else
-      +license(0, {})
+    div#license.item_list
+      for lic, lcnt in profile.education.licenses
+        +license(lcnt, lic)
+      else
+        +license(0, {})
+
+      img(src='/images/add_button.png', title='Add License', width='33px').add_item
 
     div
       label Other Education
@@ -190,13 +212,15 @@ form(action='/user/'+user.id+'/profile/save', method='post')
         option(value='99') 50+
 
 
-  fieldset
+  fieldset.item_list
     legend Services
 
     for service, scnt in profile.services
       +service(scnt, service)
     else
       +service(0, {})
+
+    img(src='/images/add_button.png', title='Add Service', width='33px').add_item
 
   fieldset
     legend Position
