@@ -4,13 +4,13 @@ module.exports = function(app) {
 
   // All Environments
   app.configure(function() {
-    this
+    app
       .set('version', '0.0.1')
   });
 
   // Development
   app.configure('development', function() {
-    this
+    app
       .set('host', 'localhost')
       .set('port', port)
       .set('env', 'development')
@@ -18,7 +18,7 @@ module.exports = function(app) {
 
   // Production
   app.configure('production', function() {
-    this
+    app
       .set('host', '')
       .set('port', port)
       .set('env', 'production')

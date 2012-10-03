@@ -19,7 +19,7 @@ module.exports = function(app) {
   // configure
 
   app.configure(function() {
-    this
+    app
       .use(express.logger('dev'))
       .use(express.cookieParser())
       .use(express.bodyParser())
@@ -30,7 +30,7 @@ module.exports = function(app) {
   // template engine
 
   app.configure(function() {
-    this
+    app
       .set('views', __dirname + '/../app/views')
       .set('view engine', 'jade')
       .set('view options', {layout:false})
@@ -43,7 +43,7 @@ module.exports = function(app) {
   // db reference
 
   app.configure(function() {
-    this
+    app
       .set('db',
         {
           'main': db,
