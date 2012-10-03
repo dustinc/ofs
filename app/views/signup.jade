@@ -12,6 +12,12 @@ block content
       input(type='text', name='user[email]')
 
     div
+      label User Type:
+      select(name='user[user_type]')
+        for user_type in user_types.values
+          option(value=user_type) #{user_type}
+
+    div
       label Username:
       input(type='text', name='user[username]')
 
