@@ -82,3 +82,17 @@ var Teacher = module.exports = new Schema({
 });
 
 Teacher.plugin(TimeStamp);
+
+
+
+Teacher.virtual('highest_degree').get(function() {
+  var weights = {
+    'Doctorates' : 100,
+    'Masters' : 10,
+    'Bachelors' : 1
+  };
+  
+  return this.education.degrees.sort(function(a, b) {
+    return weights[b.degree_type] - weights[a.degree_type];
+  })[0].degree_type;
+});
