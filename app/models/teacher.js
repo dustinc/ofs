@@ -41,15 +41,15 @@ var Service = new Schema({
  */
 
 var Teacher = module.exports = new Schema({
-  user_id: {type: ObjectId, required: true},
-  
+  user_id: {type: ObjectId, ref: 'User', required: true},
+
   education: {
     degrees: [Degree],
     certificates: [CertLic],
     licenses: [CertLic],
     other: String
   },
-  
+
   experience: {
     years_teaching: {type: String, enum: ['0', '1-3', '4-6', '7-10', '11+']},
     delivery_mode: {type: String, enum: ['Face to Face', 'Online', 'Both']},
@@ -57,7 +57,7 @@ var Teacher = module.exports = new Schema({
     courses_taught: [String],
     eligible_areas: [String]
   },
-  
+
   publication: {
     publication_type: Array,
     total: Number,
@@ -72,7 +72,7 @@ var Teacher = module.exports = new Schema({
     reviewer: Boolean,
     reviewer_total: Number
   },
-  
+
   services: [Service],
 
   positions_desired: [String],
