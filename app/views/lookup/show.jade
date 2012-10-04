@@ -1,17 +1,19 @@
 extends ../admin/index
 
 block sub_content
-  h2= lookup.name
-  a(href="/lookup/#{lookup.name}/edit") Edit
-
-  if lookup.values
-    ul
-      for value in lookup.values
-        if value.name
-          li #{value.name}
-            ul
-              for v in value.values
-                li #{v}
-        else
-          li #{value}
+  h3= lookup.name
+  a.button-box(href="/lookup/#{lookup.name}/edit") Edit
+  
+  #lookup-info
+    if lookup.values
+      ul
+        for value in lookup.values
+          if value.name
+            li
+              span.key #{value.name}
+              ul
+                for v in value.values
+                  li.sub-thing #{v}
+          else
+            li #{value}
 

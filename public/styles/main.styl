@@ -448,24 +448,76 @@ footer a
   height 25px
   border $border
   
-h2.pageheader 
+h2 
   font-family $seriffont
   text-align center
   font-size 3.0em
   
+h3
+  font-family $sansfont
+  text-align left
+  font-size 1.5em
+  line-height 2em
+  
 #page-content
   border $border
   border-top none
+  padding 10px
+  
+#sub-content
+  font-size 1.3em
   
 #sub-content p
   padding 10px
-  font-size 1.3em
+  
+#sub-content li
+  margin-bottom .5em
   
 /* END GENERAL PAGES */
 
 /* ADMIN */
+.admin label
+  font-weight bold
 
-
+.lookup-info
+  margin-top 10px
+  
+.admin a.button-box
+  background-color $teal
+  padding 5px
+  text-decoration none
+  color #fff
+  margin-right 10px
+  line-height 3em
+  
+.admin a.button-box:hover
+  background-color $lightteal
+  
+#name-value-edit
+  line-height 3em
+  
+#lookup_values_edit
+  line-height 3em
+  
+#lookup-info
+  font-weight bold
+  
+  
+#lookup_values_edit ul li:nth-child(odd)
+  background-color #ccc
+  
+#lookup-info ul li ul, #lookup-info ul li ul li
+  display inline
+  
+#lookup-info .key, #lookup-info .sub-thing
+  margin-right 10px
+  
+#lookup-info .key:after 
+  content ":"
+  
+#lookup-info .sub-thing
+  font-weight normal
+  
 /* DUSTINS TERRIBLE STYLES */
 
 img.add_new

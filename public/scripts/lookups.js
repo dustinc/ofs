@@ -1,6 +1,6 @@
 var addRow = function() {
   var $li = $('#lookup_values_edit ul li').filter(':last');
-  $li.after('<li><a href="#" class="remove">remove</a><input type="text" name="lookup[values]" /><a href="#" class="expand">expand</a></li>');
+  $li.after('<li><input type="text" name="lookup[values]" /><a href="#" class="expand button-box">expand</a> <a href="#" class="remove button-box">remove</a></li>');
   return false;
 };
 

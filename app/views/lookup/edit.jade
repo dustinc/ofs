@@ -1,39 +1,38 @@
 extends ../admin/index
 
 block sub_content
-  h2 Edit #{lookup.name}
-  a(href="/lookup/#{lookup.name}") Cancel
-
+  h3 Edit #{lookup.name}
+  
   form(action='/lookup/#{lookup.name}/update', method='post')
-    div
+    #name-value-edit
       label Name
       input(type='text', name='lookup[name]', value=lookup.name)
 
 
     div#lookup_values_edit
-      label Values
-      a(href='#').add_new Add New
+      label Values 
+      a(href='#').add_new.button-box Add New
       ul
         for value, i in lookup.values
           if value.name
             li
-              a(href='#').remove remove
               input(type='text', name='lookup[values][#{i}][name]', value=value.name)
               for v in value.values
                 input(type='text', name='lookup[values][#{i}][values][]', value=v)
-              a(href='#').expand expand
+              a(href='#').expand.button-box expand
+              a(href='#').remove.button-box remove
           else
             li
-              a(href='#').remove remove
               input(type='text', name='lookup[values]', value=value)
-              a(href='#').expand expand
+              a(href='#').expand.button-box expand
+              a(href='#').remove.button-box remove
         else
           li
-            a(href='#').remove remove
             input(type='text', name='lookup[values]',)
-            a(href='#').expand expand
-
-
+            a(href='#').expand.button-box expand
+            a(href='#').remove.button-box remove
+            
+    a(href="/lookup/#{lookup.name}").button-box Cancel
     input(type='hidden', name='lookup[_id]', value=lookup._id)
     input(type='submit', value='Save')
 
