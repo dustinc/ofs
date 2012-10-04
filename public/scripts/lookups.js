@@ -1,6 +1,15 @@
+
+
 var addRow = function() {
-  var $li = $('#lookup_values_edit ul li').filter(':last');
-  $li.after('<li><input type="text" name="lookup[values]" /><a href="#" class="expand button-box">expand</a> <a href="#" class="remove button-box">remove</a></li>');
+  var $ul = $('#lookup_values_edit ul'),
+      new_row = '<li><input type="text" name="lookup[values]" /><a href="#" class="expand button-box">expand</a> <a href="#" class="remove button-box">remove</a></li>';
+  
+  if($ul.find('li').length != 0) {
+    $ul.find('li').filter(':last').after(new_row);
+  } else {
+    $ul.html(new_row);
+  }
+  
   return false;
 };
 
