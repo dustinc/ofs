@@ -2,9 +2,9 @@ extends layout
 
 block content
   h2 Search Database
-  
+
   form(action='/search/adjunct', method='get')#search_form
-    
+
     label Delivery Mode
     select(name='adjunct[experience.delivery_mode]')
       option(value='')
@@ -35,6 +35,14 @@ block content
           th Years Teaching Online
           th Highest Degree
 
+      if total_results > 10
+        tfoot
+          tr
+            td(colspan='4')
+              if page > 1
+                a(href=page_url+(page-1)).float-left Prev
+              if total_results > page_total
+                a(href=page_url+(page+1)).float-right Next
       tbody
         for result in search_results
           tr

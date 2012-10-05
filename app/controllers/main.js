@@ -29,10 +29,14 @@ controller.signup = function(req, res, next) {
 
 controller.adjunct_search = function(req, res, next) {
 
-  var lookups = db.lookups.findOne({name: 'Teacher Lookups'}),
-      query = db.teachers.find().populate('user_id'),
-      post = req.param('adjunct');
+  var query = db.teachers.find().populate('user_id'),
+      post = req.query.adjunct,
+      page = 1,
+      limit = 10,
+      req_url = req.url.replace(/(&page=\d*|page=\d*&*)/, '').replace(/\?$/, ''),
+      page_url = req_url + ((req_url == req.route.path) ? '?' : '&') + 'page=';
 
+  // build query
   if(post) {
     for(var key in post) {
       if(post[key] != '') {
@@ -41,7 +45,24 @@ controller.adjunct_search = function(req, res, next) {
     }
   }
 
-  return res.render('adjunct_search', {lookups: lookups, search_results: query.exec()});
+  // limit
+  query.limit(limit);
+
+  // pagination
+  if(req.query.page) {
+    page = parseInt(req.query.page);
+    query.skip((page - 1) * limit);
+  }
+
+  return res.render('adjunct_search', {
+      lookups: db.lookups.findOne({name: 'Teacher Lookups'}),
+      search_results: query.exec(),
+      total_results: db.teachers.find().count(),
+      page: page,
+      page_url: page_url,
+      page_total: (page * limit)
+  });
+
 };
 
 controller.job_search = function(req, res, next) {
