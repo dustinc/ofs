@@ -22,9 +22,9 @@ module.exports = function(app) {
     app
       .use(express.logger('dev'))
       .use(express.cookieParser())
+      .use(express.session({ secret: 'secret' }))
       .use(express.bodyParser())
-      .use(express.errorHandler({dumpException: true, showStack: true}))
-      .use(express.session({ secret: 'shh, secret stuffs'}));
+      .use(express.errorHandler({dumpException: true, showStack: true}));
   });
   
   // template engine
