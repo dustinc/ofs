@@ -68,6 +68,14 @@ User.pre('init', function(next) {
 // pre save
 
 User.pre('save', function(next) {
+  var phash = require('password-hash');
+
+  if(this.password != '' && !phash.isHashed(this.password)) {
+    this.password = phash.generate(this.password);
+  }
+
+  if(this.confirm_password) delete this.confirm_password;
+
   next();
 });
 
