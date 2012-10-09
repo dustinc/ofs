@@ -9,7 +9,8 @@ const express       = require('express'),
       models        = require('./models'),
       config        = require('./config'),
       routes        = require('./routes'),
-      environments  = require('./environments');
+      environments  = require('./environments'),
+      errors        = require('./errors');
 
 
 /**
@@ -17,7 +18,7 @@ const express       = require('express'),
  */
 
 module.exports = function() {
-  
+
   const app = express.createServer();
 
   models(app);
@@ -27,6 +28,8 @@ module.exports = function() {
   environments(app);
 
   routes(app);
+
+  errors(app);
 
   return app;
 
