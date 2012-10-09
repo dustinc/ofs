@@ -25,6 +25,7 @@ var User = module.exports = new Schema({
   },
   password: String,
   user_type: {type: String, required: true},
+  is_admin: {type: Boolean, required: false, default: 0},
   roles: Array
 });
 
