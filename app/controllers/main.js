@@ -17,15 +17,45 @@ controller.load = function(template, req, res, next) {
   res.render(template);
 };
 
+// index
 
 controller.index = function(req, res, next) {
-  res.render('home', {title: 'My Site Title'});
+  res.render('home');
 };
+
+// login
+
+controller.login = function(req, res, next) {
+  var phash = require('password-hash');
+
+  db.users.findOne({username: req.body.username}, function(err, _user) {
+    if(err) return next(err);
+    
+    if(!phash.verify(req.body.password, _user.password)) {
+      return res.send('password does not match');
+    } else {
+      req.session.user = _user;
+      return res.redirect(req.header('Referrer'));
+    }
+    
+  })
+
+};
+
+controller.logout = function(req, res, next) {
+  //delete req.session.user;
+  req.session.destroy();
+  return res.redirect('/');
+};
+
+// signup
 
 controller.signup = function(req, res, next) {
   var user_types = db.lookups.findOne({name: 'User Types'});
   return res.render('signup', {user_types: user_types});
 };
+
+// adjunct search
 
 controller.adjunct_search = function(req, res, next) {
 
@@ -64,6 +94,8 @@ controller.adjunct_search = function(req, res, next) {
   });
 
 };
+
+// job search
 
 controller.job_search = function(req, res, next) {
   return res.send('job search');
