@@ -32,9 +32,18 @@ controller.show = function(req, res, next) {
 controller.create = function(req, res, next) {
 
   var User = db.main.model('User'),
-      user = new User(req.body.user);
+      user = req.body.user
 
-  user.save(function(err) {
+
+  if(user.password != user.confirm_password) {
+    return res.redirect('/signup');
+  }
+
+  delete user.confirm_password;
+
+  new_user = new User(user);
+
+  new_user.save(function(err) {
     if(err) next(err);
     return res.redirect('/user/' + user._id);
   });
@@ -53,7 +62,9 @@ controller.edit = function(req, res, next) {
 // Update
 
 controller.update = function(req, res, next) {
-  var user = req.body.user;
+  var user = req.body.user,
+      phash = require('password-hash');
+
 
   db.users.findOne({ _id: user._id}, function(err, _user) {
     if(err) return next(err);
@@ -62,7 +73,12 @@ controller.update = function(req, res, next) {
     _user.name.last = user.name.last;
     _user.email = user.email;
     _user.username = user.username;
-    _user.password = user.password;
+
+    // set new password
+    if(phash.verify(user.current_password, _user.password) && user.password == user.confirm_password) {
+      _user.password = user.password;
+    }
+
     _user.user_type = user.user_type;
 
     _user.save(function(err) {
