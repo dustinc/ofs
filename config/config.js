@@ -2,7 +2,7 @@
 // dependencies
 
 const express   = require('express'),
-      stylus    = require('stylus');
+      stylus    = require('stylus'),
       mongoose  = require('mongoose'),
       _         = require('underscore');
 
