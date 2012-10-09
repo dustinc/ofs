@@ -17,14 +17,22 @@ html
             img(src='/images/onlinefacultysupport-logo.png', alt='Online Faculty Support')
             
         #login
-          form#top-login-form(action='POST')
-            input(type='text', id='user-name', name='User Name', value='User Name')
-            input(type='text', id='password', name='Password', value='Password')
-            input(type='submit', id='login-button', name='Login', value='Login')
-          .clearfix
-          p
-            a(href='/signup') Create an account
-            |  to start building your profile.
+          if !s_user
+            form#top-login-form(action='/login', method='post')
+              input(type='text', id='user-name', name='username', value='User Name')
+              input(type='password', id='password', name='password', value='Password')
+              input(type='submit', id='login-button', name='Login', value='Login')
+            .clearfix
+            p
+              a(href='/signup') Create an account
+              |  to start building your profile.
+          else
+            p Hello, #{s_user.name.first}
+            p
+              if s_user.is_admin
+                a(href='/admin') Admin
+              a(href='/user/'+s_user._id) My Account
+              a(href='/logout') Logout
     
       block menu_main
         nav
