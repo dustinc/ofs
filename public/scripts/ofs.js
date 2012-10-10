@@ -1,11 +1,47 @@
+
+
+// flash message timeout
+
+var flashTimeout = function() {
+  if($('#messages').length == 0) return false;
+  setTimeout(function() {
+    $('#messages').slideUp('slow');
+  }, 3000);
+};
+
+
 $(function() {
+
+// init flash timeout
+flashTimeout();
+
+
+/*
+ * generic stuffs
+ */
+
+$('body').on('click', 'a.delete', function() {
+  return confirm('Are you sure you want to permanently delete?');
+});
+
 
 
 /*
  * semi-generic form functions
  */
 
+
+// clear example values on focus
+
+$('#top-login-form input').focus(function() {
+  if($(this).val() == 'username' || $(this).val() == 'password') $(this).val('');
+}).blur(function() {
+  if($(this).val() == '') $(this).val($(this).attr('name'));
+});
+
+
 // add new item
+
 $('.item_list').on('click', '.add_item', function() {
 
   var $item_list = $(this).closest('.item_list');
@@ -39,6 +75,7 @@ $('.item_list').on('click', '.add_item', function() {
 
 
 // remove item (soft)
+
 $('.item_list').on('click', '.remove_item', function() {
   $(this).closest('.item').remove();
 });
