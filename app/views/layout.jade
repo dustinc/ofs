@@ -19,7 +19,7 @@ html
             img(src='/images/onlinefacultysupport-logo.png', alt='Online Faculty Support')
             
         #login
-          if !s_user
+          - if(typeof s_user == 'undefined' || s_user == false)
             form#top-login-form(action='/login', method='post')
               input(type='text', id='user-name', name='username', value='User Name')
               input(type='password', id='password', name='password', value='Password')
