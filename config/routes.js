@@ -30,7 +30,7 @@ module.exports = function(app) {
       },
 
       isThisUser = function(req, res, next) {
-        if(!req.session.user.is_admin && req.params.user_id != req.session.user._id) {
+        if(req.params.user_id != req.session.user._id && !req.session.user.is_admin) {
           res.status(404);
           return next(new Error('Sorry, the page you are you looking for does not exist.'));
         }
@@ -81,6 +81,7 @@ module.exports = function(app) {
   // admin
   app.get('/admin', authenticatedAdmin, admin.index);
   app.get('/admin/users?', user.index);
+  app.get('/admin/user/:user_id/delete', authenticatedAdmin, user.delete);
   app.get('/admin/quick_edit_li', admin.quick_edit_li);// remove this
 
   // lookups
@@ -95,7 +96,6 @@ module.exports = function(app) {
   app.get('/user/:user_id', authenticatedUser, user.show);
   app.get('/user/:user_id/edit', authenticatedUser, user.edit);
   app.get('/user/:user_id/save', authenticatedUser, user.save);
-  app.get('/user/:user_id/delete', authenticatedUser, user.delete);
   app.post('/user/:user_id/update', authenticatedUser, user.update);
 
   //user profile
