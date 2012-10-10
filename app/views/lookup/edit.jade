@@ -3,7 +3,7 @@ extends ../admin/index
 block sub_content
   h3 Edit #{lookup.name}
   
-  form(action='/lookup/#{lookup.name}/update', method='post')
+  form(action='/admin/lookup/#{lookup.name}/update', method='post')
     #name-value-edit
       label Name
       input(type='text', name='lookup[name]', value=lookup.name)
@@ -32,7 +32,7 @@ block sub_content
             a(href='#').expand.button-box expand
             a(href='#').remove.button-box remove
             
-    a(href="/lookup/#{lookup.name}").button-box Cancel
+    a(href="/admin/lookup/#{lookup.name}").button-box Cancel
     input(type='hidden', name='lookup[_id]', value=lookup._id)
     input(type='submit', value='Save')
 

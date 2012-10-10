@@ -25,7 +25,7 @@ controller.create = function(req, res, next) {
   lookup.save(function(err) {
     if(err) return next(err);
 
-    return res.redirect('/lookup/'+lookup.name);
+    return res.redirect('/admin/lookup/'+lookup.name);
   });
 };
 
@@ -63,7 +63,7 @@ controller.update = function(req, res, next) {
         return res.send('Saved Lookup');
       }
 
-      return res.redirect('/lookup/'+_lookup.name);
+      return res.redirect('/admin/lookup/'+_lookup.name);
     });
 
   });
