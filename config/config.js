@@ -54,6 +54,12 @@ module.exports = function(app) {
       )
   });
 
+  app.use(function(req, res, next) {
+    res.local('messages');
+    next();
+  });
+  app.dynamicHelpers({ messages: require('express-messages') });
+
   return app;
 
 };
