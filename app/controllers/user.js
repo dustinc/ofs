@@ -32,10 +32,25 @@ controller.show = function(req, res, next) {
 controller.create = function(req, res, next) {
 
   var User = db.main.model('User'),
-      user = req.body.user
+      user = req.body.user,
+      verr = false;
 
+  if(user.email == '') {
+    verr = true;
+    req.flash('error', 'Email Required');
+  }
 
-  if(user.password != user.confirm_password) {
+  if(user.username == '') {
+    verr = true;
+    req.flash('error', 'Username Required');
+  }
+
+  if(user.password == '' || user.password != user.confirm_password) {
+    verr = true;
+    req.flash('error', 'Password Required');
+  }
+
+  if(verr) {
     return res.redirect('/signup');
   }
 
@@ -44,8 +59,10 @@ controller.create = function(req, res, next) {
   new_user = new User(user);
 
   new_user.save(function(err) {
-    if(err) next(err);
-    return res.redirect('/user/' + user._id);
+    if(err) return next(err);
+    req.session.user = new_user;
+    req.flash('info', '');
+    return res.redirect('/user/' + new_user._id);
   });
 
 };
@@ -95,7 +112,7 @@ controller.delete = function(req, res, next) {
   return db.users.findOne({ _id: req.param('user_id') }, function(err, _user) {
     if(err) return next(err);
     _user.remove();
-    return res.redirect('/user');
+    return res.redirect('/admin/users');
   });
 };
 

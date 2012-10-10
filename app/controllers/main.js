@@ -26,24 +26,36 @@ controller.index = function(req, res, next) {
 // login
 
 controller.login = function(req, res, next) {
-  var phash = require('password-hash');
+  var phash = require('password-hash'),
+      verr = false;
 
   db.users.findOne({username: req.body.username}, function(err, _user) {
     if(err) return next(err);
-    
-    if(!phash.verify(req.body.password, _user.password)) {
-      return res.send('password does not match');
-    } else {
-      req.session.user = _user;
+
+    if(!_user) {
+      verr = true;
+      req.flash('error', 'User Not Found');
       return res.redirect(req.header('Referrer'));
     }
-    
+
+    if(!phash.verify(req.body.password, _user.password)) {
+      verr = true;
+      req.flash('error', 'Password Does Not Match');
+    }
+
+    if(!verr) {
+      // log in user
+      req.flash('info', 'Login Successful! Welcome Back, %s', _user.name.first)
+      req.session.user = _user;
+    }
+
+    return res.redirect(req.header('Referrer'));
+
   })
 
 };
 
 controller.logout = function(req, res, next) {
-  //delete req.session.user;
   req.session.destroy();
   return res.redirect('/');
 };
