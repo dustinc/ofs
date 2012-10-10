@@ -29,7 +29,11 @@ html
               a(href='/signup') Create an account
               |  to start building your profile.
           else
-            p Hello, #{s_user.name.first}
+            p Hello, 
+              - if(typeof s_user.name.first != 'undefined')
+                | #{s_user.name.first}
+              else
+                | #{s_user.username}
             p
               if s_user.is_admin
                 a(href='/admin') Admin
