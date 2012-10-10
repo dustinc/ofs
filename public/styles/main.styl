@@ -529,6 +529,28 @@ h3
 img.add_new
   cursor pointer
 
+
+// flash message
+
+#messages
+  position fixed
+  width 900px
+  z-index 1
+
+  ul
+    li
+      font-size 12px
+      font-weight bold
+      padding 5px
+
+  ul.info
+    li
+      background-color rgba(133, 234, 133, .9)
+
+  ul.error
+    li
+      background-color rgba(255, 186, 210, .9)
+
 // adjunct search page
 
 table#adjunct_search_results
