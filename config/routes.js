@@ -72,6 +72,7 @@ module.exports = function(app) {
   app.get('/signup', main.signup);
   app.post('/user/create', user.create);
 
+  app.get('/loadfixtures', main.loadfixtures);
 
   /*
    * Requires Authentication

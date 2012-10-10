@@ -112,3 +112,103 @@ controller.adjunct_search = function(req, res, next) {
 controller.job_search = function(req, res, next) {
   return res.send('job search');
 };
+
+// load fixtures - temp controller
+
+controller.loadfixtures = function(req, res, next) {
+
+
+  var User = db.users,
+      Lookup = db.lookups,
+      user_fixture = {
+        "email" : "tester@testing.com",
+        "username" : "tester",
+        "is_admin" : true,
+        "name" : { "first" : "Test", "last" : "User" },
+        "password" : "sha1$6184983d$1$76bca90f2e87e81e797654a853862bb0e67806ad",
+        "user_type" : "Administrator"
+      },
+      lookup_fixtures = [{
+        "name" : "Teacher Lookups",
+        "values" : [{
+          "name" : "Degree Types",
+          "values" : [
+            "Doctorates",
+            "Masters",
+            "Bachelors"
+      ]},
+      {
+        "name" : "Service Types",
+        "values" : [
+          "Dissertation/Thesis",
+          "University/College"
+        ]
+      },
+      {
+        "name" : "Delivery Modes",
+        "values" : [
+          "Face to Face",
+          "Online",
+          "Both"
+        ]
+      },
+      {
+        "name" : "Years Teaching",
+        "values" : [
+          "0",
+          "1-3",
+          "4-6",
+          "7-10",
+          "11+"
+        ]
+      },
+      {
+        "name" : "Institution Types",
+        "values" : [
+          "K12 School",
+          "Community/Technical College",
+          "University/College"
+        ]
+      },
+      {
+        "name" : "Course Types",
+        "values" : [
+          "K12",
+          "Undergraduate",
+          "Graduate"
+        ]
+      }
+    ] },
+    {"name" : "User Types", "values" : [ "Institution", "Teacher", "Administrator" ] }];
+
+
+
+
+
+  var user = new User(user_fixture);
+  user.save(function(err) {
+    //if(err) return next(err);
+
+    Lookup.collection.remove(function(err) {
+      if(err) return next(err);
+      var total = lookup_fixtures.length,
+          count = 0;
+
+      lookup_fixtures.forEach(function(fixture) {
+        var lookup = new Lookup(fixture);
+        lookup.save(function(err) {
+          if(err) return next(err);
+          count++;
+          if(count == total) {
+            req.flash('info', 'Fixures Loaded');
+            return res.redirect(req.header('Referrer'));
+          }
+        });
+      });
+
+    });
+
+  });
+
+
+};
