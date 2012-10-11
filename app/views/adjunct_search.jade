@@ -3,7 +3,7 @@ extends layout
 block content
   h2 Search Database
 
-  form(action='/search/adjunct', method='get')#search_form
+  form(action='/search/adjunct', method='get')#search-form
 
     label Delivery Mode
     select(name='adjunct[experience.delivery_mode]')
@@ -27,7 +27,7 @@ block content
       input(type='submit')
 
   - if(typeof(search_results) != 'undefined' && search_results.length)
-    table#adjunct_search_results
+    table#adjunct-search-results
       thead
         tr
           th Name

@@ -1,7 +1,7 @@
 
 
 var addRow = function() {
-  var $ul = $('#lookup_values_edit ul'),
+  var $ul = $('#lookup-values-edit ul'),
       new_row = '<li><input type="text" name="lookup[values]" /><a href="#" class="expand button-box">expand</a> <a href="#" class="remove button-box">remove</a></li>';
   
   if($ul.find('li').length != 0) {
@@ -34,11 +34,11 @@ var cleanRow = function($row) {
 
 
 $(function() {
-  $('div#lookup_values_edit').on('click', 'a.add_new', addRow);
+  $('div#lookup-values-edit').on('click', 'a.add-new', addRow);
 
-  $('div#lookup_values_edit').on('click', 'a.expand', expandRow);
+  $('div#lookup-values-edit').on('click', 'a.expand', expandRow);
 
-  $('div#lookup_values_edit').on('click', 'a.remove', function() {
+  $('div#lookup-values-edit').on('click', 'a.remove', function() {
     $(this).parent().remove();
     return false;
   });

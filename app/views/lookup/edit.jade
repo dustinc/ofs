@@ -9,9 +9,9 @@ block sub_content
       input(type='text', name='lookup[name]', value=lookup.name)
 
 
-    div#lookup_values_edit
+    div#lookup-values-edit
       label Values 
-      a(href='#').add_new.button-box Add New
+      a(href='#').add-new.button-box Add New
       ul
         for value, i in lookup.values
           if value.name

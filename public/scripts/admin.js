@@ -7,14 +7,14 @@ $(function() {
   });
 
   // lookups quick edit
-  $('div#admin_sub_content').on('click', '.quick-edit span', function() {
+  $('div#admin-sub-content').on('click', '.quick-edit span', function() {
     var $li = $(this).parent();
     $li.find('span.value').hide();
     $li.find('span.element').show();
     return false;
   });
 
-  $('div#admin_sub_content').on('click', 'span.tools a', function() {
+  $('div#admin-sub-content').on('click', 'span.tools a', function() {
     var act = $(this).attr('class'),
         $li = $(this).closest('li.quick-edit'),
         $div,
@@ -57,14 +57,14 @@ $(function() {
         $li.find('span.value').show();
         break;
 
-      case 'cancel_remove':
+      case 'cancel-remove':
         $li.remove();
         break;
     }
     return false;
   });
 
-  $('div#admin_sub_content').on('click', 'a.add', function() {
+  $('div#admin-sub-content').on('click', 'a.add', function() {
     var $ul = $(this).closest('ul.lookups'),
         $last_li = $ul.find('li').filter(':last');
 
@@ -78,7 +78,7 @@ $(function() {
     return false;
   });
 
-  $('div#admin_sub_content').on('click', 'a.remove', function() {
+  $('div#admin-sub-content').on('click', 'a.remove', function() {
     $(this).parent().remove();
     return false;
   });
