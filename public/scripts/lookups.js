@@ -30,6 +30,7 @@ var cleanRow = function($row) {
     }
 
   })
+  return false;
 };
 
 
