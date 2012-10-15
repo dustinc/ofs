@@ -2,53 +2,63 @@ extends layout
 
 block content
   h2 Search Database
+  
+  #sub-content
+    block sub_content
 
-  form(action='/search/adjunct', method='get')#search-form
+      form(action='/search/adjunct', method='get')#search-form
+      
+        div
+          label(for='dmode') Delivery Mode
+          select(name='adjunct[experience.delivery_mode]', id='dmode')
+            option(value='')
+            for v in lookups.delivery_modes.values
+              option(value=v) #{v}
 
-    label Delivery Mode
-    select(name='adjunct[experience.delivery_mode]')
-      option(value='')
-      for v in lookups.delivery_modes.values
-        option(value=v) #{v}
+        div
+          label(for='yearsteachingonline') Years Teaching Online
+          select(name='adjunct[experience.years_teaching_online]', id='yearsteachingonline')
+            option(value='')
+            for v in lookups.years_teaching.values
+              option(value=v) #{v}
+        
+        div
+          label(for='highestdegree') Highest Degree
+          select(name='adjunct[education.degrees.degree_type]', id='highestdegree')
+            option(value='')
+            for v in lookups.degree_types.values
+              option(value=v) #{v}
 
-    label Years Teaching Online
-    select(name='adjunct[experience.years_teaching_online]')
-      option(value='')
-      for v in lookups.years_teaching.values
-        option(value=v) #{v}
+        div
+          input(type='submit')
+          
+      .clearfix
+      
+      h3 Search Results
 
-    label Highest Degree
-    select(name='adjunct[education.degrees.degree_type]')
-      option(value='')
-      for v in lookups.degree_types.values
-        option(value=v) #{v}
+      - if(typeof(search_results) != 'undefined' && search_results.length)
+        table#adjunct-search-results
+          thead
+            tr
+              th Name
+              th Delivery Mode
+              th Years Teaching Online
+              th Highest Degree
 
-    div
-      input(type='submit')
-
-  - if(typeof(search_results) != 'undefined' && search_results.length)
-    table#adjunct-search-results
-      thead
-        tr
-          th Name
-          th Delivery Mode
-          th Years Teaching Online
-          th Highest Degree
-
-      if total_results > 10
-        tfoot
-          tr
-            td(colspan='4')
-              if page > 1
-                a(href=page_url+(page-1)).float-left Prev
-              if total_results > page_total
-                a(href=page_url+(page+1)).float-right Next
-      tbody
-        for result in search_results
-          tr
-            td #{result.user_id.name.full}
-            td #{result.experience.delivery_mode}
-            td #{result.experience.years_teaching_online}
-            td #{result.highest_degree}
-  else
-    p No Results
+          if total_results > 10
+            tfoot
+              tr
+                td(colspan='4')
+                  if page > 1
+                    a(href=page_url+(page-1)).float-left Prev
+                  if total_results > page_total
+                    a(href=page_url+(page+1)).float-right Next
+          tbody
+            for result in search_results
+              tr
+                td #{result.user_id.name.full}
+                td #{result.experience.delivery_mode}
+                td #{result.experience.years_teaching_online}
+                td #{result.highest_degree}
+      else
+        p No Results

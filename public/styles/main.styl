@@ -448,6 +448,12 @@ footer a
 /* END FOOTER */
   
 /* GENERAL PAGES */
+strong
+  font-weight bold
+
+em
+  font-style italic
+
 .top-divider
   background $teal
   width 100%
@@ -465,6 +471,15 @@ h3
   font-size 1.5em
   line-height 2em
   
+h4
+  font-weight bold
+  margin 2px 0
+  text-transform capitalize
+  font-size 1.2em
+  
+  a 
+    text-decoration none
+  
 #page-content
   border $border
   border-top none
@@ -478,52 +493,104 @@ h3
   
 #sub-content li
   margin-bottom .5em
+  margin-left 20px
+  list-style-position outside
+  list-style-type disc
+  
+form div 
+  padding 5px 0
   
 /* END GENERAL PAGES */
 
-/* ADMIN */
-.admin label
-  font-weight bold
+/* ADMIN */ 
+.admin 
 
-.lookup-info
-  margin-top 10px
+  a.button-box
+    background-color $teal
+    padding 5px
+    text-decoration none
+    color #fff
+    margin-right 10px
+    line-height 3em
   
-.admin a.button-box
-  background-color $teal
-  padding 5px
-  text-decoration none
-  color #fff
-  margin-right 10px
-  line-height 3em
-  
-.admin a.button-box:hover
-  background-color $lightteal
+  a.button-box:hover
+    background-color $lightteal
+    
+  label
+    font-weight bold
   
 #name-value-edit
   line-height 3em
   
-#lookup-values-edit
-  line-height 3em
+#sub-content ul.sub-menu
   
-#lookup-info
+  li
+    display inline
+    margin-left 0
+    
+    a
+      background-color $teal
+      padding 5px
+      text-decoration none
+      color #fff
+      margin-right 10px
+      line-height 3em
+    
+    a:hover
+      background-color $lightteal
+  
+/* USERS */
+ul.user-values 
+  
+  li
+    padding 10px
+    margin 0
+  
+  li:nth-child(odd)
+    background-color #ccc
+    
+    .tester
+      background-color #fff
+      padding-left 5px
+ 
+/* LOOKUPS */
+.lookup-info
+  margin-top 10px
+
+#lookups
+  margin-top 10px
   font-weight bold
   
+#sub-content #lookup-values-edit
+  line-height 3em
   
-#lookup-values-edit ul li:nth-child(odd)
-  background-color #ccc
+  ul li
+    list-style-type none
+    margin-left 0
   
-#lookup-info ul li ul, #lookup-info ul li ul li
+  ul li:nth-child(odd)
+    background-color #ccc
+  
+#sub-content #lookup-info 
+  font-weight bold
+
+  ul li ul, ul li ul li
+    display inline
+  
+  .key, .sub-thing
+    margin-right 10px
+  
+  .key:after 
+    content ":"
+  
+  .sub-thing
+    font-weight normal
+    
+/* SEARCH FORM */
+#sub-content form#search-form div
   display inline
-  
-#lookup-info .key, #lookup-info .sub-thing
-  margin-right 10px
-  
-#lookup-info .key:after 
-  content ":"
-  
-#lookup-info .sub-thing
-  font-weight normal
-  
+  margin 0 10px
+ 
 /* DUSTINS TERRIBLE STYLES */
 
 img.add-new
@@ -542,6 +609,7 @@ img.add-new
       font-size 12px
       font-weight bold
       padding 5px
+      list-style-type none
 
   ul.info
     li

@@ -2,7 +2,8 @@ extends index
 
 block content
 
-  ul.sub_menu
-    li: a(href="/user/#{user._id}") Cancel
+  #sub-content
+    ul.sub-menu
+      li: a(href="/user/#{user._id}") Cancel
 
-  include _form
+    include _form

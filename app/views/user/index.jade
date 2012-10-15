@@ -2,14 +2,20 @@ extends ../admin/index
 
 block sub_content
   h3 Users
-
-  for user in users
-    h4: a(href='#', id=user.username, class='toggle') #{user.username}
-    div(class=user.username + ' hide')
-      a(href='/user/#{user._id}') edit
-      if s_user.is_admin
-        a(href='/admin/user/#{user._id}/delete').delete delete
-      p Email: #{user.email}
-      p Name: #{user.firstname} #{user.lastname}
-  else
-    p No Users
+  
+  #sub-content
+    block sub_content
+      ul.user-values
+        for user in users
+          li
+            h4: a(href='#', id=user.username, class='toggle') #{user.username}
+            div(class=user.username + ' hide')
+              a(href='/user/#{user._id}').button-box edit
+              |  
+              if s_user.is_admin
+                a(href='/admin/user/#{user._id}/delete').delete.button-box delete
+              p <strong>Email:</strong> #{user.email} 
+              p <strong>Name:</strong> #{user.firstname} #{user.lastname}
+        else
+          li
+            p No Users

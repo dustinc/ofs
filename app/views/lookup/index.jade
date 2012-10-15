@@ -1,17 +1,18 @@
 extends ../admin/index
 
-block sub_content
-  h3 Lookups
+#sub-content
+  block sub_content
+    h3 Lookups
 
-  form(action='/admin/lookup/create', method='put')
+    form(action='/admin/lookup/create', method='put')
 
-    label(for='name') Name
-    input(type='text', name='lookup[name]', id='name')
+      label(for='name') Name
+      input(type='text', name='lookup[name]', id='name')
 
-    input(type='submit', value='Save')
+      input(type='submit', value='Save')
 
-  if lookups
-    ul
-      each lookup in lookups
-        li: a(href='/admin/lookup/#{lookup.name}') #{lookup.name}
+    if lookups
+      ul#lookups
+        each lookup in lookups
+          li: a(href='/admin/lookup/#{lookup.name}') #{lookup.name}
 

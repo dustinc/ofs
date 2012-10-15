@@ -37,7 +37,9 @@ html
             p
               if s_user.is_admin
                 a(href='/admin') Admin
+                |  &#124; 
               a(href='/user/'+s_user._id) My Account
+              |  &#124; 
               a(href='/logout') Logout
     
       block menu_main
