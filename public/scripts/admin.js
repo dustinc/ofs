@@ -4,6 +4,7 @@ $(function() {
   // toggle item values
   $('.toggle').click(function() {
     $('div.' + $(this).attr('id')).toggle();
+    return false;
   });
 
   // lookups quick edit
