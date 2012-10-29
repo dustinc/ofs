@@ -49,7 +49,9 @@ module.exports = function(app) {
           'main': db,
           'users': db.model('User'),
           'lookups': db.model('Lookup'),
-          'teachers': db.model('Teacher')
+          'teachers': db.model('Teacher'),
+          'articles': db.model('Article'),
+          'counters': db.model('Counter')
         }
       )
   });

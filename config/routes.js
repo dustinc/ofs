@@ -5,6 +5,7 @@ module.exports = function(app) {
       admin = require('../app/controllers/admin')(app),
       user = require('../app/controllers/user')(app),
       lookup = require('../app/controllers/lookup')(app),
+      article = require('../app/controllers/article')(app),
       db = app.set('db'),
 
       isLoggedIn = function(req, res, next) {
@@ -61,7 +62,8 @@ module.exports = function(app) {
   app.get('/', main.index);
   app.get('/about', main.load.bind(null, 'about'));
   app.get('/forums', function(req, res, next) {return res.send('forums');});
-  app.get('/templates-and-tutorials', function(req, res, next) {return res.send('templates-and-tutorials');});
+  app.get('/articles', article.index);
+  app.get('/articles?/:article_id', article.show);
   app.get('/personalized-help', function(req, res, next) {return res.send('personalized-help');});
 
   // searches
@@ -81,9 +83,19 @@ module.exports = function(app) {
 
   // admin
   app.get('/admin', authenticatedAdmin, admin.index);
-  app.get('/admin/users?', user.index);
+  app.get('/admin/users?', authenticatedAdmin, user.index);
   app.get('/admin/user/:user_id/delete', authenticatedAdmin, user.delete);
-  app.get('/admin/quick_edit_li', admin.quick_edit_li);// remove this
+  app.get('/admin/quick_edit_li', authenticatedAdmin, admin.quick_edit_li);// remove this
+
+  // articles
+  app.get('(/admin)?/articles?', article.index);
+  app.get('/articles?/:article_id', article.show);
+  app.get('/admin/articles?', article.index);
+  app.get('/admin/articles?/new', authenticatedAdmin, article.form);
+  app.get('/admin/articles?/:article_id/edit', authenticatedAdmin, article.form);
+  app.get('/admin/articles?/:article_id/delete', authenticatedAdmin, article.delete);
+  app.post('/admin/articles?/:article_id/save', authenticatedAdmin, article.save);
+
 
   // lookups
   app.get('/admin/lookups?', authenticatedAdmin, lookup.index);

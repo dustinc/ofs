@@ -1,0 +1,37 @@
+extends ../admin/index
+
+block sub_content
+
+  form(action='/admin/article/'+article._id+'/save', method='post')
+    div
+      label Title
+      input(type='text', name='article[title]', value=article.title)
+
+    div.md-editor-panel
+      span(data-md='header1') Header 1 | 
+      span(data-md='header2') Header 2 | 
+      span(data-md='header3') Header 3 | 
+      span(data-md='header4') Header 4 | 
+      span(data-md='bold') b | 
+      span(data-md='italic') i | 
+      span(data-md='link') link | 
+      span(data-md='image') image
+    
+    div
+      label Body
+      //- input(type='hidden', name='article[body]', value=article.body).md-editor-value
+      
+      textarea(name='article[body]', rows='15', cols='80').md-editor-textarea
+        | #{article.body}
+
+      h4 Preview
+      hr
+      .md-editor-preview
+        !{article.content}
+
+    div
+      label Active
+      input(type='checkbox', name='article[is_active]', checked=article.is_active)
+
+    input(type='hidden', name='article[_id]', value=article._id)
+    input(type='submit', value='save')

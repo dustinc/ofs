@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  div(id=article._id).article
+    - if(typeof s_user !== 'undefined' && s_user.is_admin)
+      a(href='/admin/article/'+article._id+'/edit') Edit
+    h4= article.title
+    .article-body
+      !{article.content}
+  
+  if article.prev_article_id
+    a(href='/article/' + article.prev_article_id).float-left Prev
+  if article.next_article_id
+    a(href='/article/' + article.next_article_id).float-right Next
