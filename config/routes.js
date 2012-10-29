@@ -74,6 +74,15 @@ module.exports = function(app) {
   app.get('/signup', main.signup);
   app.post('/user/create', user.create);
 
+  app.get('/markdown', function(req, res, next) {
+    var md = require('discount');
+    if(!req.xhr) {
+      return res.send('not allowed');
+    }
+
+    return res.send(md.parse(req.query.markdown));
+  });
+
   app.get('/loadfixtures', main.loadfixtures);
 
   /*
