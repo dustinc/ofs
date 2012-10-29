@@ -9,10 +9,10 @@ const express   = require('express'),
 // exports
 
 module.exports = function(app) {
-  
+
   // connect db
 
-  var dblink = process.env.MONGOHQ_URL || 'mongodb://localhost/db';
+  var dblink = process.env.MONGOHQ_URL || 'mongodb://localhost/main';
 
   const db = mongoose.createConnection(dblink);
 
@@ -26,7 +26,7 @@ module.exports = function(app) {
       .use(express.bodyParser())
       .use(express.errorHandler({dumpException: true, showStack: true}));
   });
-  
+
   // template engine
 
   app.configure(function() {
@@ -40,7 +40,7 @@ module.exports = function(app) {
   });
 
   app.set('title', 'OFS');
-  
+
   // db reference
 
   app.configure(function() {
