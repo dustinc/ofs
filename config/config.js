@@ -31,6 +31,7 @@ module.exports = function(app) {
 
   app.configure(function() {
     app
+      .set('_', _)
       .set('views', __dirname + '/../app/views')
       .set('view engine', 'jade')
       .set('view options', {layout:false})
