@@ -12,7 +12,7 @@ module.exports = function(app) {
 
   // connect db
 
-  var dblink = process.env.MONGOHQ_URL || 'mongodb://localhost/main';
+  var dblink = process.env.MONGOHQ_URL || 'mongodb://localhost/db';
 
   const db = mongoose.createConnection(dblink);
 

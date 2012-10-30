@@ -6,31 +6,33 @@
 
 mixin degree(dcnt, degree)
   div.degree.item
-    label Degree
-    select(name='profile[education][degrees][#{dcnt}][degree_type]')
+    label(for='degree') Degree
+    select(name='profile[education][degrees][#{dcnt}][degree_type]', id='degree')
       option(value='')
       for degree_type in lookups.degree_types.values
         option(value=degree_type, selected=degree_type == degree.degree_type) #{degree_type}
 
-    label Field of Study
-    input(type='text', name='profile[education][degrees][#{dcnt}][field]', value=degree.field)
+    label(for='field-of-study') Field of Study
+    input(type='text', name='profile[education][degrees][#{dcnt}][field]', value=degree.field, id='field-of-study')
 
-    label Year Obtained
-    input(type='text', name='profile[education][degrees][#{dcnt}][year]', value=degree.year)
+    label(for='year-obtained') Year Obtained
+    input(type='text', name='profile[education][degrees][#{dcnt}][year]', value=degree.year, id='year-obtained')
     
-    img(src='/images/remove_button.png', title='Remove Degree', width='23px').remove_item
+    //img(src='/images/remove_button.png', title='Remove Degree', width='23px').remove_item 
+    a(title='Remove Degree', class='button-box').remove_item Remove This Degree
 
 
 //- Certificate Mixin
 
 mixin certificate(ccnt, cert)
   div.cert.item
-    label Certificate
-    input(type='text', name='profile[education][certificates][#{ccnt}][name]', value=cert.name)
-    label Certificate Date
-    input(type='text', name='profile[education][certificates][#{ccnt}][year]', value=cert.year)
+    label(for='certificate') Certificate
+    input(type='text', name='profile[education][certificates][#{ccnt}][name]', value=cert.name, id='certificate')
+    label(for='certificate-date') Certificate Date
+    input(type='text', name='profile[education][certificates][#{ccnt}][year]', value=cert.year, id='certificate-date')
     
-    img(src='/images/remove_button.png', title='Remove Certificate', width='23px').remove_item
+    //img(src='/images/remove_button.png', title='Remove Certificate', width='23px').remove_item
+    a(title='Remove Certificate', class='button-box').remove_item Remove This Certificate
 
 
 
@@ -38,35 +40,36 @@ mixin certificate(ccnt, cert)
 
 mixin license(lcnt, lic)
       div.license.item
-        label License
-        input(type='text', name='profile[education][licenses][#{lcnt}][name]', value=lic.name)
-        label License Date
-        input(type='text', name='profile[education][licenses][#{lcnt}][year]', value=lic.year)
+        label(for='licenses') License
+        input(type='text', name='profile[education][licenses][#{lcnt}][name]', value=lic.name, id='licenses')
+        label(for='license-date') License Date
+        input(type='text', name='profile[education][licenses][#{lcnt}][year]', value=lic.year, id='license-date')
         
-        img(src='/images/remove_button.png', title='Remove License', width='23px').remove_item
-
+        //img(src='/images/remove_button.png', title='Remove License', width='23px').remove_item 
+        a(title='Remove License', class='button-box').remove_item Remove This License
 
 //- Service Mixin
 
 mixin service(scnt, service)
-  div.service.item
+  div.service.item.profile-segment
     div
-      label Type
-      select(name='profile[services][#{scnt}][service_type]')
+      label(for='type') Type
+      select(name='profile[services][#{scnt}][service_type]', id='type')
         option(value='')
         for service_type in lookups.service_types.values
           option(value=service_type, selected=service_type == service.service_type) #{service_type}
     div
-      label Name
-      input(type='text', name='profile[services][#{scnt}][name]', value=service.name)
+      label(for='name') Name
+      input(type='text', name='profile[services][#{scnt}][name]', value=service.name, id='name')
     div
-      label Description
-      input(type='text', name='profile[services][#{scnt}][description]', value=service.description)
+      label(for='description') Description
+      input(type='text', name='profile[services][#{scnt}][description]', value=service.description, id='description')
     div
-      label Year
-      input(type='text', name='profile[services][#{scnt}][year]', value=service.year)
+      label(for='year') Year
+      input(type='text', name='profile[services][#{scnt}][year]', value=service.year, id='year')
     
-    img(src='/images/remove_button.png', title='Remove Service', width='23px').remove_item
+    //img(src='/images/remove_button.png', title='Remove Service', width='23px').remove_item
+    a(title='Remove Service', class='button-box').remove_item Remove This Service
 
 
 //- START FORM
@@ -77,6 +80,8 @@ form(action='/user/'+user.id+'/profile/save', method='post')
 
   input(type='hidden', name='profile[user_id]', value=user.id)
 
+  .teal-divider
+  
   fieldset
     legend Education
 
@@ -87,7 +92,8 @@ form(action='/user/'+user.id+'/profile/save', method='post')
       else
         +degree(0, {})
 
-      img(src='/images/add_button.png', title='Add Degree', width='33px').add_item
+      //img(src='/images/add_button.png', title='Add Degree', width='33px').add_item
+      a(title='Add Degree', class='button-box').add_item Add Another Degree
 
     //- CERTS
     div#certs.item_list
@@ -96,7 +102,8 @@ form(action='/user/'+user.id+'/profile/save', method='post')
       else
         +certificate(0, {})
 
-      img(src='/images/add_button.png', title='Add Certificate', width='33px').add_item
+      //img(src='/images/add_button.png', title='Add Certificate', width='33px').add_item
+      a(title='Add Certificate', class='button-box').add_item Add Another Certificate
 
     //- LICENSES
     div#license.item_list
@@ -105,113 +112,123 @@ form(action='/user/'+user.id+'/profile/save', method='post')
       else
         +license(0, {})
 
-      img(src='/images/add_button.png', title='Add License', width='33px').add_item
+      //img(src='/images/add_button.png', title='Add License', width='33px').add_item
+      a(title='Add License', class='button-box').add_item Add Another License
 
     div
-      label Other Education
-      input(type='text', name='profile[education][other]', value=profile.education.other)
+      label(for='other-education') Other Education
+      input(type='text', name='profile[education][other]', value=profile.education.other, id='other-education')
 
+  .teal-divider
+  
   fieldset
     legend Experience
 
     div
-      label Years Teaching
-      select(name='profile[experience][years_teaching]')
+      label(for='years-teaching') Years Teaching
+      select(name='profile[experience][years_teaching]', id='years-teaching')
         option(value='')
         for v in lookups.years_teaching.values
           option(value='#{v}', selected=v == profile.experience.years_teaching) #{v}
 
     div
-      label Delivery Mode
-      select(name='profile[experience][delivery_mode]')
+      label(for='delivery-mode') Delivery Mode
+      select(name='profile[experience][delivery_mode]', id='delivery-mode')
         option(value='')
         for v in lookups.delivery_modes.values
           option(value='#{v}', selected=v == profile.experience.delivery_mode) #{v}
 
     div
-      label Years Teaching Online
-      select(name='profile[experience][years_teaching_online]')
+      label(for='years-teaching-online') Years Teaching Online
+      select(name='profile[experience][years_teaching_online]', id='years-teaching-online')
         option(value='')
         for v in lookups.years_teaching.values
           option(value='#{v}', selected=v == profile.experience.years_teaching_online) #{v}
 
     div
-      label Courses Taught
-      input(type='text', name='profile[experience][courses_taught]', value=profile.experience.courses_taught)
+      label(for='courses-taught') Courses Taught
+      input(type='text', name='profile[experience][courses_taught]', value=profile.experience.courses_taught, id='courses-taught')
 
     div
-      label Eligible Areas
-      input(type='text', name='profile[experience][eligible_areas]', value=profile.experience.eligible_areas)
+      label(for='eligible-areas') Eligible Areas
+      input(type='text', name='profile[experience][eligible_areas]', value=profile.experience.eligible_areas, id='eligible-areas')
 
+  .teal-divider
+  
   fieldset
     legend Research
 
-    div
-      p Publications
-      label Quantitative
-      input(type='checkbox', name='profile[publication][publication_type][]', value='Quantitative', checked=(profile.publication.publication_type.indexOf('Quantitative') != -1))
-      label Qualitative
-      input(type='checkbox', name='profile[publication][publication_type][]', value='Qualitative', checked=(profile.publication.publication_type.indexOf('Qualitative') != -1))
-      label Mixed Methods
-      input(type='checkbox', name='profile[publication][publication_type][]', value='Mixed Methods', checked=(profile.publication.publication_type.indexOf('Mixed Methods') != -1))
+    .profile-segment
+      div
+        h5 Publications
+        label(for='quantitative') Quantitative
+        input(type='checkbox', name='profile[publication][publication_type][]', value='Quantitative', checked=(profile.publication.publication_type.indexOf('Quantitative') != -1), id='quantitative')
+        label(for='qualitative') Qualitative
+        input(type='checkbox', name='profile[publication][publication_type][]', value='Qualitative', checked=(profile.publication.publication_type.indexOf('Qualitative') != -1), id='qualitative')
+        label(for='mixed-methods') Mixed Methods
+        input(type='checkbox', name='profile[publication][publication_type][]', value='Mixed Methods', checked=(profile.publication.publication_type.indexOf('Mixed Methods') != -1), id='mixed-methods')
 
-    div
-      label Publication Total
-      select(name='profile[publication][total]')
-        option(value='')
-        - for(var i=1; i<50; i++)
-          option(value=i, selected=i == profile.publication.total) #{i}
-        option(value='99') 50+
+      div
+        label(for='publication-total') Publication Total
+        select(name='profile[publication][total]', id='publication-total')
+          option(value='')
+          - for(var i=1; i<50; i++)
+            option(value=i, selected=i == profile.publication.total) #{i}
+          option(value='99') 50+
 
-    div
-      label Publication Past 3 Years
-      select(name='profile[publication][past_three_years]')
-        option(value='')
-        - for(var i=1; i<50; i++)
-          option(value=i, selected=i == profile.publication.past_three_years) #{i}
+      div
+        label(for='publication-past-3-years') Publication Past 3 Years
+        select(name='profile[publication][past_three_years]', id='publication-past-3-years')
+          option(value='')
+          - for(var i=1; i<50; i++)
+            option(value=i, selected=i == profile.publication.past_three_years) #{i}
 
-    div
-      label Publication Reviewer
-      input(type='checkbox', name='profile[publication][reviewer]', checked=profile.publication.reviewer)
+      div
+        label(for='publication-reviewer') Publication Reviewer
+        input(type='checkbox', name='profile[publication][reviewer]', checked=profile.publication.reviewer, id='publication-reviewer')
 
-    div
-      label Publication Reviewer Total
-      select(name='profile[publication][reviewer_total]')
-        option(value='')
-        - for(var i=1; i<50; i++)
-          option(value=i, selected=i == profile.publication.reviewer_total) #{i}
-        option(value='99') 50+
+      div
+        label(for='publication-reviewer-total') Publication Reviewer Total
+        select(name='profile[publication][reviewer_total]', id='publication-reviewer-total')
+          option(value='')
+          - for(var i=1; i<50; i++)
+            option(value=i, selected=i == profile.publication.reviewer_total) #{i}
+          option(value='99') 50+
 
-    p Presentations
-    div
-      label Presentation Total
-      select(name='profile[presentation][total]')
-        option(value='')
-        - for(var i=1; i<50; i++)
-          option(value=i, selected=i == profile.presentation.total) #{i}
-        option(value='99') 50+
+    .profile-segment
+      h5 Presentations
+      div
+        label(for='presentation-total') Presentation Total
+        select(name='profile[presentation][total]', id='presentation-total')
+          option(value='')
+          - for(var i=1; i<50; i++)
+            option(value=i, selected=i == profile.presentation.total) #{i}
+          option(value='99') 50+
 
-    div
-      label Past 3 Years
-      select(name='profile[presentation][past_three_years]')
-        option(value='')
-        - for(var i=1; i<50; i++)
-          option(value=i, selected=i == profile.presentation.past_three_years) #{i}
-        option(value='99') 50+
+      div
+        label(for='past-3-years') Past 3 Years
+        select(name='profile[presentation][past_three_years]', id='past-3-years')
+          option(value='')
+          - for(var i=1; i<50; i++)
+            option(value=i, selected=i == profile.presentation.past_three_years) #{i}
+          option(value='99') 50+
 
-    div
-      label Reviewer
-      input(type='checkbox', name='profile[presentation][reviewer]', checked=profile.presentation.reviewer)
+      div
+        label(for='reviewer') Reviewer
+        input(type='checkbox', name='profile[presentation][reviewer]', checked=profile.presentation.reviewer, id='reviewer')
 
-    div
-      label Reviewer Total
-      select(name='profile[presentation][reviewer_total]')
-        option(value='')
-        - for(var i=1; i<50; i++)
-          option(value=i, selected=i == profile.presentation.reviewer_total) #{i}
-        option(value='99') 50+
+      div
+        label(for='reviewer-total') Reviewer Total
+        select(name='profile[presentation][reviewer_total]', id='reviewer-total')
+          option(value='')
+          - for(var i=1; i<50; i++)
+            option(value=i, selected=i == profile.presentation.reviewer_total) #{i}
+          option(value='99') 50+
 
-
+    .clearfix
+          
+  .teal-divider
+  
   fieldset.item_list
     legend Services
 
@@ -219,28 +236,35 @@ form(action='/user/'+user.id+'/profile/save', method='post')
       +service(scnt, service)
     else
       +service(0, {})
+    
+    div.clearfix
+    
+    //img(src='/images/add_button.png', title='Add Service', width='33px').add_item
+    a(title='Add Service', class='button-box').add_item Add Another Service
 
-    img(src='/images/add_button.png', title='Add Service', width='33px').add_item
-
+  .teal-divider
+  
   fieldset
     legend Position
     div
-      label Position Desired
-      input(type='text', name='profile[positions_desired]', value=profile.positions_desired)
+      label(for='position-desired') Position Desired
+      input(type='text', name='profile[positions_desired]', value=profile.positions_desired, id='position-desired')
 
     div
-      label Institution
-      select(name='profile[institution]')
+      label(for='institution') Institution
+      select(name='profile[institution]', id='institution')
         option(value='')
         for v in lookups.institution_types.values
           option(value=v, selected=v == profile.institution) #{v}
 
 
     div
-      label Course
-      select(name='profile[course]')
+      label(for='course') Course
+      select(name='profile[course]', id='course')
         option(value='')
         for v in lookups.course_types.values
           option(value=v, selected=v == profile.course) #{v}
 
-  input(type='submit', value='save')
+  .teal-divider
+  
+  input(type='submit', value='Save All Changes')
