@@ -8,87 +8,20 @@ module.exports = function(app) {
       article = require('../app/controllers/article')(app),
       db = app.set('db'),
 
-      isLoggedIn = function(req, res, next) {
-        var s_user = (req.session.user) ? req.session.user : false;
-        res.local('s_user', s_user);
-        next();
-      },
+      // middleware
+      middleware = require('../lib/middleware')(app),
+      isLoggedIn = middleware.isLoggedIn,
+      authenticatedAdmin = middleware.authenticatedAdmin,
+      authenticatedUser = middleware.authenticatedUser;
 
-      authRequired = function(req, res, next) {
-        if(!req.session.user) {
-          res.status(403);
-          return next(new Error('User Not Authorized'));
-        }
-        next();
-      },
-
-      isAdmin = function(req, res, next) {
-        if(!req.session.user.is_admin) {
-          res.status(403);
-          return next(new Error('Must be Admin to Access Page'));
-        }
-        next();
-      },
-
-      isThisUser = function(req, res, next) {
-        if(req.params.user_id != req.session.user._id && !req.session.user.is_admin) {
-          res.status(404);
-          return next(new Error('Sorry, the page you are you looking for does not exist.'));
-        }
-        next();
-      },
-
-      authenticatedAdmin = [authRequired, isAdmin],
-
-      authenticatedUser = [authRequired, isThisUser];
-
-
-
-
-
-  /*
-   * Viewable By All
-  */
 
 
   // set local auth var for all pages.
   app.get('/*', isLoggedIn);
 
-  // login
-  app.post('/login', main.login);
-  app.get('/logout', main.logout);
-
-  // general
-  app.get('/', main.index);
-  app.get('/about', main.load.bind(null, 'about'));
-  app.get('/forums', function(req, res, next) {return res.send('forums');});
-  app.get('/articles', article.index);
-  app.get('/articles?/:article_id', article.show);
-  app.get('/personalized-help', function(req, res, next) {return res.send('personalized-help');});
-
-  // searches
-  app.get('/search/adjunct', main.adjunct_search);// add seach middleware to show limited search/results to unauthorized users
-  app.get('/search/jobs', main.job_search);// same as adjunct search
-
-  // create new user
-  app.get('/signup', main.signup);
-  app.post('/user/create', user.create);
-
-  app.get('/markdown', function(req, res, next) {
-    var md = require('discount');
-    if(!req.xhr) {
-      return res.send('not allowed');
-    }
-
-    return res.send(md.parse(req.query.markdown));
-  });
-
-  app.get('/loadfixtures', main.loadfixtures);
-
   /*
    * Requires Authentication
   */
-
 
   // admin
   app.get('/admin', authenticatedAdmin, admin.index);
@@ -97,9 +30,7 @@ module.exports = function(app) {
   app.get('/admin/quick_edit_li', authenticatedAdmin, admin.quick_edit_li);// remove this
 
   // articles
-  app.get('(/admin)?/articles?', article.index);
-  app.get('/articles?/:article_id', article.show);
-  app.get('/admin/articles?', article.index);
+  app.get('/admin/articles', authenticatedAdmin, admin.index);
   app.get('/admin/articles?/new', authenticatedAdmin, article.form);
   app.get('/admin/articles?/:article_id/edit', authenticatedAdmin, article.form);
   app.get('/admin/articles?/:article_id/delete', authenticatedAdmin, article.delete);
@@ -124,6 +55,49 @@ module.exports = function(app) {
   app.get('/user/:user_id/profile', authenticatedUser, user.profile);
   app.get('/user/:user_id/profile/edit', authenticatedUser, user.profile.edit);
   app.post('/user/:user_id/profile/save', authenticatedUser, user.profile.save);
+
+
+  /*
+   * Viewable By All
+  */
+
+  // login
+  app.post('/login', main.login);
+  app.get('/logout', main.logout);
+
+  // create new user
+  app.get('/signup', main.signup);
+  app.post('/user/create', user.create);
+
+  // general
+  app.get('/', main.index);
+  app.get('/about', main.load.bind(null, 'about'));
+
+  // articles
+  app.get('/articles?', article.index);
+  app.get('/articles?/:article_id', article.show);
+
+  // article pages
+  app.get('/forums', function(req, res, next) {next()});
+  app.get('/templates-and-tutorials', article.page);
+  app.get('/personalized-help', article.page);
+
+  // searches
+  app.get('/search/faculty', main.adjunct_search);// add seach middleware to show limited search/results to unauthorized users
+  app.get('/search/jobs', main.job_search);// same as adjunct search
+
+  // xhr markdown
+  app.get('/markdown', function(req, res, next) {
+    var md = require('discount');
+    if(!req.xhr) {
+      return res.send('not allowed');
+    }
+
+    return res.send(md.parse(req.query.markdown));
+  });
+
+  // temp
+  app.get('/loadfixtures', main.loadfixtures);
 
 
   /*
