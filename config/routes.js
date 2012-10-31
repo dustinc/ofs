@@ -83,7 +83,7 @@ module.exports = function(app) {
   app.get('/personalized-help', article.page);
 
   // searches
-  app.get('/search/faculty', main.adjunct_search);// add seach middleware to show limited search/results to unauthorized users
+  app.get('/search/faculty', main.faculty_search);// add seach middleware to show limited search/results to unauthorized users
   app.get('/search/jobs', main.job_search);// same as adjunct search
 
   // xhr markdown

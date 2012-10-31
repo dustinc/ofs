@@ -2,46 +2,58 @@ extends layout
 
 block content
   h2 Search Database
-  
+
   #sub-content
     block sub_content
 
-      form(action='/search/adjunct', method='get')#search-form
-      
+      form(action='/search/faculty', method='get')#search-form
+
         div
           label(for='dmode') Delivery Mode
-          select(name='adjunct[experience.delivery_mode]', id='dmode')
+          select(name='faculty[experience.delivery_mode]', id='dmode')
             option(value='')
             for v in lookups.delivery_modes.values
-              option(value=v) #{v}
+              option(value=v, selected=v == search_query['experience.delivery_mode']) #{v}
+
+        div
+          label(for='yearsteaching') Years Teaching
+          select(name='faculty[experience.years_teaching]', id='yearsteaching')
+            option(value='')
+            for v in lookups.years_teaching.values
+              option(value=v, selected=v == search_query['experience.years_teaching']) #{v}
 
         div
           label(for='yearsteachingonline') Years Teaching Online
-          select(name='adjunct[experience.years_teaching_online]', id='yearsteachingonline')
+          select(name='faculty[experience.years_teaching_online]', id='yearsteachingonline')
             option(value='')
             for v in lookups.years_teaching.values
-              option(value=v) #{v}
-        
-        div
-          label(for='highestdegree') Highest Degree
-          select(name='adjunct[education.degrees.degree_type]', id='highestdegree')
-            option(value='')
-            for v in lookups.degree_types.values
-              option(value=v) #{v}
+              option(value=v, selected=v == search_query['experience.years_teaching_online']) #{v}
 
         div
+          label(for='degree') Degree
+          select(name='faculty[education.degrees.degree_type]', id='degree')
+            option(value='')
+            for v in lookups.degree_types.values
+              option(value=v, selected=v == search_query['education.degrees.degree_type']) #{v}
+
+        br
+        div
           input(type='submit')
-          
+        
+        div
+          a(href='/search/faculty') Clear Search
+
       .clearfix
-      
+
       h3 Search Results
 
       - if(typeof(search_results) != 'undefined' && search_results.length)
-        table#adjunct-search-results
+        table#faculty-search-results
           thead
             tr
               th Name
               th Delivery Mode
+              th Years Teaching
               th Years Teaching Online
               th Highest Degree
 
@@ -58,6 +70,7 @@ block content
               tr
                 td #{result.user_id.name.full}
                 td #{result.experience.delivery_mode}
+                td #{result.experience.years_teaching}
                 td #{result.experience.years_teaching_online}
                 td #{result.highest_degree}
       else

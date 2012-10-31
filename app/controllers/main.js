@@ -69,10 +69,10 @@ controller.signup = function(req, res, next) {
 
 // adjunct search
 
-controller.adjunct_search = function(req, res, next) {
+controller.faculty_search = function(req, res, next) {
 
   var query = db.teachers.find().populate('user_id'),
-      post = req.query.adjunct,
+      post = req.query.faculty || {},
       page = 1,
       limit = 10,
       req_url = req.url.replace(/(&page=\d*|page=\d*&*)/, '').replace(/\?$/, ''),
@@ -96,8 +96,9 @@ controller.adjunct_search = function(req, res, next) {
     query.skip((page - 1) * limit);
   }
 
-  return res.render('adjunct_search', {
+  return res.render('faculty_search', {
       lookups: db.lookups.findOne({name: 'Teacher Lookups'}),
+      search_query: post,
       search_results: query.exec(),
       total_results: db.teachers.find().count(),
       page: page,
