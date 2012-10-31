@@ -35,7 +35,7 @@ controller.index = function(req, res, next) {
   return res.render('article', { articles: articles });
 };
 
-// show
+// show single
 
 controller.show = function(req, res, next) {
   var article_id = req.params.article_id;
@@ -47,6 +47,20 @@ controller.show = function(req, res, next) {
     .exec(function(err, _article) {
       return res.render('article/show', { article: _article });
     });
+};
+
+// load page
+
+controller.page = function(req, res, next) {
+  var page = req.path.replace(/^\//, '').replace('-', ' ').replace(/\w\S*/, function(m) {return m.charAt(0).toUpperCase();});
+
+  db.main.model('Article').where('categories').in(page).limit(1).exec(function(err, _article) {
+      if(_article != null) {
+        return res.render('article/show', { article: _article });
+      }
+      next();
+    });
+
 };
 
 // edit
@@ -111,7 +125,7 @@ controller.save = function(req, res, next) {
       _article.title = req.body.article.title;
       _article.body = req.body.article.body;
       _article.is_active = req.body.article.is_active;
-      
+
       _article.save(function(err) {
         if(err) {
           req.flash('error', 'Error Saving Aritcle');
