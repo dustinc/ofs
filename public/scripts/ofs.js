@@ -100,7 +100,7 @@ $('#signupform').submit(function() {
 
   if($form.find('#pw').val() != '') {
     if($form.find('#pw').val() != $form.find('#cpw').val()) {
-      $form.find('#pw').after('<span class="error">Password Does Not Match</span>');
+      $form.find('#cpw').after('<span class="error">Password Does Not Match</span>');
       error = true;
     }
   } else {
