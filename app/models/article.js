@@ -4,6 +4,17 @@ var Schema = require('mongoose').Schema,
     TimeStamp = require('./timestamp');
 
 
+
+
+// Comment Schema
+
+var Comment = new Schema({
+  person: String,
+  comment: String,
+  created_at: { type: Date, default: new Date }
+});
+
+
 /*
  * Article Schema
  */
@@ -11,57 +22,47 @@ var Schema = require('mongoose').Schema,
 var Article = module.exports = new Schema({
   title : { type: String, required: true },
   body : { type: String, required: true },
-  is_active : { type: Boolean, default: true },
+  slug: String,
   sequence: Number,
-  prev_article_id: ObjectId,
-  next_article_id: ObjectId,
-  categories: [String]
+  categories: [String],
+  comments: [Comment],
+  files: [{
+    _id: { type: ObjectId, require: true },
+    name: { type: String, required: true }
+  }],
+  has_files: { type: Boolean, default: false },
+  is_page: { type: Boolean, default: false },
+  is_active : { type: Boolean, default: true }
 });
 
 Article.plugin(TimeStamp);
 
 Article.virtual('excerpt').get(function() {
   var md = require('discount');
-  
+
   if(this.body.length > 20) {
     return md.parse(this.body.substring(0, this.body.lastIndexOf(' ', 20))
       + '...' + "<a href='/article/"+this._id+"'>read more</a>");
   }
-  
+
   return md.parse(this.body);
 });
 
 Article.virtual('content').get(function() {
   var md = require('discount');
-  return md.parse(this.body);
+  if(this.body)
+    return md.parse(this.body);
+  return '';
 });
 
 Article.pre('save', function(next) {
-  
-  if(this.isNew) {
-    var that = this;
-    var prev_id;
-    
-    this.model('Article').findOne({ 'sequence': this.sequence - 1}, function(err, _a) {
-      
-      if(err) return next(err);
-      
-      if(null == _a) return next();
-      
-      that.prev_article_id = _a._id;
-      
-      _a.next_article_id = that._id;
-      
-      _a.save(function(err) {
-        if(err) return next(err);
-      });
-      next()
-    });
-    
-  } else {
-    next();
+  this.title = this.title.replace(/^\s+|\s+$/g, '');
+
+  if(this.title !== '') {
+    this.slug = this.title.replace(/\s+/g, '-').toLowerCase();
   }
-  
+
+  next();
 });
 
 
