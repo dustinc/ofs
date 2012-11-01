@@ -79,3 +79,6 @@ html
     - if(typeof(scripts) != 'undefined')
       for scrpt in scripts
         script(src=scrpt)
+
+    - if(typeof s_user != 'undefined' && s_user != false && s_user.is_admin)
+      script(src='/scripts/admin.js')
