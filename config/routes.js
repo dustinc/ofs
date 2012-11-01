@@ -30,7 +30,7 @@ module.exports = function(app) {
   app.get('/admin/quick_edit_li', authenticatedAdmin, admin.quick_edit_li);// remove this
 
   // articles
-  app.get('/admin/articles', authenticatedAdmin, admin.index);
+  app.get('/admin/articles', authenticatedAdmin, article.index);
   app.get('/admin/articles?/new', authenticatedAdmin, article.form);
   app.get('/admin/articles?/:article_id/edit', authenticatedAdmin, article.form);
   app.get('/admin/articles?/:article_id/delete', authenticatedAdmin, article.delete);
@@ -75,6 +75,7 @@ module.exports = function(app) {
 
   // articles
   app.get('/articles?', article.index);
+  app.get('/articles?/show', article.show);
   app.get('/articles?/:article_id', article.show);
 
   // article pages
