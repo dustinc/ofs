@@ -12,58 +12,96 @@ module.exports = function(_app) {
   return controller;
 };
 
-// index
+// Index
 
 controller.index = function(req, res, next) {
   var articles = db.articles.find(),
       article_id = req.params.article_id || false,
       categories = req.query.categories || [];
 
-  categories = _.isArray(categories) ? categories : [categories];
+  if(!article_id) {
 
-  if(article_id) {
+    // load pages
+    if(req.query.is_page) {
+      articles.where('is_page', true);
+    }
+
+    // by categories
+    if(categories.length > 0) {
+      categories = _.isArray(categories) ? categories : [categories];
+      categories = _.map(categories, function(category) {
+        return category.replace(/\w\S*/g, function(txt) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        })
+      });
+      articles.in('categories', categories);
+    }
+
+
+  } else {
     articles.where('_id', article_id);
-  } else if(0 < categories.length) {
-    articles.in('categories', categories);
   }
 
   articles.desc('sequence');
 
   if(req.session.user && req.session.user.is_admin) {
+    // extends admin page
     return res.render('article/admin', { articles: articles });
   }
   return res.render('article', { articles: articles });
 };
 
-// show single
+// Show Single
 
 controller.show = function(req, res, next) {
-  var article_id = req.params.article_id;
+  var article_id = req.params.article_id || false,
+      article = db.articles.findOne(),
+      create_new_link;
 
-  db.articles
-    .findOne()
-    .where('_id', article_id)
-    .desc('created_at')
-    .exec(function(err, _article) {
-      return res.render('article/show', { article: _article });
-    });
+  if(!article_id) {
+
+    // sequence
+    if(req.query.sequence) {
+      if(req.query.getnext) {
+        article.gt('sequence', req.query.sequence);
+      } else if(req.query.getprev) {
+        article.lt('sequence', req.query.sequence);
+      }
+    }
+
+    // has categories
+    if(req.query.categories) {
+      article.in('categories', req.query.categories);
+    }
+
+    // marked as a page
+    if(req.query.is_page) {
+      article.where('is_page', true);
+    }
+
+  } else {
+    article.where('_id', article_id);
+  }
+
+  article.desc('sequence').exec(function(err, _article) {
+    if(_article == null) return next();
+    return res.render('article/show',
+      { article: _article, create_new_link: create_new_link }
+    );
+  });
+
 };
 
-// load page
+// Load Page
 
 controller.page = function(req, res, next) {
-  var page = req.path.replace(/^\//, '').replace('-', ' ').replace(/\w\S*/, function(m) {return m.charAt(0).toUpperCase();});
-
-  db.main.model('Article').where('categories').in(page).limit(1).exec(function(err, _article) {
-      if(_article != null) {
-        return res.render('article/show', { article: _article });
-      }
-      next();
-    });
-
+  db.main.model('Article').findOne({ 'slug': req.params.slug, 'is_page': true }, function(err, _article) {
+    if(_article == null) return next();
+    return res.render('article/show', { article: _article });
+  });
 };
 
-// edit
+// Load Form
 
 controller.form = function(req, res, next) {
   var article_id = req.params.article_id || false,
