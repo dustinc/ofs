@@ -1,3 +1,11 @@
+// Mixins
+
+mixin category(cat)
+  div.item
+    input(type='text', name='article[categories]', value=cat)
+    a(title='Remove Category', class='button-box').remove_item Remove This Category
+
+
 extends ../admin/index
 
 block sub_content
@@ -8,19 +16,17 @@ block sub_content
       input(type='text', name='article[title]', value=article.title)
 
     div.md-editor-panel
-      span(data-md='header1') Header 1 | 
-      span(data-md='header2') Header 2 | 
-      span(data-md='header3') Header 3 | 
-      span(data-md='header4') Header 4 | 
-      span(data-md='bold') b | 
-      span(data-md='italic') i | 
-      span(data-md='link') link | 
+      span(data-md='header1') Header 1 |
+      span(data-md='header2') Header 2 |
+      span(data-md='header3') Header 3 |
+      span(data-md='header4') Header 4 |
+      span(data-md='bold') b |
+      span(data-md='italic') i |
+      span(data-md='link') link |
       span(data-md='image') image
-    
+
     div
       label Body
-      //- input(type='hidden', name='article[body]', value=article.body).md-editor-value
-      
       textarea(name='article[body]', rows='15', cols='80').md-editor-textarea
         | #{article.body}
 
@@ -28,6 +34,19 @@ block sub_content
       hr
       .md-editor-preview
         !{article.content}
+
+    div#article-categories.item_list
+      label Categories
+      for cat in article.categories
+        +category(cat)
+      else
+        +category()
+
+      a(title='Add Category', class='button-box').add_item Add Category
+
+    div
+      label Page
+      input(type='checkbox', name='article[is_page]', checked=article.is_page)
 
     div
       label Active
