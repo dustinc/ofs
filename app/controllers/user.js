@@ -91,19 +91,78 @@ controller.update = function(req, res, next) {
     _user.email = user.email;
     _user.username = user.username;
 
-    // set new password
-    if(phash.verify(user.current_password, _user.password) && user.password == user.confirm_password) {
-      _user.password = user.password;
-    }
-
     _user.user_type = user.user_type;
 
     _user.save(function(err) {
-      if(err) return next(err);
+      if(err) {
+        req.flash('error', 'There was an error updating your info');
+        return next(err);
+      }
+      req.flash('info', 'Your info was updated');
       return res.redirect('/user/' + _user._id);
     });
 
   });
+};
+
+// Password Reset
+
+controller.resetpassword = function(req, res, next) {
+  var user,
+      verr = false;
+
+  if(req.method == 'POST') {
+    user = req.body.user;
+
+    if(user.current_password != '') {
+
+      // load user
+      db.users.findOne({ _id: user._id}, function(err, _user) {
+        if(err) return next(err);
+
+        // verify current password
+        if(phash.verify(user.current_password, _user.password)) {
+
+          // new password confirm
+          if(user.password == user.confirm_password) {
+
+            // set new password
+            _user.password = user.password;
+
+          } else {
+            verr = true;
+            req.flash('error', 'Password confirmation does not match');
+          }
+
+        }
+
+      });
+
+    } else {
+      verr = true;
+      req.flash('error', 'Please enter current password');
+    }
+
+    // do not save if there are validation errors
+    if(verr) {
+      return res.redirect(req.header('Referrer'));
+    }
+
+    _user.save(function(err) {
+      if(err) {
+        req.flash('error', 'There was a problem updating your password');
+      }
+      req.flash('info', 'Your password was updated');
+      return res.redirect('/user/' + _user._id);
+    });
+
+  } else {
+    // GET
+    user = db.users.findOne({ _id: req.param('user_id')});
+  }
+
+  return res.render('user/resetpassword', { user: user });
+
 };
 
 // Delete

@@ -1,12 +1,14 @@
 
 var controller = {},
     app,
-    db;
+    db,
+    sendgrid;
 
 
 module.exports = function(_app) {
   app = _app;
   db = app.set('db');
+  sendgrid = app.set('sendgrid');
   return controller;
 };
 
@@ -55,12 +57,51 @@ controller.login = function(req, res, next) {
 
 };
 
+// Logout
+
 controller.logout = function(req, res, next) {
   req.session.destroy();
   return res.redirect('/');
 };
 
-// signup
+// Forgot Password
+
+controller.forgotpassword = function(req, res, next) {
+
+  if(req.method == 'POST') {
+
+    // Keep flash message consistent for security
+    req.flash('info', 'Password reset instructions sent your email address.');
+
+
+    db.users.findOne({ email: req.body.email }, function(err, _user) {
+
+      if(_user != null) {
+
+        // Create temp pass reset entry - TODO
+
+        // Build email body
+        var email_text = 'OFS Password Reset Email - Coming Soon!';
+
+        sendgrid.send({
+          to: _user.email,
+          from: 'info@onlinefacultysupport.com',
+          subject: 'OnlineFacultySupport.com Password Reset',
+          text: email_text
+        }, function(success, message) {
+          return res.redirect('/');
+        });
+
+      }
+    });
+
+  } else {
+    return res.render('forgotpassword');
+  }
+
+};
+
+// Signup
 
 controller.signup = function(req, res, next) {
   var user_types = db.lookups.findOne({name: 'User Types'});

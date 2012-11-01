@@ -49,6 +49,8 @@ module.exports = function(app) {
   app.get('/user/:user_id', authenticatedUser, user.show);
   app.get('/user/:user_id/edit', authenticatedUser, user.edit);
   app.get('/user/:user_id/save', authenticatedUser, user.save);
+  app.get('/user/:user_id/resetpassword', authenticatedUser, user.resetpassword);
+  app.post('/user/:user_id/resetpassword', authenticatedUser, user.resetpassword);
   app.post('/user/:user_id/update', authenticatedUser, user.update);
 
   //user profile
@@ -68,6 +70,9 @@ module.exports = function(app) {
   // create new user
   app.get('/signup', main.signup);
   app.post('/user/create', user.create);
+
+  app.get('/forgotpassword', main.forgotpassword);
+  app.post('/forgotpassword', main.forgotpassword);
 
   // general
   app.get('/', main.index);
