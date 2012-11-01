@@ -34,7 +34,39 @@ module.exports = function(app) {
   app.get('/admin/articles?/new', authenticatedAdmin, article.form);
   app.get('/admin/articles?/:article_id/edit', authenticatedAdmin, article.form);
   app.get('/admin/articles?/:article_id/delete', authenticatedAdmin, article.delete);
-  app.post('/admin/articles?/:article_id/save', authenticatedAdmin, article.save);
+  app.post('/admin/articles?/:article_id/save', authenticatedAdmin, function(req, res, next) {
+
+    if(req.files.article_file) {
+
+      var fs = require('fs'),
+          File = db.files,
+          new_file;
+
+      new_file = {
+        name: req.files.article_file.name,
+        type: req.files.article_file.type,
+        size: req.files.article_file.size,
+        body: fs.readFileSync(req.files.article_file.path)
+      };
+
+      file = new File(new_file);
+
+      file.save(function(err) {
+        if(err) return next(err);
+
+        req.body.article.files = [{
+          _id: file._id,
+          name: file.name
+        }];
+
+        return next();
+      });
+
+    } else {
+      return next();
+    }
+
+  }, article.save);
 
 
   // lookups

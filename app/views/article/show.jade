@@ -7,8 +7,15 @@ block content
     h4= article.title
     .article-body
       !{article.content}
-  
-  if article.prev_article_id
-    a(href='/article/' + article.prev_article_id).float-left Prev
-  if article.next_article_id
-    a(href='/article/' + article.next_article_id).float-right Next
+
+  .files
+    for file in article.files
+      a(href='/file/'+file._id, target='blank') #{file.name}
+    else
+      p No Files
+
+  //
+    if article.prev_article_id
+      a(href='/article/' + article.prev_article_id).float-left Prev
+    if article.next_article_id
+      a(href='/article/' + article.next_article_id).float-right Next

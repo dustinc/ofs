@@ -116,7 +116,7 @@ controller.form = function(req, res, next) {
   return res.render('article/edit', { article: article, scripts: ['/scripts/md-editor.js'] });
 };
 
-// delete
+// Delete
 
 controller.delete = function(req, res, next) {
   var article = db.articles.findOne({ '_id': req.params.article_id }) || false;
@@ -129,11 +129,12 @@ controller.delete = function(req, res, next) {
   return res.redirect('/admin/articles');
 };
 
-// save
+// Save
 
 controller.save = function(req, res, next) {
   var Article = db.main.model('Article'),
       a = req.body.article;
+
 
   Article.findOne({ '_id': req.params.article_id }, function(err, _article) {
 
@@ -160,9 +161,23 @@ controller.save = function(req, res, next) {
 
       // update
 
-      _article.title = req.body.article.title;
-      _article.body = req.body.article.body;
-      _article.is_active = req.body.article.is_active;
+      _article.title      = a.title;
+      _article.body       = a.body;
+      _article.is_page    = a.is_page;
+      _article.is_active  = a.is_active;
+
+      if(a.categories) {
+        _article.categories = a.categories;
+      } else {
+        _article.categories = [];
+      }
+
+      if(_.isArray(a.files) && a.files.length > 0) {
+        _.each(a.files, function(file) {
+          _article.files.push(file);
+        });
+
+      }
 
       _article.save(function(err) {
         if(err) {

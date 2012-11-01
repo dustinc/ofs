@@ -10,7 +10,7 @@ extends ../admin/index
 
 block sub_content
 
-  form(action='/admin/article/'+article._id+'/save', method='post')
+  form(action='/admin/article/'+article._id+'/save', enctype='multipart/form-data', method='post')
     div
       label Title
       input(type='text', name='article[title]', value=article.title)
@@ -52,5 +52,6 @@ block sub_content
       label Active
       input(type='checkbox', name='article[is_active]', checked=article.is_active)
 
+    input(type='file', name='article_file')
     input(type='hidden', name='article[_id]', value=article._id)
     input(type='submit', value='save')
