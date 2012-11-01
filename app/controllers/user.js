@@ -214,7 +214,7 @@ controller.profile.edit = function(req, res, next) {
       _profile = new Profile();
     }
 
-    return res.render('profile/edit', {user: user, profile: _profile, lookups: lookups});
+    return res.render('profile/edit', {user: user, profile: _profile, lookups: lookups, scripts: ['/scripts/profile.js']});
 
   });
 };
@@ -258,13 +258,13 @@ controller.profile.save = function(req, res, next) {
       _profile.publication.publication_type     = p.publication.publication_type;
       _profile.publication.total                = p.publication.total;
       _profile.publication.past_three_years     = p.publication.past_three_years;
-      _profile.publication.reviewer             = p.publication.reviewer;
+      _profile.publication.reviewer             = (p.publication.reviewer) ? p.publication.reviewer : false;
       _profile.publication.reviewer_total       = p.publication.reviewer_total;
 
       // Presentation
       _profile.presentation.total               = p.presentation.total;
       _profile.presentation.past_three_years    = p.presentation.past_three_years;
-      _profile.presentation.reviewer            = p.presentation.reviewer;
+      _profile.presentation.reviewer            = (p.presentation.reviewer) ? p.presentation.reviewer : false;
       _profile.presentation.reviewer_total      = p.presentation.reviewer_total;
 
       // The Rest

@@ -39,14 +39,13 @@ mixin certificate(ccnt, cert)
 //- License Mixin
 
 mixin license(lcnt, lic)
-      div.license.item
-        label(for='licenses') License
-        input(type='text', name='profile[education][licenses][#{lcnt}][name]', value=lic.name, id='licenses')
-        label(for='license-date') License Date
-        input(type='text', name='profile[education][licenses][#{lcnt}][year]', value=lic.year, id='license-date')
-        
-        //img(src='/images/remove_button.png', title='Remove License', width='23px').remove_item 
-        a(title='Remove License', class='button-box').remove_item Remove This License
+  div.license.item
+    label(for='licenses') License
+    input(type='text', name='profile[education][licenses][#{lcnt}][name]', value=lic.name, id='licenses')
+    label(for='license-date') License Date
+    input(type='text', name='profile[education][licenses][#{lcnt}][year]', value=lic.year, id='license-date')
+
+    a(title='Remove License', class='button-box').remove_item Remove This License
 
 //- Service Mixin
 
@@ -185,7 +184,7 @@ form(action='/user/'+user.id+'/profile/save', method='post')
 
       div
         label(for='publication-reviewer') Publication Reviewer
-        input(type='checkbox', name='profile[publication][reviewer]', checked=profile.publication.reviewer, id='publication-reviewer')
+        input(type='checkbox', name='profile[publication][reviewer]', checked=profile.publication.reviewer, id='publication-reviewer').reviewer
 
       div
         label(for='publication-reviewer-total') Publication Reviewer Total
@@ -215,7 +214,7 @@ form(action='/user/'+user.id+'/profile/save', method='post')
 
       div
         label(for='reviewer') Reviewer
-        input(type='checkbox', name='profile[presentation][reviewer]', checked=profile.presentation.reviewer, id='reviewer')
+        input(type='checkbox', name='profile[presentation][reviewer]', checked=profile.presentation.reviewer, id='reviewer').reviewer
 
       div
         label(for='reviewer-total') Reviewer Total

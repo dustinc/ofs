@@ -49,14 +49,14 @@ div#profile-info
     p Types of Research: #{profile.publication.publication_type}
     p Total Publications: #{profile.publication.total}
     p Publications in past 3 years: #{profile.publication.past_three_years}
-    p Publications Reviewer: #{profile.publication.reviewer}
-    p Publications Reviewer Total: #{profile.publication.reviwer_total}
+    if profile.publication.reviewer
+      p Publications Reviewer Total: #{profile.publication.reviewer_total}
 
     h4 Presentations
     p Total Presentations: #{profile.presentation.total}
     p Presentations in past 3 years: #{profile.presentation.past_three_years}
-    p Presentations Reviewer: #{profile.presentation.reviewer}
-    p Presentations Reviewer Total: #{profile.presentation.reviewer_total}
+    if profile.presentation.reviewer
+      p Presentations Reviewer Total: #{profile.presentation.reviewer_total}
 
   div#service
     h3 Service
