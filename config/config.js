@@ -4,6 +4,8 @@
 const express   = require('express'),
       stylus    = require('stylus'),
       mongoose  = require('mongoose'),
+      SendGrid  = require('sendgrid').SendGrid,
+      sendgrid  = new SendGrid('ericmjameson', 'vfr45$%TGB');
       _         = require('underscore');
 
 // exports
@@ -36,7 +38,8 @@ module.exports = function(app) {
       .set('view engine', 'jade')
       .set('view options', {layout:false})
       .use(stylus.middleware({src: __dirname + '/../public'}))
-      .use(express.static(__dirname + '/../public'));
+      .use(express.static(__dirname + '/../public'))
+      .set('sendgrid', sendgrid);
   });
 
   app.set('title', 'OFS');
