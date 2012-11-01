@@ -8,4 +8,5 @@ module.exports = function() {
   mongoose.model('Teacher', require('../app/models/teacher'));
   mongoose.model('Article', require('../app/models/article'));
   mongoose.model('Counter', require('../app/models/counter'));
+  mongoose.model('File', require('../app/models/file'));
 };

@@ -152,7 +152,18 @@ controller.faculty_search = function(req, res, next) {
 // job search
 
 controller.job_search = function(req, res, next) {
-  return res.send('job search');
+  return next()
+};
+
+// File
+
+controller.file = function(req, res, next) {
+  db.files.findOne({ '_id': req.params.file_id }, function(err, _file) {
+    if(err) return next(err);
+    res.contentType(_file.type);
+    console.log(_file.body);
+    return res.end(_file.body.buffer);
+  });
 };
 
 // load fixtures - temp controller

@@ -85,8 +85,10 @@ module.exports = function(app) {
 
   // article pages
   app.get('/forums', function(req, res, next) {next()});
-  app.get('/templates-and-tutorials', article.page);
-  app.get('/personalized-help', article.page);
+  app.get('/page/:slug', article.page);
+
+  // file
+  app.get('/file/:file_id', main.file);
 
   // searches
   app.get('/search/faculty', main.faculty_search);// add seach middleware to show limited search/results to unauthorized users
