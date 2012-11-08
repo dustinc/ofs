@@ -32,7 +32,7 @@ var Service = new Schema({
   service_type: String,
   name: String,
   description: String,
-  year: String
+  year: {type: String}
 });
 
 
@@ -51,15 +51,16 @@ var Teacher = module.exports = new Schema({
   },
 
   experience: {
-    years_teaching: {type: String, enum: ['0', '1-3', '4-6', '7-10', '11+']},
-    delivery_mode: {type: String, enum: ['Face to Face', 'Online', 'Both']},
-    years_teaching_online: {type: String, enum: ['0', '1-3', '4-6', '7-10', '11+']},
+    years_teaching: {type: String},
+    delivery_mode: {type: String},
+    years_teaching_online: {type: String},
     courses_taught: [String],
     eligible_areas: [String]
   },
 
+  research_type: Array,
+
   publication: {
-    publication_type: Array,
     total: Number,
     past_three_years: Number,
     reviewer: Boolean,
@@ -76,8 +77,8 @@ var Teacher = module.exports = new Schema({
   services: [Service],
 
   positions_desired: [String],
-  institution: {type: String, enum: ['K12 School', 'Community/Technical College', 'University/College']},
-  course: {type: String, enum: ['K12', 'Undergraduate', 'Graduate']}
+  institution: {type: String},
+  course: {type: String}
 
 });
 
