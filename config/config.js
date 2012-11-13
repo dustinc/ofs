@@ -55,6 +55,7 @@ module.exports = function(app) {
           'lookups': db.model('Lookup'),
           'teachers': db.model('Teacher'),
           'articles': db.model('Article'),
+          'comments': db.model('Comment'),
           'counters': db.model('Counter'),
           'files': db.model('File')
         }

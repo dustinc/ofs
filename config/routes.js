@@ -67,6 +67,7 @@ module.exports = function(app) {
     }
 
   }, article.save);
+  app.post('/comment', article.comment);
 
 
   // lookups

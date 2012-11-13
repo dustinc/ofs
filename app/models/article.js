@@ -1,18 +1,8 @@
 
 var Schema = require('mongoose').Schema,
     ObjectId = Schema.ObjectId,
+    Comment = require('./comment'),
     TimeStamp = require('./timestamp');
-
-
-
-
-// Comment Schema
-
-var Comment = new Schema({
-  person: String,
-  comment: String,
-  created_at: { type: Date, default: new Date }
-});
 
 
 /*
@@ -37,6 +27,10 @@ var Article = module.exports = new Schema({
 
 Article.plugin(TimeStamp);
 
+/*
+ * Virtuals and Methods
+ */
+
 Article.virtual('excerpt').get(function() {
   var md = require('discount');
 
@@ -55,6 +49,10 @@ Article.virtual('content').get(function() {
   return '';
 });
 
+/*
+ * Pre and Post
+ */
+
 Article.pre('save', function(next) {
   this.title = this.title.replace(/^\s+|\s+$/g, '');
 
@@ -64,11 +62,3 @@ Article.pre('save', function(next) {
 
   next();
 });
-
-
-
-
-
-
-
-

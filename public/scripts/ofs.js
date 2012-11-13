@@ -81,7 +81,9 @@ $('.item_list').on('click', '.remove_item', function() {
 });
 
 
-// Sign up form validation
+/*
+ * Sign up form validation
+ */
 
 $('#signupform').submit(function() {
   var $form = $(this),
@@ -109,6 +111,17 @@ $('#signupform').submit(function() {
   }
 
   if(error) return false;
+});
+
+
+/*
+ * Article Comments
+ */
+
+// Toggle comment reply form display
+$('#comments').on('click', '.comment-reply', function() {
+  $(this).closest('.comment-form').find('form').slideToggle();
+  return false;
 });
 
 });

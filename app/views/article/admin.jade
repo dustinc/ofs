@@ -4,7 +4,10 @@ block sub_content
   h3 Articles
 
   ul.sub-menu
-    li: a(href='/admin/article/new') Create New
+    if !n
+      li: a(href='/admin/article/new') Create New
+    else
+      li: a(href='/admin/article/new?'+n+'=true') Create New
 
   for article in articles
     div(id=article._id).article

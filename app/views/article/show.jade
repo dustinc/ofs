@@ -1,3 +1,35 @@
+
+
+mixin commentform(comment_id, hide)
+
+  - if(typeof s_user != 'undefined' && s_user != false)
+
+    .comment-form
+      if comment_id
+        span.comment-toolbar
+          a(href='#').comment-reply reply
+      form(action='/comment', method='post', class=(hide == true) ? 'hide' : 'show')
+        if comment_id
+          input(type='hidden', name='in_reply_to', value=comment_id)
+        input(type='hidden', name='article_id', value=article._id)
+        input(type='hidden', name='comment[person]', value=s_user.name.first + ' ' + s_user.name.last)
+        textarea(name='comment[comment]', rows='5', cols='45')
+        input(type='submit', value='Save Comment')
+  else
+    a(href='/login') Login
+    | to comment.
+
+
+mixin comment(comment)
+  div.comment
+    p #{comment.person}
+    if comment.comment
+      p #{comment.comment}
+    mixin commentform(comment._id, true)
+    for reply in comment.comments
+      mixin comment(reply)
+
+
 extends ../layout
 
 block content
@@ -14,8 +46,11 @@ block content
     else
       p No Files
 
-  //
-    if article.prev_article_id
-      a(href='/article/' + article.prev_article_id).float-left Prev
-    if article.next_article_id
-      a(href='/article/' + article.next_article_id).float-right Next
+
+  #comments
+    for comment in article.comments
+      +comment(comment)
+    else
+      p.no-comment No Comments
+
+    +commentform(false, false)
