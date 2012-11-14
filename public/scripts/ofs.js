@@ -42,9 +42,9 @@ $('#top-login-form input').focus(function() {
 
 // add new item
 
-$('.item_list').on('click', '.add_item', function() {
+$('.item-list').on('click', '.add-item', function() {
 
-  var $item_list = $(this).closest('.item_list');
+  var $item_list = $(this).closest('.item-list');
       $last_item = $item_list.find('.item').filter(':last'),
       $item = $last_item.clone();
 
@@ -76,7 +76,7 @@ $('.item_list').on('click', '.add_item', function() {
 
 // remove item (soft)
 
-$('.item_list').on('click', '.remove_item', function() {
+$('.item-list').on('click', '.remove-item', function() {
   $(this).closest('.item').remove();
 });
 

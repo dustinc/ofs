@@ -38,9 +38,18 @@ div#profile-info
 
     p Years Teaching Online: #{profile.experience.years_teaching_online}
 
-    p Courses Taught: #{profile.experience.courses_taught}
+    p Eligible Areas:
+    for eligible_area in profile.experience.eligible_areas
+      li #{eligible_area}
+    else
+      p No areas added.
 
-    p Eligible Areas: #{profile.experience.eligible_areas}
+    p Courses Taught:
+    for course_taught in profile.experience.courses_taught
+      li #{course_taught}
+    else
+      p No courses added.
+
 
   div#research
     h3 Research

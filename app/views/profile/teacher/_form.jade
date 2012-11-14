@@ -17,9 +17,9 @@ mixin degree(dcnt, degree)
 
     label(for='year-obtained') Year Obtained
     input(type='text', name='profile[education][degrees][#{dcnt}][year]', value=degree.year, id='year-obtained')
-    
-    //img(src='/images/remove_button.png', title='Remove Degree', width='23px').remove_item 
-    a(title='Remove Degree', class='button-box').remove_item Remove This Degree
+
+    //img(src='/images/remove_button.png', title='Remove Degree', width='23px').remove-item
+    a(title='Remove Degree', class='button-box').remove-item Remove This Degree
 
 
 //- Certificate Mixin
@@ -30,9 +30,9 @@ mixin certificate(ccnt, cert)
     input(type='text', name='profile[education][certificates][#{ccnt}][name]', value=cert.name, id='certificate')
     label(for='certificate-date') Certificate Date
     input(type='text', name='profile[education][certificates][#{ccnt}][year]', value=cert.year, id='certificate-date')
-    
-    //img(src='/images/remove_button.png', title='Remove Certificate', width='23px').remove_item
-    a(title='Remove Certificate', class='button-box').remove_item Remove This Certificate
+
+    //img(src='/images/remove_button.png', title='Remove Certificate', width='23px').remove-item
+    a(title='Remove Certificate', class='button-box').remove-item Remove This Certificate
 
 
 
@@ -45,7 +45,25 @@ mixin license(lcnt, lic)
     label(for='license-date') License Date
     input(type='text', name='profile[education][licenses][#{lcnt}][year]', value=lic.year, id='license-date')
 
-    a(title='Remove License', class='button-box').remove_item Remove This License
+    a(title='Remove License', class='button-box').remove-item Remove This License
+
+
+//- Eligible Area Mixin
+mixin eligible_area(cnt, eligible_area)
+  div.item
+    label(for='eligible-areas-'+cnt) Eligible Areas
+    input(type='text', name='profile[experience][eligible_areas][#{cnt}]', value=eligible_area, id='eligible-areas-'+cnt)
+
+    a(title='Remove Area', class='button-box').remove-item Remove This Area
+
+
+//- Course Taught Mixin
+mixin course_taught(cnt, course_taught)
+  div.item
+    label(for='courses-taught-'+cnt) Courses Taught
+    input(type='text', name='profile[experience][courses_taught][#{cnt}]', value=course_taught, id='courses-taught-'+cnt)
+
+    a(title='Remove Course', class='button-box').remove-item Remove This Course
 
 //- Service Mixin
 
@@ -66,9 +84,9 @@ mixin service(scnt, service)
     div
       label(for='year') Year
       input(type='text', name='profile[services][#{scnt}][year]', value=service.year, id='year')
-    
-    //img(src='/images/remove_button.png', title='Remove Service', width='23px').remove_item
-    a(title='Remove Service', class='button-box').remove_item Remove This Service
+
+    //img(src='/images/remove_button.png', title='Remove Service', width='23px').remove-item
+    a(title='Remove Service', class='button-box').remove-item Remove This Service
 
 
 //- START FORM
@@ -80,46 +98,46 @@ form(action='/user/'+user.id+'/profile/save', method='post')
   input(type='hidden', name='profile[user_id]', value=user.id)
 
   .teal-divider
-  
+
   fieldset
     legend Education
 
     //- DEGREES
-    div#degrees.item_list
+    div#degrees.item-list
       for degree, dcnt in profile.education.degrees
         +degree(dcnt, degree)
       else
         +degree(0, {})
 
-      //img(src='/images/add_button.png', title='Add Degree', width='33px').add_item
-      a(title='Add Degree', class='button-box').add_item Add Another Degree
+      //img(src='/images/add_button.png', title='Add Degree', width='33px').add-item
+      a(title='Add Degree', class='button-box').add-item Add Another Degree
 
     //- CERTS
-    div#certs.item_list
+    div#certs.item-list
       for cert, ccnt in profile.education.certificates
         +certificate(ccnt, cert)
       else
         +certificate(0, {})
 
-      //img(src='/images/add_button.png', title='Add Certificate', width='33px').add_item
-      a(title='Add Certificate', class='button-box').add_item Add Another Certificate
+      //img(src='/images/add_button.png', title='Add Certificate', width='33px').add-item
+      a(title='Add Certificate', class='button-box').add-item Add Another Certificate
 
     //- LICENSES
-    div#license.item_list
+    div#license.item-list
       for lic, lcnt in profile.education.licenses
         +license(lcnt, lic)
       else
         +license(0, {})
 
-      //img(src='/images/add_button.png', title='Add License', width='33px').add_item
-      a(title='Add License', class='button-box').add_item Add Another License
+      //img(src='/images/add_button.png', title='Add License', width='33px').add-item
+      a(title='Add License', class='button-box').add-item Add Another License
 
     div
       label(for='other-education') Other Education
       input(type='text', name='profile[education][other]', value=profile.education.other, id='other-education')
 
   .teal-divider
-  
+
   fieldset
     legend Experience
 
@@ -130,30 +148,39 @@ form(action='/user/'+user.id+'/profile/save', method='post')
         for v in lookups.years_teaching.values
           option(value='#{v}', selected=v == profile.experience.years_teaching) #{v}
 
-    div
+    div.item-list
       label(for='delivery-mode') Delivery Mode
       select(name='profile[experience][delivery_mode]', id='delivery-mode')
         option(value='')
         for v in lookups.delivery_modes.values
           option(value='#{v}', selected=v == profile.experience.delivery_mode) #{v}
 
-    div
+    div.item-list
       label(for='years-teaching-online') Years Teaching Online
       select(name='profile[experience][years_teaching_online]', id='years-teaching-online')
         option(value='')
         for v in lookups.years_teaching.values
           option(value='#{v}', selected=v == profile.experience.years_teaching) #{v}
 
-    div
-      label(for='courses-taught') Courses Taught
-      input(type='text', name='profile[experience][courses_taught]', value=profile.experience.courses_taught, id='courses-taught')
 
-    div
-      label(for='eligible-areas') Eligible Areas
-      input(type='text', name='profile[experience][eligible_areas]', value=profile.experience.eligible_areas, id='eligible-areas')
+    div.item-list
+      for eligible_area, cnt in profile.experience.eligible_areas
+        +eligible_area(cnt, eligible_area)
+      else
+        +eligible_area(0, {})
+
+      a(title='Add Eligible Area', class='button-box').add-item Add Eligible Area
+
+    div.item-list
+      for course_taught, cnt in profile.experience.courses_taught
+        +course_taught(cnt, course_taught)
+      else
+        +course_taught(0, {})
+
+      a(title='Add Course Taught', class='button-box').add-item Add Course Taught
 
   .teal-divider
-  
+
   fieldset
     legend Research
 
@@ -226,24 +253,24 @@ form(action='/user/'+user.id+'/profile/save', method='post')
           option(value='99') 50+
 
     .clearfix
-          
+
   .teal-divider
-  
-  fieldset.item_list
+
+  fieldset.item-list
     legend Services
 
     for service, scnt in profile.services
       +service(scnt, service)
     else
       +service(0, {})
-    
+
     div.clearfix
-    
-    //img(src='/images/add_button.png', title='Add Service', width='33px').add_item
-    a(title='Add Service', class='button-box').add_item Add Another Service
+
+    //img(src='/images/add_button.png', title='Add Service', width='33px').add-item
+    a(title='Add Service', class='button-box').add-item Add Another Service
 
   .teal-divider
-  
+
   fieldset
     legend Position
     div
@@ -266,5 +293,5 @@ form(action='/user/'+user.id+'/profile/save', method='post')
           option(value=v, selected=v == profile.course) #{v}
 
   .teal-divider
-  
+
   input(type='submit', value='Save All Changes')
