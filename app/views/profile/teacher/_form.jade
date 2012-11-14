@@ -52,7 +52,7 @@ mixin license(lcnt, lic)
 mixin service(scnt, service)
   div.service.item.profile-segment
     div
-      label(for='type') Type
+      label(for='type') Committee Type
       select(name='profile[services][#{scnt}][service_type]', id='type')
         option(value='')
         for service_type in lookups.service_types.values
@@ -142,7 +142,7 @@ form(action='/user/'+user.id+'/profile/save', method='post')
       select(name='profile[experience][years_teaching_online]', id='years-teaching-online')
         option(value='')
         for v in lookups.years_teaching.values
-          option(value='#{v}', selected=v == profile.experience.years_teaching_online) #{v}
+          option(value='#{v}', selected=v == profile.experience.years_teaching) #{v}
 
     div
       label(for='courses-taught') Courses Taught
@@ -157,15 +157,16 @@ form(action='/user/'+user.id+'/profile/save', method='post')
   fieldset
     legend Research
 
+    div
+      h5 Publications
+      label(for='quantitative') Quantitative
+      input(type='checkbox', name='profile[research_type][]', value='Quantitative', checked=(profile.research_type.indexOf('Quantitative') != -1), id='quantitative')
+      label(for='qualitative') Qualitative
+      input(type='checkbox', name='profile[research_type][]', value='Qualitative', checked=(profile.research_type.indexOf('Qualitative') != -1), id='qualitative')
+      label(for='mixed-methods') Mixed Methods
+      input(type='checkbox', name='profile[research_type][]', value='Mixed Methods', checked=(profile.research_type.indexOf('Mixed Methods') != -1), id='mixed-methods')
+
     .profile-segment
-      div
-        h5 Publications
-        label(for='quantitative') Quantitative
-        input(type='checkbox', name='profile[publication][publication_type][]', value='Quantitative', checked=(profile.publication.publication_type.indexOf('Quantitative') != -1), id='quantitative')
-        label(for='qualitative') Qualitative
-        input(type='checkbox', name='profile[publication][publication_type][]', value='Qualitative', checked=(profile.publication.publication_type.indexOf('Qualitative') != -1), id='qualitative')
-        label(for='mixed-methods') Mixed Methods
-        input(type='checkbox', name='profile[publication][publication_type][]', value='Mixed Methods', checked=(profile.publication.publication_type.indexOf('Mixed Methods') != -1), id='mixed-methods')
 
       div
         label(for='publication-total') Publication Total

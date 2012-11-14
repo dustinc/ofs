@@ -45,8 +45,9 @@ div#profile-info
   div#research
     h3 Research
 
+    p Types of Research: #{profile.research_type}
+
     h4 Publications
-    p Types of Research: #{profile.publication.publication_type}
     p Total Publications: #{profile.publication.total}
     p Publications in past 3 years: #{profile.publication.past_three_years}
     if profile.publication.reviewer
