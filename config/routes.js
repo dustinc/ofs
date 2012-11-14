@@ -110,16 +110,12 @@ module.exports = function(app) {
 
   // general
   app.get('/', main.index);
-  app.get('/about', main.load.bind(null, 'about'));
+  app.get('/forums', function(req, res, next) {next()});
 
   // articles
   app.get('/articles?', article.index);
   app.get('/articles?/show', article.show);
   app.get('/articles?/:article_id', article.show);
-
-  // article pages
-  app.get('/forums', function(req, res, next) {next()});
-  app.get('/page/:slug', article.page);
 
   // file
   app.get('/file/:file_id', main.file);
@@ -143,10 +139,11 @@ module.exports = function(app) {
 
 
   /*
-   * End of the trail, catch-all 404
+   * End of the trail, catch-all 404.
+   * But first attempt article page via slug
   */
 
-  app.get('/*', function(req, res, next) {
+  app.get('/:slug', article.page, function(req, res, next) {
     res.status(404);
     next(new Error('Sorry, the page you are you looking for does not exist.'));
   });
