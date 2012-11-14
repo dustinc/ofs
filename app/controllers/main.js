@@ -31,29 +31,36 @@ controller.login = function(req, res, next) {
   var phash = require('password-hash'),
       verr = false;
 
-  db.users.findOne({username: req.body.username}, function(err, _user) {
-    if(err) return next(err);
+  if(req.method == 'POST') {
+    db.users.findOne({username: req.body.username}, function(err, _user) {
+      if(err) return next(err);
 
-    if(!_user) {
-      verr = true;
-      req.flash('error', 'User Not Found');
+      if(!_user) {
+        verr = true;
+        req.flash('error', 'Username and/or Password incorrect');
+      }
+
+      if(!phash.verify(req.body.password, _user.password)) {
+        verr = true;
+        req.flash('error', 'Username and/or Password incorrect');
+      }
+
+      if(!verr) {
+        // log in user
+        req.flash('info', 'Login Successful! Welcome Back, %s', _user.name.first)
+        req.session.user = _user;
+      }
+
+      // do not redirect back to /login
+      if(req.header('Referrer').match(/login$/) != null) {
+        return res.redirect('/');
+      }
+
       return res.redirect(req.header('Referrer'));
-    }
-
-    if(!phash.verify(req.body.password, _user.password)) {
-      verr = true;
-      req.flash('error', 'Password Does Not Match');
-    }
-
-    if(!verr) {
-      // log in user
-      req.flash('info', 'Login Successful! Welcome Back, %s', _user.name.first)
-      req.session.user = _user;
-    }
-
-    return res.redirect(req.header('Referrer'));
-
-  })
+    });
+  } else {
+    return res.render('login');
+  }
 
 };
 

@@ -97,6 +97,7 @@ module.exports = function(app) {
   */
 
   // login
+  app.get('/login', main.login);
   app.post('/login', main.login);
   app.get('/logout', main.logout);
 
