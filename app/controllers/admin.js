@@ -3,37 +3,34 @@
 
 var controller = {},
     app,
-    db,
-    scripts = [];
+    db;
 
 // Constructor
 
 module.exports = function(_app) {
   app = _app;
   db = app.set('db');
-  scripts.push('/scripts/admin.js');
-  controller.scripts = scripts;
   return controller;
 };
 
 controller.index = function(req, res, next) {
-  return res.render('admin/index', {scripts: scripts});
+  return res.render('admin/index');
 };
 
 controller.users = function(req, res, next) {
   var users = db.users.find();
   return res.render('admin/users',
-    {users: users, scripts: scripts}
+    { users: users }
   );
 };
 
 controller.lookups = function(req, res, next) {
   return res.render('admin/lookups',
-    {lookups: db.lookups.find(), scripts: scripts}
+    { lookups: db.lookups.find() }
   );
 };
 
 
 controller.quick_edit_li = function(req, res, next) {
-  return res.render('admin/quick_edit_li', {lookup_value: ''});
+  return res.render('admin/quick_edit_li', { lookup_value: '' });
 };

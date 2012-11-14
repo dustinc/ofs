@@ -16,7 +16,7 @@ module.exports = function(_app) {
 // Index
 
 controller.index = function(req, res, next) {
-  return res.render('user/index', { users: db.users.find(), scripts: ['/scripts/admin.js'] } );
+  return res.render('user/index', { users: db.users.find() } );
 };
 
 // Show
