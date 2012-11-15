@@ -50,7 +50,7 @@ controller.edit = function(req, res, next) {
 controller.update = function(req, res, next) {
   var lookup = req.param('lookup');
 
-  return db.main.model('Lookup').findOne({'name': req.param('name')}, function(err, _lookup) {
+  db.main.model('Lookup').findOne({'name': req.param('name')}, function(err, _lookup) {
     if(err) return next(err);
 
     _lookup.name = lookup.name;
@@ -65,6 +65,27 @@ controller.update = function(req, res, next) {
 
       return res.redirect('/admin/lookup/'+_lookup.name);
     });
+
+  });
+
+};
+
+controller.load = function(req, res, next) {
+
+  if(!req.xhr) {
+    res.status(403)
+    throw new Error('Cannot acces page directly');
+  }
+
+  db.lookups.findOne({ name: req.query.name }, function(err, _lookup) {
+
+    var data = '';
+
+    if(!err && _lookup != null) {
+      data = _lookup.values;
+    }
+
+    return res.json(data);
 
   });
 

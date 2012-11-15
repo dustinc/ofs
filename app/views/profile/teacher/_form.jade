@@ -49,19 +49,21 @@ mixin license(lcnt, lic)
 
 
 //- Eligible Area Mixin
+
 mixin eligible_area(cnt, eligible_area)
   div.item
     label(for='eligible-areas-'+cnt) Eligible Areas
-    input(type='text', name='profile[experience][eligible_areas][#{cnt}]', value=eligible_area, id='eligible-areas-'+cnt)
+    input(type='text', data-keyfind='eligible_areas', name='profile[experience][eligible_areas][#{cnt}]', value=eligible_area, id='eligible-areas-'+cnt).suggest-eligible-area
 
     a(title='Remove Area', class='button-box').remove-item Remove This Area
 
 
 //- Course Taught Mixin
+
 mixin course_taught(cnt, course_taught)
   div.item
     label(for='courses-taught-'+cnt) Courses Taught
-    input(type='text', name='profile[experience][courses_taught][#{cnt}]', value=course_taught, id='courses-taught-'+cnt)
+    input(type='text', data-keyfind='courses', name='profile[experience][courses_taught][#{cnt}]', value=course_taught, id='courses-taught-'+cnt).suggest-course
 
     a(title='Remove Course', class='button-box').remove-item Remove This Course
 
@@ -91,7 +93,7 @@ mixin service(scnt, service)
 
 //- START FORM
 
-form(action='/user/'+user.id+'/profile/save', method='post')
+form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
   - if(typeof profile.id != '')
     input(type='hidden', name='profile[_id]', value=profile.id)
 

@@ -73,6 +73,7 @@ module.exports = function(app) {
   // lookups
   app.get('/admin/lookups?', authenticatedAdmin, lookup.index);
   app.get('/admin/lookups?/create', authenticatedAdmin, lookup.create);
+  app.get('/admin/lookups?/load', authenticatedAdmin, lookup.load);
   app.get('/admin/lookups?/:name', authenticatedAdmin, lookup.show);
   app.get('/admin/lookups?/:name/edit', authenticatedAdmin, lookup.edit);
   app.post('/admin/lookups?/:name/update', authenticatedAdmin, lookup.update);
