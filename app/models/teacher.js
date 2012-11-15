@@ -1,7 +1,8 @@
 
 var Schema = require('mongoose').Schema,
     ObjectId = Schema.ObjectId,
-    TimeStamp = require('./timestamp');
+    TimeStamp = require('./timestamp'),
+    _ = require('underscore');
 
 /*
  * Degree Schema
@@ -84,7 +85,7 @@ var Teacher = module.exports = new Schema({
 
 Teacher.plugin(TimeStamp);
 
-
+// Virtuals
 
 Teacher.virtual('highest_degree').get(function() {
   var weights = {
@@ -92,8 +93,23 @@ Teacher.virtual('highest_degree').get(function() {
     'Masters' : 10,
     'Bachelors' : 1
   };
-  
+
   return this.education.degrees.sort(function(a, b) {
     return weights[b.degree_type] - weights[a.degree_type];
   })[0].degree_type;
+});
+
+// PRE Hooks
+
+Teacher.pre('save', function(next) {
+
+  if(_.isArray(this.experience.eligible_areas)) {
+    this.model('Lookup').pushToLookup(this.experience.eligible_areas, 'Eligible Areas');
+  }
+
+  if(_.isArray(this.experience.courses_taught)) {
+    this.model('Lookup').pushToLookup(this.experience.courses_taught, 'Courses');
+  }
+
+  next();
 });
