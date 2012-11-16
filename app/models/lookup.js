@@ -21,27 +21,39 @@ Lookup.plugin(TimeStamp);
 
 Lookup.statics.pushToLookup = function(values, name) {
 
-  this.model('Lookup').findOne({ name: name }, function(err, _lookup) {
+  var L = this.model('Lookup');
+
+  L.findOne({ name: name }, function(err, _lookup) {
 
     var modified = false;
 
-    // Check each value
-    _.each(values, function(value) {
+    // Lookup not found - create new
+    if(_lookup == null) {
+      _lookup = new L({ name: name, values: values });
+    } else {
 
-      // Only push new values
-      if(_.indexOf(_lookup.values, value) == -1) {
-        _lookup.values.push(value);
-        modified = true;
-      }
+      // Check each value
+      _.each(values, function(value) {
 
-    });
+        // Only push new values
+        if(_.indexOf(_lookup.values, value) == -1) {
+          _lookup.values.push(value);
+          modified = true;
+        }
 
-    // Save only if values were modified
-    if(modified) {
-      _lookup.markModified('values');
+      });
+
+    }
+
+    // Save only if new or values were modified
+    if(modified || _lookup.isNew) {
+
+      if(modified) _lookup.markModified('values');
+
       _lookup.save(function(err) {
         return (!err);
       });
+
     }
 
   });
