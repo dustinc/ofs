@@ -255,7 +255,6 @@ controller.profile.save = function(req, res, next) {
       _profile.experience.eligible_areas        = p.experience.eligible_areas;
 
       // Publication
-      _profile.publication.publication_type     = p.publication.publication_type;
       _profile.publication.total                = p.publication.total;
       _profile.publication.past_three_years     = p.publication.past_three_years;
       _profile.publication.reviewer             = (p.publication.reviewer) ? p.publication.reviewer : false;
@@ -268,6 +267,7 @@ controller.profile.save = function(req, res, next) {
       _profile.presentation.reviewer_total      = p.presentation.reviewer_total;
 
       // The Rest
+      _profile.research_type                    = p.research_type;
       _profile.services                         = p.services;
       _profile.positions_desired                = p.positions_desired;
       _profile.institution                      = p.institution;
