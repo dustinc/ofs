@@ -28,4 +28,5 @@ form(action='/user/'+post_action, method='post')
     label(for='uname') Username:
     input(type='text', name='user[username]', id='uname', value=user.username)
 
+  a(href="/user/#{user._id}").button-box Cancel
   input(type='submit', value='Save')

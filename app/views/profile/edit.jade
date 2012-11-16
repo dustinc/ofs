@@ -2,7 +2,6 @@ extends index
 
 block sub_content
 
-  ul.sub-menu
-    li: a(href="/user/#{user._id}/profile") Cancel
-
+  h3 Edit Profile Info for #{user.name.full}
+  
   include teacher/_form

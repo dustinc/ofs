@@ -187,16 +187,19 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
     legend Research
 
     div
-      h5 Publications
-      label(for='quantitative') Quantitative
-      input(type='checkbox', name='profile[research_type][]', value='Quantitative', checked=(profile.research_type.indexOf('Quantitative') != -1), id='quantitative')
-      label(for='qualitative') Qualitative
-      input(type='checkbox', name='profile[research_type][]', value='Qualitative', checked=(profile.research_type.indexOf('Qualitative') != -1), id='qualitative')
-      label(for='mixed-methods') Mixed Methods
-      input(type='checkbox', name='profile[research_type][]', value='Mixed Methods', checked=(profile.research_type.indexOf('Mixed Methods') != -1), id='mixed-methods')
+      
 
     .profile-segment
 
+      div
+        h5 Publications
+        label(for='quantitative') Quantitative
+        input(type='checkbox', name='profile[research_type][]', value='Quantitative', checked=(profile.research_type.indexOf('Quantitative') != -1), id='quantitative')
+        label(for='qualitative') Qualitative
+        input(type='checkbox', name='profile[research_type][]', value='Qualitative', checked=(profile.research_type.indexOf('Qualitative') != -1), id='qualitative')
+        label(for='mixed-methods') Mixed Methods
+        input(type='checkbox', name='profile[research_type][]', value='Mixed Methods', checked=(profile.research_type.indexOf('Mixed Methods') != -1), id='mixed-methods')
+        
       div
         label(for='publication-total') Publication Total
         select(name='profile[publication][total]', id='publication-total')
@@ -296,4 +299,5 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
 
   .teal-divider
 
+  a(href="/user/#{user._id}").button-box Cancel
   input(type='submit', value='Save All Changes')

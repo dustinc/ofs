@@ -1,85 +1,97 @@
 
-div#profile-info
+div#profile-info.clearfix
 
-  div#education
-    h3 Education
+  div.clearfix
+    div#education
+      h3 Education
 
-    h4 Degrees
-    for degree in profile.education.degrees
-      p #{degree.degree_type} #{degree.field} #{degree.year}
-    else
-      p: a(href='#') Add a degree
-
-
-    h4 Certificates
-    for cert in profile.education.certificates
-      p #{cert.name} #{cert.year}
-    else
-      p: a(href='#') Add a certificate
-
-    h4 Licenses
-    for lic in profile.education.licenses
-      p #{lic.name} #{lic.year}
-    else
-      p: a(href='#') Add a license
-
-    h4 Other
-    if profile.education.other
-      p #{profile.education.other}
-    else
-      p: a(href='#') Add a other education
-
-  div#teaching
-    h3 Teaching Experience
-
-    p Years Teaching: #{profile.experience.years_teaching}
-
-    p Delivery Mode: #{profile.experience.delivery_mode}
-
-    p Years Teaching Online: #{profile.experience.years_teaching_online}
-
-    p Eligible Areas:
-    for eligible_area in profile.experience.eligible_areas
-      li #{eligible_area}
-    else
-      p No areas added.
-
-    p Courses Taught:
-    for course_taught in profile.experience.courses_taught
-      li #{course_taught}
-    else
-      p No courses added.
+      h5 Degrees
+      ul
+        for degree in profile.education.degrees
+          li: <strong>#{degree.degree_type}</strong> of <strong>#{degree.field}</strong> acquired in <strong>#{degree.year}</strong>
+        else
+          li: a(href='#') Add a degree
 
 
-  div#research
-    h3 Research
+      h5 Certificates
+      ul
+        for cert in profile.education.certificates
+          li: <strong>#{cert.name}</strong> acquired in <strong>#{cert.year}</strong>
+        else
+          li: a(href='#') Add a certificate
 
-    p Types of Research: #{profile.research_type}
+      h5 Licenses
+      ul
+        for lic in profile.education.licenses
+          if(lic.name)
+            li: <strong>#{lic.name}</strong> acquired in <strong>#{lic.year}</strong>
+          else
+            li: a(href='#') Add a license
 
-    h4 Publications
-    p Total Publications: #{profile.publication.total}
-    p Publications in past 3 years: #{profile.publication.past_three_years}
-    if profile.publication.reviewer
-      p Publications Reviewer Total: #{profile.publication.reviewer_total}
+      h5 Other
+      ul
+        if profile.education.other
+          li: <strong>#{profile.education.other}</strong>
+        else
+          li: a(href='#') Add another type of education
 
-    h4 Presentations
-    p Total Presentations: #{profile.presentation.total}
-    p Presentations in past 3 years: #{profile.presentation.past_three_years}
-    if profile.presentation.reviewer
-      p Presentations Reviewer Total: #{profile.presentation.reviewer_total}
+    div#teaching
+      h3 Teaching Experience
 
-  div#service
-    h3 Service
+      p <strong>Years Teaching:</strong> #{profile.experience.years_teaching}
 
-    for service in profile.services
-      p #{service.service_type} #{service.description} #{service.year}
-    else
-      p: a(href='#') Add service
+      p <strong>Delivery Mode:</strong> #{profile.experience.delivery_mode}
 
+      p <strong>Years Teaching Online:</strong> #{profile.experience.years_teaching_online}
 
-  div#position
-    h3 Position
+      p <strong>Eligible Areas:</strong>
+      ul
+        for eligible_area in profile.experience.eligible_areas
+          li #{eligible_area}
+        else
+          p No areas added.
 
-    p Position Desired: #{profile.position_desired}
-    p Institution: #{profile.institution}
-    p Course: #{profile.course}
+      p <strong>Courses Taught:</strong>
+      ul
+        for course_taught in profile.experience.courses_taught
+          if(course_taught)
+            li: #{course_taught}
+          else
+            li No courses added.
+
+  div.clearfix
+    div#research
+      h3 Research
+
+      p <strong>Types of Research:</strong> #{profile.research_type}
+
+      h5 Publications
+      ul
+        li Total Publications: #{profile.publication.total}
+        li Publications in past 3 years: #{profile.publication.past_three_years}
+        if profile.publication.reviewer
+          li Publications Reviewer Total: #{profile.publication.reviewer_total}
+
+      h5 Presentations
+      ul
+        li Total Presentations: #{profile.presentation.total}
+        li Presentations in past 3 years: #{profile.presentation.past_three_years}
+      if profile.presentation.reviewer
+        li Presentations Reviewer Total: #{profile.presentation.reviewer_total}
+
+    div#service
+      h3 Service
+      
+      ul
+        for service in profile.services
+          li #{service.service_type} #{service.description} #{service.year}
+        else
+          li: a(href='#') Add service
+
+  div.clearfix
+    div#position
+      h3 Position
+      
+      p <strong>Position Desired:</strong> #{profile.positions_desired}
+      p <strong>Institution:</strong> #{profile.institution}
+      p <strong>Course:</strong> #{profile.course}

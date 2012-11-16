@@ -2,8 +2,13 @@ extends index
 
 block content
 
-  #sub-content
-    ul.sub-menu
-      li: a(href="/user/#{user._id}") Cancel
+  h2.pageheader #{user.name.full}
+  
+  #sub-content.user-profile-view
 
+    nav
+      include _usersubmenu
+    
+    h3 Edit Account Info for #{user.name.full}
+    
     include _form
