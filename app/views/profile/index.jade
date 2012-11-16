@@ -2,9 +2,6 @@ extends ../user/show
 
 block sub_content
 
-  ul.sub-menu
-    li: a(href="/user/#{user._id}/profile/edit") Edit Profile
-
   block profile_details
 
     case user.user_type
@@ -12,7 +9,9 @@ block sub_content
       when "Teacher"
 
         if profile.user_id
-          h3 Profile Info
+          h3 Profile Info for #{user.name.full}
+          ul.sub-menu
+            li: a(href="/user/#{user._id}/profile/edit") Edit Profile
           include teacher/index
 
         else

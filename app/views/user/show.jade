@@ -1,19 +1,17 @@
 extends ../layout
 
 block content
-  h2 #{user.name.full}
+  h2.pageheader #{user.name.full}
   
-  #sub-content
+  #sub-content.user-profile-view
 
     block user_menu
-      ul.sub-menu
-        li: a(href="/user/#{user._id}") Account
-        li: a(href="/user/#{user._id}/profile") Profile
-
+      include _usersubmenu
 
     block sub_content
       
+      h3 Account Info for #{user.name.full}
       ul.sub-menu
         li: a(href="/user/#{user._id}/edit") Edit Account
-      
+        
       p <strong>Email:</strong> #{user.email}
