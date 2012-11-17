@@ -54,10 +54,9 @@ div#profile-info.clearfix
       p <strong>Courses Taught:</strong>
       ul
         for course_taught in profile.experience.courses_taught
-          if(course_taught)
-            li: #{course_taught}
-          else
-            li No courses added.
+          li #{course_taught}
+        else
+          li No courses added.
 
   div.clearfix
     div#research
