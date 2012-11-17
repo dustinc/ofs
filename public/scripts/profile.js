@@ -43,9 +43,9 @@ $(function() {
   });
 
   // Courses autocomplete - delegated
-  $('form#profile-form').on('focus', 'input.suggest-course', function() {
+  $('form#profile-form').on('focus', 'input.suggest-course-taught', function() {
     $('input.suggest-course').autocomplete({
-      source: loadSuggestions('Courses')
+      source: loadSuggestions('Courses Taught')
     });
   });
 

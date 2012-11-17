@@ -108,7 +108,7 @@ Teacher.pre('save', function(next) {
   }
 
   if(_.isArray(this.experience.courses_taught)) {
-    this.model('Lookup').pushToLookup(this.experience.courses_taught, 'Courses');
+    this.model('Lookup').pushToLookup(this.experience.courses_taught, 'Courses Taught');
   }
 
   next();

@@ -63,7 +63,7 @@ mixin eligible_area(cnt, eligible_area)
 mixin course_taught(cnt, course_taught)
   div.item
     label(for='courses-taught-'+cnt) Courses Taught
-    input(type='text', data-keyfind='courses', name='profile[experience][courses_taught][#{cnt}]', value=course_taught, id='courses-taught-'+cnt).suggest-course
+    input(type='text', data-keyfind='courses', name='profile[experience][courses_taught][#{cnt}]', value=course_taught, id='courses-taught-'+cnt).suggest-course-taught
 
     a(title='Remove Course', class='button-box').remove-item Remove This Course
 
