@@ -144,7 +144,9 @@ module.exports = function(app) {
    * But first attempt article page via slug
   */
 
-  app.get('/:slug', article.page, function(req, res, next) {
+  app.get('/:slug', article.page);
+
+  app.get('*', function(req, res, next) {
     res.status(404);
     next(new Error('Sorry, the page you are you looking for does not exist.'));
   });
