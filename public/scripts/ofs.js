@@ -113,6 +113,34 @@ $('#signupform').submit(function() {
   if(error) return false;
 });
 
+// Reset password validation
+
+$('#resetpassword').submit(function() {
+  var $form = $(this),
+      error = false;
+
+  // remove existing error messages
+  $form.find('span.error').remove();
+
+  // validate
+  if($form.find('#cpw').val() != '') {
+
+    if($form.find('#npw').val() != $form.find('#cnpw').val()) {
+      $form.find('#cnpw').after('<span class="error">Password Does Not Match</span>');
+      error = true;
+    } else if($form.find('#npw').val() == '') {
+      $form.find('#npw').after('<span class="error">Please Enter New Password</span>');
+      error = true;
+    }
+
+  } else {
+    $form.find('#cpw').after('<span class="error">Please Current Enter Password</span>');
+    error = true;
+  }
+
+  if(error) return false;
+
+});
 
 /*
  * Article Comments
