@@ -145,7 +145,7 @@ controller.forgotpassword = function(req, res, next) {
             // Save and redirect to login page
             _user.save(function(err) {
               if(err) return next(err);
-              req.flash('info', 'Password resest. Please login using your new password.');
+              req.flash('info', 'Password has been reset. Please login using your new password.');
 
               // Mark link inactive
               _forgot.active = false;
