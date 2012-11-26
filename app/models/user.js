@@ -23,6 +23,7 @@ var User = module.exports = new Schema({
     required: true,
     index: {unique: true, sparse: true}
   },
+  display_name: { type: String, required: false },
   password: String,
   user_type: {type: String, required: true},
   is_admin: {type: Boolean, required: false, default: 0},
@@ -74,7 +75,13 @@ User.pre('save', function(next) {
     this.password = phash.generate(this.password);
   }
 
-  if(this.confirm_password) delete this.confirm_password;
+  if(this.confirm_password) {
+    delete this.confirm_password;
+  }
+
+  if(this.display_name == '') {
+    this.display_name = this.username;
+  }
 
   next();
 });

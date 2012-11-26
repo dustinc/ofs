@@ -90,6 +90,7 @@ controller.update = function(req, res, next) {
     _user.name.last = user.name.last;
     _user.email = user.email;
     _user.username = user.username;
+    _user.display_name = user.display_name;
 
     _user.user_type = user.user_type;
 
