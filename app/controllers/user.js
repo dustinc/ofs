@@ -110,7 +110,8 @@ controller.update = function(req, res, next) {
 
 controller.resetpassword = function(req, res, next) {
   var user,
-      verr = false;
+      verr = false,
+      phash = require('password-hash');
 
   if(req.method == 'POST') {
     user = req.body.user;
