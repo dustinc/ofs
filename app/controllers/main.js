@@ -345,10 +345,27 @@ controller.faculty_search = function(req, res, next) {
 
 };
 
-// job search
+// Job Search
 
 controller.job_search = function(req, res, next) {
-  return next()
+
+  var request = require('request'),
+      xml2js = require('xml2js');
+
+  request('http://www.higheredjobs.com/rss/categoryFeed.cfm?catID=50', function(err, response, data) {
+    if(!err && response.statusCode == 200) {
+
+      var parser = new xml2js.Parser();
+
+      parser.parseString(data, function(err, result) {
+        return res.render('job_search', { results: result.rss.channel[0].item });
+      });
+
+
+    } else {
+      res.send(err);
+    }
+  });
 };
 
 // File

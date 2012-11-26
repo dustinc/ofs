@@ -1,0 +1,262 @@
+extends layout
+
+block content
+  h3 Job Search
+  
+  form
+    
+    fieldset
+      legend Job Category
+      select(name='JobCat', id='JobCat', size='12', multiple='multiple')
+        option(value='') -- Search in All Categories --
+        option(value='91') Faculty - Liberal Arts - Psychology
+        option(value='141') Admin - Academic Advising
+        option(value='14') Admin - Admissions and Enrollment
+        option(value='219') Admin - Adult and Continuing Education Programs
+        option(value='15') Admin - Alumni Associations and Services
+        option(value='36') Admin - Arts and Museum Administration
+        option(value='212') Admin - Assessment, Accreditation, and Compliance
+        option(value='16') Admin - Athletics and Coaching
+        option(value='17') Admin - Broadcasting, Radio, and Television
+        option(value='213') Admin - Bursar and Student Accounts
+        option(value='18') Admin - Business and Financial Services
+        option(value='22') Admin - Career Counseling and Placement
+        option(value='177') Admin - Child Care Services
+        option(value='211') Admin - Computing - Database Administration
+        option(value='163') Admin - Computing - Management/Director
+        option(value='175') Admin - Computing - Multimedia
+        option(value='173') Admin - Computing - Network/System Administration
+        option(value='159') Admin - Computing - Programming/Analyst
+        option(value='161') Admin - Computing - Support and Training
+        option(value='160') Admin - Computing - Web Development
+        option(value='162') Admin - Computing - Other
+        option(value='172') Admin - Conference and Events Administration
+        option(value='21') Admin - Counseling
+        option(value='217') Admin - Curriculum Design
+        option(value='23') Admin - Development and Fund Raising
+        option(value='179') Admin - Disability Services
+        option(value='220') Admin - Distance Education Programs
+        option(value='214') Admin - Economic and Business Development
+        option(value='205') Admin - Executive Assistants
+        option(value='25') Admin - Extension and Outreach
+        option(value='26') Admin - Facilities Management
+        option(value='148') Admin - Faculty Development
+        option(value='27') Admin - Financial Aid
+        option(value='143') Admin - Food Services
+        option(value='29') Admin - Health and Medical Services
+        option(value='30') Admin - Human Resources
+        option(value='31') Admin - Institutional Research and Planning
+        option(value='218') Admin - Instructional Technology and Design
+        option(value='32') Admin - International Programs and Services
+        option(value='150') Admin - Laboratory and Research
+        option(value='33') Admin - Legal Affairs
+        option(value='34') Admin - Libraries
+        option(value='35') Admin - Multicultural Affairs and Affirmative Action
+        option(value='206') Admin - Occupational and Environmental Safety
+        option(value='39') Admin - Police and Public Safety
+        option(value='37') Admin - Public Relations, Marketing and Communications
+        option(value='24') Admin - Publications and Editing
+        option(value='149') Admin - Registrars
+        option(value='174') Admin - Religious Services
+        option(value='38') Admin - Residence Life and Housing
+        option(value='215') Admin - Sales
+        option(value='42') Admin - Secretary and Administrative Assistants
+        option(value='28') Admin - Sponsored Programs, Grants, and Contracts
+        option(value='40') Admin - Student Affairs and Services
+        option(value='216') Admin - Tutors and Learning Resources
+        option(value='41') Admin - Volunteer Programs and Service Learning
+        option(value='43') Admin - Other Administrative Positions
+        option(value='1') Executive - Academic Vice Presidents and Provosts
+        option(value='164') Executive - Administrative Vice Presidents
+        option(value='243') Executive - Deans - Agriculture
+        option(value='244') Executive - Deans - Business
+        option(value='245') Executive - Deans - Communications
+        option(value='246') Executive - Deans - Education
+        option(value='247') Executive - Deans - Engineering
+        option(value='248') Executive - Deans - Fine and Applied Arts
+        option(value='249') Executive - Deans - Health
+        option(value='250') Executive - Deans - Law and Legal Studies
+        option(value='251') Executive - Deans - Liberal Arts
+        option(value='252') Executive - Deans - Medicine
+        option(value='253') Executive - Deans - Science
+        option(value='254') Executive - Deans - Other
+        option(value='4') Executive - Presidents and Chancellors
+        option(value='207') Executive - Other Executive
+        option(value='50') Faculty - Agriculture - Agricultural Economics & Agribusiness
+        option(value='140') Faculty - Agriculture - Extension
+        option(value='51') Faculty - Agriculture - Animal Science
+        option(value='52') Faculty - Agriculture - Entomology
+        option(value='54') Faculty - Agriculture - Environmental Science, Ecology & Forestry
+        option(value='53') Faculty - Agriculture - Food Science
+        option(value='123') Faculty - Agriculture - Horticulture & Landscape Architecture
+        option(value='49') Faculty - Agriculture - Plant and Soil Science
+        option(value='57') Faculty - Agriculture - Veterinary Medicine
+        option(value='58') Faculty - Agriculture - Other
+        option(value='45') Faculty - Business - Accounting
+        option(value='256') Faculty - Business - Business Administration
+        option(value='228') Faculty - Business - Business Law
+        option(value='255') Faculty - Business - Entrepreneurship
+        option(value='44') Faculty - Business - Finance
+        option(value='183') Faculty - Business - Hotel & Restaurant Management
+        option(value='203') Faculty - Business - Human Resources
+        option(value='144') Faculty - Business - Information Systems and Technology
+        option(value='229') Faculty - Business - International Business
+        option(value='46') Faculty - Business - Management
+        option(value='47') Faculty - Business - Marketing and Sales
+        option(value='48') Faculty - Business - Other Business
+        option(value='130') Faculty - Communications - Broadcast Journalism
+        option(value='131') Faculty - Communications - Film and Video
+        option(value='132') Faculty - Communications - Journalism
+        option(value='152') Faculty - Communications - Media & Communication Studies
+        option(value='129') Faculty - Communications - Public Relations and Advertising
+        option(value='128') Faculty - Communications - Speech
+        option(value='133') Faculty - Communications - Other Communications
+        option(value='59') Faculty - Education - Adult and Distance Education (study of) 
+        option(value='62') Faculty - Education - Counselor Education
+        option(value='63') Faculty - Education - Curriculum and Instruction
+        option(value='64') Faculty - Education - Edu. Admin & Leadership (study of) 
+        option(value='226') Faculty - Education - Educational Psychology
+        option(value='68') Faculty - Education - Higher Education (study of) 
+        option(value='69') Faculty - Education - Instructional Technology & Design
+        option(value='166') Faculty - Education - Reading & Developmental Ed. (study of) 
+        option(value='227') Faculty - Education - School Psychology
+        option(value='72') Faculty - Education - Special Education
+        option(value='184') Faculty - Education - Teacher Education
+        option(value='73') Faculty - Education - Teacher Education - Early Childhood
+        option(value='67') Faculty - Education - Teacher Education - Elementary
+        option(value='180') Faculty - Education - Teacher Education - Middle School
+        option(value='71') Faculty - Education - Teacher Education - Secondary Education
+        option(value='75') Faculty - Education - Other Education (study of) 
+        option(value='110') Faculty - Engineering - Aerospace
+        option(value='111') Faculty - Engineering - Agricultural
+        option(value='113') Faculty - Engineering - Biological
+        option(value='114') Faculty - Engineering - Chemical
+        option(value='115') Faculty - Engineering - Civil and Environmental
+        option(value='116') Faculty - Engineering - Computer Engineering
+        option(value='117') Faculty - Engineering - Electrical
+        option(value='146') Faculty - Engineering - Industrial & Manufacturing
+        option(value='118') Faculty - Engineering - Mechanical
+        option(value='120') Faculty - Engineering - Other Engineering
+        option(value='121') Faculty - Fine and Applied Arts - Architecture
+        option(value='126') Faculty - Fine and Applied Arts - Art
+        option(value='122') Faculty - Fine and Applied Arts - Art History
+        option(value='230') Faculty - Fine and Applied Arts - Digital Arts
+        option(value='197') Faculty - Fine and Applied Arts - Fashion & Textile Design
+        option(value='155') Faculty - Fine and Applied Arts - Graphic Design
+        option(value='201') Faculty - Fine and Applied Arts - Industrial Design
+        option(value='167') Faculty - Fine and Applied Arts - Interior Design
+        option(value='124') Faculty - Fine and Applied Arts - Music
+        option(value='196') Faculty - Fine and Applied Arts - Photography
+        option(value='125') Faculty - Fine and Applied Arts - Theatre and Dance
+        option(value='127') Faculty - Fine and Applied Arts - Other Fine & Applied Arts
+        option(value='151') Faculty - Health - Communication Disorders
+        option(value='193') Faculty - Health - Health Education & Promotion
+        option(value='259') Faculty - Health - Health Information Technology
+        option(value='200') Faculty - Health - Healthcare Administration
+        option(value='185') Faculty - Health - Nutrition & Dietetics
+        option(value='105') Faculty - Health - Physical Education & Kinesiology
+        option(value='153') Faculty - Health - Physical & Occupational Therapy
+        option(value='221') Faculty - Health - Public and Environmental Health
+        option(value='208') Faculty - Health - Sports Mgmt, Recreation & Leisure Studies
+        option(value='138') Faculty - Health - Other Health Faculty
+        option(value='134') Faculty - Law and Legal Studies
+        option(value='77') Faculty - Liberal Arts - American Studies
+        option(value='78') Faculty - Liberal Arts - Anthropology
+        option(value='156') Faculty - Liberal Arts - Criminal Justice
+        option(value='81') Faculty - Liberal Arts - Economics
+        option(value='82') Faculty - Liberal Arts - English and Literature
+        option(value='83') Faculty - Liberal Arts - English as Second Language
+        option(value='76') Faculty - Liberal Arts - Ethnic & Multicultural Studies
+        option(value='157') Faculty - Liberal Arts - Foreign Languages & Literatures
+        option(value='139') Faculty - Liberal Arts - History
+        option(value='199') Faculty - Liberal Arts - Human Development & Family Studies
+        option(value='204') Faculty - Liberal Arts - Humanities
+        option(value='88') Faculty - Liberal Arts - Linguistics
+        option(value='89') Faculty - Liberal Arts - Philosophy
+        option(value='90') Faculty - Liberal Arts - Political Science
+        option(value='209') Faculty - Liberal Arts - Public Administration & Policy
+        option(value='92') Faculty - Liberal Arts - Religious Studies & Theology
+        option(value='222') Faculty - Liberal Arts - Security Studies
+        option(value='169') Faculty - Liberal Arts - Social Work
+        option(value='93') Faculty - Liberal Arts - Sociology
+        option(value='202') Faculty - Liberal Arts - Urban Studies & Planning
+        option(value='96') Faculty - Liberal Arts - Women's Studies
+        option(value='97') Faculty - Liberal Arts - Other Liberal Arts
+        option(value='181') Faculty - Medicine - Dentistry
+        option(value='192') Faculty - Medicine - Emergency Medical Services
+        option(value='137') Faculty - Medicine - Medical Researcher
+        option(value='136') Faculty - Medicine - Nursing
+        option(value='154') Faculty - Medicine - Pharmacology
+        option(value='223') Faculty - Medicine - Physician Assistant
+        option(value='135') Faculty - Medicine - Physicians
+        option(value='168') Faculty - Medicine - Radiology
+        option(value='210') Faculty - Medicine - Other Medicine
+        option(value='98') Faculty - Science - Astronomy and Astrophysics
+        option(value='99') Faculty - Science - Biochemistry and Molecular Biology
+        option(value='100') Faculty - Science - Biology
+        option(value='101') Faculty - Science - Chemistry
+        option(value='102') Faculty - Science - Computer Science
+        option(value='103') Faculty - Science - Geography
+        option(value='170') Faculty - Science - Geology, Earth Sciences & Oceanography
+        option(value='182') Faculty - Science - Library and Information Science
+        option(value='104') Faculty - Science - Mathematics
+        option(value='106') Faculty - Science - Physics
+        option(value='107') Faculty - Science - Statistics
+        option(value='108') Faculty - Science - Other Science
+        option(value='190') Faculty - Vocational & Technical - Automotive Technology
+        option(value='187') Faculty - Vocational & Technical - Aviation
+        option(value='189') Faculty - Vocational & Technical - Construction & Building Trades
+        option(value='224') Faculty - Vocational & Technical - Cosmetology
+        option(value='188') Faculty - Vocational & Technical - Culinary Arts
+        option(value='195') Faculty - Vocational & Technical - Electronics
+        option(value='198') Faculty - Vocational & Technical - Fire Science
+        option(value='225') Faculty - Vocational & Technical - Massage Therapy
+        option(value='257') Faculty - Vocational & Technical - Medical Assistants
+        option(value='258') Faculty - Vocational & Technical - Medical Billing and Coding
+        option(value='191') Faculty - Vocational & Technical - Telecommunications
+        option(value='186') Faculty - Vocational & Technical - Tourism
+        option(value='74') Faculty - Vocational & Technical - Other
+
+    fieldset
+      legend Position Type
+      div
+        input(type='checkbox', name='PosType', value='1', checked='checked')
+        label Full Time
+
+      div
+        input(type='checkbox', name='PosType', value='2', checked='checked')
+        label Part Time
+
+    fieldset
+      legend Institution Type
+
+      div
+        input(type='checkbox', name='InstType', value='1', checked='checked')
+        label Four-Year / Advanced Degree (BA, MA and/or PhD)
+
+      div
+        input(type='checkbox', name='InstType', value='2', checked='checked')
+        label Community College (Associate Degree)
+
+      div
+        input(type='checkbox', name='InstType', value='3', checked='checked')
+        label Outside Higher Education
+
+    fieldset
+      legend Location Type
+      div
+        input(id='RemoteType_1', name='Remote', type='checkbox', value='1', checked='checked')
+        label Location Bound
+        span.tip Employee is required to work from a specific geographic location br (For example, work in an office or location based classroom)
+
+      div
+        input(id='RemoteType_2', name='Remote', type='checkbox', value='2', checked='checked')
+        label Online/Remote
+        span.tip Employee is NOT required to work from a specific geographic location<br />(For example, teach and/or work from home)
+
+
+  for result in results
+    div.job-result
+      a(href=result.link) #{result.title}
+      p #{result.description}
+    hr
