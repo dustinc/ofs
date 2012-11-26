@@ -71,39 +71,228 @@ controller.logout = function(req, res, next) {
   return res.redirect('/');
 };
 
-// Forgot Password
+// Forgot Password - TODO Refactor
 
 controller.forgotpassword = function(req, res, next) {
 
+  var phash = require('password-hash'),
+      email_regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   if(req.method == 'POST') {
 
-    // Keep flash message consistent for security
-    req.flash('info', 'Password reset instructions sent your email address.');
+    if(req.body.user) {
+
+      // Reset Password
+
+      // Load Forgot entry
+      db.forgots.findOne({ user_id: req.body.user._id, key: req.body.user.k, active: true }, function(err, _forgot) {
+
+        if(err) {
+          // Log error and exit
+          console.log(err);
+          return next(err);
+        }
+
+        if(_forgot == null) {
+          console.log('"Forgot" entry not found');
+          return next();
+        }
+
+        // Check date created
+
+        var now = new Date().getTime();
+
+        // Within 24 hrs of created?
+        if((_forgot.created_at.getTime() - now) > (24 * 60 * 60 * 1000)) {
+          // Expired
+          console.log('Key Expired');
+          req.flash('error', 'Password Reset Key Expired');
+
+          // Mark link inactive
+          _forgot.active = false;
+
+          _forgot.save(function(err) {
+            if(err) {
+              console.log(err);
+              return next(err);
+            }
+
+            // Bail to home page
+            return res.redirect('/');
+          });
+
+        }
+
+        // Load User
+        db.users.findOne({ _id: req.body.user._id }, function(err, _user) {
+
+          if(err) {
+            console.log(err);
+            return next(err);
+          }
+
+          if(_user == null) {
+            console.log('User not found');
+            return next();
+          }
+
+          // Check new password
+          if(req.body.user.password != '' && req.body.user.password == req.body.user.confirm_password) {
+
+            // Set new password
+            _user.password = req.body.user.password;
+
+            // Save and redirect to login page
+            _user.save(function(err) {
+              if(err) return next(err);
+              req.flash('info', 'Password resest. Please login using your new password.');
+
+              // Mark link inactive
+              _forgot.active = false;
+
+              _forgot.save(function(err) {
+                if(err) {
+                  console.log('"Forgot" used but may still be marked active');
+                  console.log(err);
+                }
+
+                // Password successfully reset
+                return res.redirect('/login');
+              });
 
 
-    db.users.findOne({ email: req.body.email }, function(err, _user) {
+            });
 
-      if(_user != null) {
+          }
 
-        // Create temp pass reset entry - TODO
-
-        // Build email body
-        var email_text = 'OFS Password Reset Email - Coming Soon!';
-
-        sendgrid.send({
-          to: _user.email,
-          from: 'info@onlinefacultysupport.com',
-          subject: 'OnlineFacultySupport.com Password Reset',
-          text: email_text
-        }, function(success, message) {
-          return res.redirect('/');
         });
 
+      });
+
+    } else {
+
+      // Save Forgot entry and Build Email w/ Link to reset password
+
+      // Keep flash message consistent for security
+      req.flash('info', 'Password reset instructions sent your email address.');
+
+      if(!email_regex.test(req.body.email)) {
+        console.log('Email not valid');
+        return res.redirect('/');
       }
-    });
+
+      db.users.findOne({ email: req.body.email }, function(err, _user) {
+
+        if(_user == null) {
+          console.log('User not found');
+          return res.redirect('/');
+        }
+
+        // Save PRC
+        delete this.cp;
+        var Forgot = db.forgots,
+            forgot = new Forgot({
+              user_id: _user._id,
+              key: phash.generate(this.user_id+_user.password+Math.random())
+            });
+
+        forgot.save(function(err) {
+          if(err) {
+            console.log(err);
+            return res.redirect('/');
+          }
+
+          // Build email body
+          var email_text = "Click this link to reset your password\r\n"+forgot.reset_link;
+
+          // Send email
+          sendgrid.send({
+            to: _user.email,
+            from: 'info@onlinefacultysupport.com',
+            subject: 'OnlineFacultySupport.com Password Reset',
+            text: email_text
+          }, function(success, message) {
+            return res.redirect('/');
+          });
+
+        });
+
+      });
+
+    }
 
   } else {
-    return res.render('forgotpassword');
+
+
+    if(req.query.ui && req.query.k) {
+
+      // Validate Link
+
+      // Load Forgot entry
+      db.forgots.findOne({ user_id: req.query.ui, key: req.query.k, active: true }, function(err, _forgot) {
+
+        if(err) {
+          // Log error and exit
+          console.log(err);
+          return next(err);
+        }
+
+        if(_forgot == null) {
+          console.log('"Forgot" entry not found');
+          return next();
+        }
+
+        // Check date created
+
+        var now = new Date().getTime();
+
+        // Within 24 hrs of created?
+        if((_forgot.created_at.getTime() - now) > (24 * 60 * 60 * 1000)) {
+          // Expired
+          console.log('Key Expired');
+          req.flash('error', 'Password Reset Key Expired');
+
+          // Mark link inactive
+          _forgot.active = false;
+
+          _forgot.save(function(err) {
+            if(err) {
+              console.log(err);
+              return next(err);
+            }
+
+            // Bail to home page
+            return res.redirect('/');
+          });
+
+        }
+
+        // Load User
+        db.users.findOne({ _id: req.query.ui }, function(err, _user) {
+
+          if(err) {
+            // Log error and exit
+            console.log(err);
+            return next(err);
+          }
+
+          if(_user == null) {
+            // Log user not found and exit
+            console.log('User Not Found');
+            return next();
+          }
+
+
+          // Allow user access to reset password page
+          return res.render('forgotpassword', { user: _user, k: req.query.k });
+        });
+
+      });
+
+    } else {
+      // First time accessing the page
+      return res.render('forgotpassword');
+    }
   }
 
 };

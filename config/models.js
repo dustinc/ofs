@@ -10,4 +10,5 @@ module.exports = function() {
   mongoose.model('Comment', require('../app/models/comment'));
   mongoose.model('Counter', require('../app/models/counter'));
   mongoose.model('File', require('../app/models/file'));
+  mongoose.model('Forgot', require('../app/models/forgot'));
 };

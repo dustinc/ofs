@@ -1,4 +1,4 @@
-
+var email_regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 // flash message timeout
 
@@ -137,6 +137,41 @@ $('#resetpassword').submit(function() {
     $form.find('#cpw').after('<span class="error">Please Current Enter Password</span>');
     error = true;
   }
+
+  if(error) return false;
+
+});
+
+// Forgot password validation
+
+$('#forgotpassword').submit(function() {
+  var $form = $(this),
+      error = false;
+
+  // remove existing error messages
+  $form.find('span.error').remove();
+
+  // validate
+
+  if($form.find('#email').length > 0) {
+    // validate email
+    if(!email_regex.test($form.find('#email').val())) {
+      $form.find('#email').after('<span class="error">Email Not Valid</span>');
+      error = true;
+    }
+  }
+
+  if($form.find('#npw').length > 0) {
+    // confirm password match
+    if($form.find('#npw').val() != '' && $form.find('#npw').val() != $form.find('#cnpw').val()) {
+      $form.find('#cnpw').after('<span class="error">Password Does Not Match</span>');
+      error = true;
+    } else if($form.find('#npw').val() == '') {
+      $form.find('#npw').after('<span class="error">Please Enter New Password</span>');
+      error = true;
+    }
+  }
+
 
   if(error) return false;
 

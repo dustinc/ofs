@@ -57,7 +57,8 @@ module.exports = function(app) {
           'articles': db.model('Article'),
           'comments': db.model('Comment'),
           'counters': db.model('Counter'),
-          'files': db.model('File')
+          'files': db.model('File'),
+          'forgots': db.model('Forgot')
         }
       )
   });
