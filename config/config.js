@@ -58,6 +58,8 @@ module.exports = function(app) {
           'comments': db.model('Comment'),
           'counters': db.model('Counter'),
           'files': db.model('File'),
+          'jobs': db.model('Job'),
+          'institutions': db.model('Institution'),
           'forgots': db.model('Forgot')
         }
       )
