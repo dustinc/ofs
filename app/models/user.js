@@ -63,6 +63,9 @@ User.statics.getUsers = function(callback) {
 // pre init
 
 User.pre('init', function(next) {
+  if(this.display_name == '') {
+    this.display_name = this.username;
+  }
   next();
 });
 
