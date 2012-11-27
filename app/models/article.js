@@ -57,7 +57,8 @@ Article.pre('save', function(next) {
   this.title = this.title.replace(/^\s+|\s+$/g, '');
 
   if(this.title !== '') {
-    this.slug = this.title.replace(/\s+/g, '-').toLowerCase();
+    this.slug = this.title.replace(/\s+/g, '-').toLowerCase()
+      .replace('/(;|\||,|!|@|#|\$|\(|\)|<|>|\/|\"|\'|`|\\\|~|\{|\}|\[|\]|=|\+|\?|&|\*|\^)*/i', '');
   }
 
   next();
