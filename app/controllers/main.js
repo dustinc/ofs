@@ -35,12 +35,12 @@ controller.login = function(req, res, next) {
     db.users.findOne({username: req.body.username}, function(err, _user) {
       if(err) return next(err);
 
-      if(!_user) {
+      if(_user == null) {
         verr = true;
         req.flash('error', 'Username and/or Password incorrect');
       }
 
-      if(!phash.verify(req.body.password, _user.password)) {
+      if(!verr && !phash.verify(req.body.password, _user.password)) {
         verr = true;
         req.flash('error', 'Username and/or Password incorrect');
       }
