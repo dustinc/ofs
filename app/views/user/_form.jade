@@ -32,5 +32,10 @@ form(action='/user/'+post_action, method='post')
     label(for='dname') Display Name:
     input(type='text', name='user[display_name]', id='dname', value=user.display_name)
 
+  if s_user.is_admin
+    div
+      label(for='admin') Admin
+      input(type='checkbox', name='user[is_admin]', id='isadmin', checked=user.is_admin)
+
   a(href="/user/#{user._id}").button-box Cancel
   input(type='submit', value='Save')
