@@ -6,8 +6,6 @@ block content
   #sub-content
     form(action='/user/create', method='post', id='signupform')
 
-      input(type='hidden', name='user[user_type]', value='Teacher')
-
       div
         label First Name
         input(type='text', id='firstname', name='user[name][first]').notempty
