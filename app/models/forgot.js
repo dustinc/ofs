@@ -15,7 +15,7 @@ Forgot.plugin(TimeStamp);
 // Virtuals
 
 Forgot.virtual('reset_link').get(function() {
-  return 'http://localhost:3000/forgotpassword?ui='+this.user_id+'&k='+this.key;
+  return '/forgotpassword?ui='+this.user_id+'&k='+this.key;
 });
 
 // PRE Hooks

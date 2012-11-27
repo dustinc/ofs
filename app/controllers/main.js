@@ -203,7 +203,8 @@ controller.forgotpassword = function(req, res, next) {
           }
 
           // Build email body
-          var email_text = "Click this link to reset your password\r\n"+forgot.reset_link;
+          var reset_link = req.protocol+'://'+req.headers.host+forgot.reset_link,
+              email_text = "Click this link to reset your password\r\n"+reset_link;
 
           // Send email
           sendgrid.send({
