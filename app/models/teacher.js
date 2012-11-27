@@ -33,7 +33,7 @@ var Service = new Schema({
   service_type: String,
   name: String,
   description: String,
-  year: {type: String}
+  year: String
 });
 
 
@@ -62,24 +62,24 @@ var Teacher = module.exports = new Schema({
   research_type: Array,
 
   publication: {
-    total: Number,
-    past_three_years: Number,
+    total: String,
+    past_three_years: String,
     reviewer: Boolean,
-    reviewer_total: Number
+    reviewer_total: String
   },
 
   presentation: {
-    total: Number,
-    past_three_years: Number,
+    total: String,
+    past_three_years: String,
     reviewer: Boolean,
-    reviewer_total: Number
+    reviewer_total: String
   },
 
   services: [Service],
 
   positions_desired: [String],
-  institution: {type: String},
-  course: {type: String}
+  institutions: [String],
+  courses: [String]
 
 });
 

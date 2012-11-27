@@ -85,7 +85,10 @@ mixin service(scnt, service)
       input(type='text', name='profile[services][#{scnt}][description]', value=service.description, id='description')
     div
       label(for='year') Year
-      input(type='text', name='profile[services][#{scnt}][year]', value=service.year, id='year')
+      select(name='profile[services][#{scnt}][year]', id='year')
+        option(value='')
+        for v in lookups.years_teaching.values
+          option(value=v, selected=v == service.year) #{v}
 
     //img(src='/images/remove_button.png', title='Remove Service', width='23px').remove-item
     a(title='Remove Service', class='button-box').remove-item Remove This Service
@@ -169,7 +172,7 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
       for eligible_area, cnt in profile.experience.eligible_areas
         +eligible_area(cnt, eligible_area)
       else
-        +eligible_area(0, {})
+        +eligible_area(0, '')
 
       a(title='Add Eligible Area', class='button-box').add-item Add Eligible Area
 
@@ -177,7 +180,7 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
       for course_taught, cnt in profile.experience.courses_taught
         +course_taught(cnt, course_taught)
       else
-        +course_taught(0, {})
+        +course_taught(0, '')
 
       a(title='Add Course Taught', class='button-box').add-item Add Course Taught
 
@@ -187,33 +190,32 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
     legend Research
 
     div
-      
+      label(for='quantitative') Quantitative
+      input(type='checkbox', name='profile[research_type][]', value='Quantitative', checked=(profile.research_type.indexOf('Quantitative') != -1), id='quantitative')
+      label(for='qualitative') Qualitative
+      input(type='checkbox', name='profile[research_type][]', value='Qualitative', checked=(profile.research_type.indexOf('Qualitative') != -1), id='qualitative')
+      label(for='mixed-methods') Mixed Methods
+      input(type='checkbox', name='profile[research_type][]', value='Mixed Methods', checked=(profile.research_type.indexOf('Mixed Methods') != -1), id='mixed-methods')
+
 
     .profile-segment
 
       div
         h5 Publications
-        label(for='quantitative') Quantitative
-        input(type='checkbox', name='profile[research_type][]', value='Quantitative', checked=(profile.research_type.indexOf('Quantitative') != -1), id='quantitative')
-        label(for='qualitative') Qualitative
-        input(type='checkbox', name='profile[research_type][]', value='Qualitative', checked=(profile.research_type.indexOf('Qualitative') != -1), id='qualitative')
-        label(for='mixed-methods') Mixed Methods
-        input(type='checkbox', name='profile[research_type][]', value='Mixed Methods', checked=(profile.research_type.indexOf('Mixed Methods') != -1), id='mixed-methods')
-        
+
       div
         label(for='publication-total') Publication Total
         select(name='profile[publication][total]', id='publication-total')
           option(value='')
-          - for(var i=1; i<50; i++)
-            option(value=i, selected=i == profile.publication.total) #{i}
-          option(value='99') 50+
+          for v in lookups.total.values
+            option(value=v, selected=v == profile.publication.total) #{v}
 
       div
         label(for='publication-past-3-years') Publication Past 3 Years
         select(name='profile[publication][past_three_years]', id='publication-past-3-years')
           option(value='')
-          - for(var i=1; i<50; i++)
-            option(value=i, selected=i == profile.publication.past_three_years) #{i}
+          for v in lookups.total.values
+            option(value=v, selected=v == profile.publication.past_three_years) #{v}
 
       div
         label(for='publication-reviewer') Publication Reviewer
@@ -223,9 +225,8 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
         label(for='publication-reviewer-total') Publication Reviewer Total
         select(name='profile[publication][reviewer_total]', id='publication-reviewer-total')
           option(value='')
-          - for(var i=1; i<50; i++)
-            option(value=i, selected=i == profile.publication.reviewer_total) #{i}
-          option(value='99') 50+
+          for v in lookups.total.values
+            option(value=v, selected=v == profile.publication.reviewer_total) #{v}
 
     .profile-segment
       h5 Presentations
@@ -233,17 +234,15 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
         label(for='presentation-total') Presentation Total
         select(name='profile[presentation][total]', id='presentation-total')
           option(value='')
-          - for(var i=1; i<50; i++)
-            option(value=i, selected=i == profile.presentation.total) #{i}
-          option(value='99') 50+
+          for v in lookups.total.values
+            option(value=v, selected=v == profile.presentation.total) #{v}
 
       div
         label(for='past-3-years') Past 3 Years
         select(name='profile[presentation][past_three_years]', id='past-3-years')
           option(value='')
-          - for(var i=1; i<50; i++)
-            option(value=i, selected=i == profile.presentation.past_three_years) #{i}
-          option(value='99') 50+
+          for v in lookups.total.values
+            option(value=v, selected=v == profile.presentation.past_three_years) #{v}
 
       div
         label(for='reviewer') Reviewer
@@ -253,9 +252,8 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
         label(for='reviewer-total') Reviewer Total
         select(name='profile[presentation][reviewer_total]', id='reviewer-total')
           option(value='')
-          - for(var i=1; i<50; i++)
-            option(value=i, selected=i == profile.presentation.reviewer_total) #{i}
-          option(value='99') 50+
+          for v in lookups.total.values
+            option(value=v, selected=v == profile.presentation.reviewer_total) #{v}
 
     .clearfix
 
@@ -271,7 +269,6 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
 
     div.clearfix
 
-    //img(src='/images/add_button.png', title='Add Service', width='33px').add-item
     a(title='Add Service', class='button-box').add-item Add Another Service
 
   .teal-divider
@@ -280,22 +277,22 @@ form(action='/user/'+user.id+'/profile/save', method='post')#profile-form
     legend Position
     div
       label(for='position-desired') Position Desired
-      input(type='text', name='profile[positions_desired]', value=profile.positions_desired, id='position-desired')
+      for v in lookups.positions.values
+        input(type='checkbox', name='profile[positions_desired][]', value=v, id='position-desired', checked=(profile.positions_desired.indexOf(v) != -1))
+        label #{v}
 
     div
       label(for='institution') Institution
-      select(name='profile[institution]', id='institution')
-        option(value='')
-        for v in lookups.institution_types.values
-          option(value=v, selected=v == profile.institution) #{v}
+      for v in lookups.institution_types.values
+        input(type='checkbox', name='profile[institutions][]', value=v, checked=(profile.institutions.indexOf(v) != -1))
+        label #{v}
 
 
     div
       label(for='course') Course
-      select(name='profile[course]', id='course')
-        option(value='')
-        for v in lookups.course_types.values
-          option(value=v, selected=v == profile.course) #{v}
+      for v in lookups.course_types.values
+        input(type='checkbox', name='profile[courses][]', value=v, checked=(profile.courses.indexOf(v) != -1))
+        label #{v}
 
   .teal-divider
 

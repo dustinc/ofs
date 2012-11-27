@@ -3,13 +3,15 @@
 
 var controller = {},
     app,
-    db;
+    db,
+    _;
 
 // Constructor
 
 module.exports = function(_app) {
   app = _app;
   db = app.set('db');
+  _ = app.set('_');
   return controller;
 };
 
@@ -244,17 +246,17 @@ controller.profile.save = function(req, res, next) {
       // Update Existing
 
       // Education
-      _profile.education.degrees                = p.education.degrees;
-      _profile.education.certificates           = p.education.certificates;
-      _profile.education.licenses               = p.education.licenses;
+      _profile.education.degrees                = (_.isArray(p.education.degrees)) ? p.education.degrees: [];
+      _profile.education.certificates           = (_.isArray(p.education.certificates)) ? p.education.certificates: [];
+      _profile.education.licenses               = (_.isArray(p.education.licenses)) ? p.education.licenses: [];
       _profile.education.other                  = p.education.other;
 
       // Experience
       _profile.experience.years_teaching        = p.experience.years_teaching;
       _profile.experience.delivery_mode         = p.experience.delivery_mode;
       _profile.experience.years_teaching_online = p.experience.years_teaching_online;
-      _profile.experience.courses_taught        = p.experience.courses_taught;
-      _profile.experience.eligible_areas        = p.experience.eligible_areas;
+      _profile.experience.courses_taught        = (_.isArray(p.experience.courses_taught)) ? p.experience.courses_taught: [];
+      _profile.experience.eligible_areas        = (_.isArray(p.experience.eligible_areas)) ? p.experience.eligible_areas: [];
 
       // Publication
       _profile.publication.total                = p.publication.total;
@@ -270,10 +272,10 @@ controller.profile.save = function(req, res, next) {
 
       // The Rest
       _profile.research_type                    = p.research_type;
-      _profile.services                         = p.services;
-      _profile.positions_desired                = p.positions_desired;
-      _profile.institution                      = p.institution;
-      _profile.course                           = p.course;
+      _profile.services                         = (_.isArray(p.services)) ? p.services: [];
+      _profile.positions_desired                = (_.isArray(p.positions_desired)) ? p.positions_desired: [];
+      _profile.institutions                     = (_.isArray(p.institutions)) ? p.institutions : [];
+      _profile.courses                          = (_.isArray(p.courses)) ? p.courses : [];
 
       // Save
       _profile.save(function(err) {
