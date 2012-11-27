@@ -118,6 +118,16 @@ module.exports = function(app) {
   app.get('/articles?/show', article.show);
   app.get('/articles?/:article_id', article.show);
 
+  app.get('/personalized-help', function(req, res, next) {
+    req.query.categories = ['Personalized Help'];
+    next();
+  }, article.index);
+
+  app.get('/tutorials-and-templates', function(req, res, next) {
+    req.query.categories = ['Tutorials And Templates', 'Tutorial', 'Template'];
+    next();
+  }, article.index);
+
   // file
   app.get('/file/:file_id', main.file);
 
