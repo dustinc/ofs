@@ -2,13 +2,15 @@
 var controller = {},
     app,
     db,
-    sendgrid;
+    sendgrid,
+    _;
 
 
 module.exports = function(_app) {
   app = _app;
   db = app.set('db');
   sendgrid = app.set('sendgrid');
+  _ = app.set('_');
   return controller;
 };
 
