@@ -2,9 +2,9 @@ extends layout
 
 block content
   h3 Job Search
-  
-  form
-    
+
+  form(action='/search/jobs', method='get')
+
     fieldset
       legend Job Category
       select(name='JobCat', id='JobCat', size='12', multiple='multiple')
@@ -111,14 +111,14 @@ block content
         option(value='129') Faculty - Communications - Public Relations and Advertising
         option(value='128') Faculty - Communications - Speech
         option(value='133') Faculty - Communications - Other Communications
-        option(value='59') Faculty - Education - Adult and Distance Education (study of) 
+        option(value='59') Faculty - Education - Adult and Distance Education (study of)
         option(value='62') Faculty - Education - Counselor Education
         option(value='63') Faculty - Education - Curriculum and Instruction
-        option(value='64') Faculty - Education - Edu. Admin & Leadership (study of) 
+        option(value='64') Faculty - Education - Edu. Admin & Leadership (study of)
         option(value='226') Faculty - Education - Educational Psychology
-        option(value='68') Faculty - Education - Higher Education (study of) 
+        option(value='68') Faculty - Education - Higher Education (study of)
         option(value='69') Faculty - Education - Instructional Technology & Design
-        option(value='166') Faculty - Education - Reading & Developmental Ed. (study of) 
+        option(value='166') Faculty - Education - Reading & Developmental Ed. (study of)
         option(value='227') Faculty - Education - School Psychology
         option(value='72') Faculty - Education - Special Education
         option(value='184') Faculty - Education - Teacher Education
@@ -126,7 +126,7 @@ block content
         option(value='67') Faculty - Education - Teacher Education - Elementary
         option(value='180') Faculty - Education - Teacher Education - Middle School
         option(value='71') Faculty - Education - Teacher Education - Secondary Education
-        option(value='75') Faculty - Education - Other Education (study of) 
+        option(value='75') Faculty - Education - Other Education (study of)
         option(value='110') Faculty - Engineering - Aerospace
         option(value='111') Faculty - Engineering - Agricultural
         option(value='113') Faculty - Engineering - Biological
@@ -242,21 +242,15 @@ block content
         input(type='checkbox', name='InstType', value='3', checked='checked')
         label Outside Higher Education
 
-    fieldset
-      legend Location Type
       div
-        input(id='RemoteType_1', name='Remote', type='checkbox', value='1', checked='checked')
-        label Location Bound
-        span.tip Employee is required to work from a specific geographic location br (For example, work in an office or location based classroom)
+        input(type='hidden', name='Remote', value='2')
+        input(type='hidden', name='ShowAll', value='yes')
 
       div
-        input(id='RemoteType_2', name='Remote', type='checkbox', value='2', checked='checked')
-        label Online/Remote
-        span.tip Employee is NOT required to work from a specific geographic location<br />(For example, teach and/or work from home)
+        input(type='submit', value='Search Jobs')
 
-
-  for result in results
-    div.job-result
-      a(href=result.link) #{result.title}
-      p #{result.description}
-    hr
+  h3 Search Results
+  if job_results
+    !{job_results}
+  else
+    p No Results

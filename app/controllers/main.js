@@ -352,23 +352,86 @@ controller.faculty_search = function(req, res, next) {
 
 controller.job_search = function(req, res, next) {
 
-  var request = require('request'),
-      xml2js = require('xml2js');
+  var request = require('request');
 
-  request('http://www.higheredjobs.com/rss/categoryFeed.cfm?catID=50', function(err, response, data) {
-    if(!err && response.statusCode == 200) {
+  // Build request link
+  var query_string = req.originalUrl.replace(req.path, '');
 
-      var parser = new xml2js.Parser();
+  // Search
+  if(query_string != '') {
 
-      parser.parseString(data, function(err, result) {
-        return res.render('job_search', { results: result.rss.channel[0].item });
-      });
+    var request_url = 'http://www.higheredjobs.com/search/advanced_action.cfm'+query_string;
 
+    // Send request
+    request(request_url, function(err, response, data) {
+      if(!err && response.statusCode == 200) {
 
-    } else {
-      res.send(err);
-    }
+        // Pull out job results div
+        var job_results = data.match(/<div id="jobResults">[^]*<div class="resultsNav">/gm)[0].replace(/<div class="resultsNav">/g, '');
+
+        // Get all hrefs
+        var hrefs = job_results.match(/href=".+?"/g);
+
+        // Clean hrefs
+        _.each(hrefs, function(href) {
+          var query = href.match(/href="details.cfm(.+?)"/);
+          if(query != null)
+            job_results = job_results.replace(query[0], 'href="/job/details'+query[1]+'"');
+        });
+
+        // Remove imgs
+        job_results = job_results.replace(/<img.+?>/gm, '');
+
+        // Render
+        return res.render('job_search', { job_results: job_results });
+
+      } else {
+        return next(err);
+      }
+    });
+
+  } else {
+    return res.render('job_search', { job_results: '' });
+  }
+
+};
+
+// Job Details
+
+controller.job_details = function(req, res, next) {
+
+  var request = require('request');
+
+  // Build Request URL
+  var query_string = req.originalUrl.replace(req.path, '');
+  var request_url = 'http://www.higheredjobs.com/search/details.cfm'+query_string;
+
+  // 404 if page is accessed without query
+  if(query_string == '') {
+    return next();
+  }
+
+  // Send Request
+  request(request_url, function(err, response, data) {
+      if(!err && response.statusCode == 200) {
+
+        var job_title = data.match(/<h1>(.+?)<\/h1>/g)[0].replace(/<h1>|<\/h1>/g, '');
+
+        // Pull out job details div
+        var job_details = data.match(/<div id="job"[^]*?<br clear="all">/gm)[0]
+              .replace(/<br clear="all">/, '')
+              .replace('style="padding:0 30px;"', '')
+              .replace(/^\s+|\s+$/, '')
+              .slice(0, -6);
+
+        // Render
+        return res.render('job_details', { job_title: job_title, job_details: job_details });
+
+      } else {
+        return next(err);
+      }
   });
+
 };
 
 // File
