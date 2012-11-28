@@ -172,9 +172,15 @@ controller.resetpassword = function(req, res, next) {
 // Delete
 
 controller.delete = function(req, res, next) {
-  return db.users.findOne({ _id: req.param('user_id') }, function(err, _user) {
+  db.users.findOne({ _id: req.param('user_id') }, function(err, _user) {
     if(err) return next(err);
-    _user.remove();
+    if(_user == null) return next();
+    db.teachers.findOne({ user_id: _user._id }, function(err, _teacher) {
+      _user.remove();
+      if(err) return next(err);
+      if(_teacher == null) return next();
+      _teacher.remove();
+    });
     return res.redirect('/admin/users');
   });
 };
