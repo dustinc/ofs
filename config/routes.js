@@ -131,9 +131,15 @@ module.exports = function(app) {
   // file
   app.get('/file/:file_id', main.file);
 
-  // searches
-  app.get('/search/faculty', main.faculty_search);// add seach middleware to show limited search/results to unauthorized users
-  app.get('/search/jobs', main.job_search);// same as adjunct search
+
+  // Searches
+  // TODO Middleware limiting results to unauthorized/unpaid
+  app.get('/faculty/search', main.faculty_search);
+  app.get('/jobs?/search', main.job_search);
+
+  // Jobs
+  app.get('/jobs?/details', main.job_details);
+
 
   // xhr markdown
   app.get('/markdown', function(req, res, next) {
