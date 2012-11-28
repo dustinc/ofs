@@ -84,5 +84,10 @@ $(function() {
     return false;
   });
 
+  $('input#article-title').change(function() {
+    var slug = $(this).val().replace(/(;|\||,|!|@|#|\$|\(|\)|<|>|\/|\"|\'|`|\\\|~|\{|\}|\[|\]|=|\+|\?|&|\*|\^)*/gi, '')
+          .replace(/\s+/g, '-').toLowerCase();
+    $('input#article-slug').val('/'+slug);
+  });
 
 });

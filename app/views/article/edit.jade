@@ -10,19 +10,23 @@ extends ../admin/index
 
 block sub_content
 
-  form(action='/admin/article/'+article._id+'/save', enctype='multipart/form-data', method='post')
+  form(action='/admin/article/'+article._id+'/save', enctype='multipart/form-data', method='post')#article-form
     div
       label Title
-      input(type='text', name='article[title]', value=article.title)
+      input(type='text', name='article[title]', value=article.title)#article-title
+
+    div.tip
+      label Permalink
+      input(type='text', readonly='readonly', value='/'+article.slug)#article-slug
 
     div.md-editor-panel
-      span(data-md='header1') Header 1 |
-      span(data-md='header2') Header 2 |
-      span(data-md='header3') Header 3 |
-      span(data-md='header4') Header 4 |
-      span(data-md='bold') b |
-      span(data-md='italic') i |
-      span(data-md='link') link |
+      span(data-md='header1') Header 1 |&nbsp;
+      span(data-md='header2') Header 2 |&nbsp;
+      span(data-md='header3') Header 3 |&nbsp;
+      span(data-md='header4') Header 4 |&nbsp;
+      span(data-md='bold') b |&nbsp;
+      span(data-md='italic') i |&nbsp;
+      span(data-md='link') link |&nbsp;
       span(data-md='image') image
 
     div
