@@ -58,13 +58,13 @@ blockquote, q
 /** End Meyer Reset **/
 
 /** BEGIN @FONT-FACE **/
-@font-face  
-    font-family 'AngelinaRegular'
-    src url('/fonts/angelina-webfont/angelina-webfont.eot')
-    src url('/fonts/angelina-webfont/angelina-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/angelina-webfont/angelina-webfont.woff') format('woff'),
-         url('/fonts/angelina-webfont/angelina-webfont.ttf') format('truetype'),
-         url('/fonts/angelina-webfont/angelina-webfont.svg#AngelinaRegular') format('svg')
+@font-face 
+    font-family 'AlexBrushRegular'
+    src url('/fonts/alex-brush-webfont/AlexBrush-Regular-OTF-webfont.eot');
+    src url('/fonts/alex-brush-webfont/AlexBrush-Regular-OTF-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/alex-brush-webfont/AlexBrush-Regular-OTF-webfont.woff') format('woff'),
+         url('/fonts/alex-brush-webfont/AlexBrush-Regular-OTF-webfont.ttf') format('truetype'),
+         url('/fonts/alex-brush-webfont/AlexBrush-Regular-OTF-webfont.svg#AlexBrushRegular') format('svg');
     font-weight normal
     font-style normal
 
@@ -191,7 +191,7 @@ $midgray = #565656
 $lightgray = #9b9b9b
 
 $sansfont = arial, 'sans serif'
-$scriptfont = AngelinaRegular, 'brush script std', serif
+$scriptfont = AlexBrushRegular, 'brush script std', serif
 $seriffont = BergamoStdRegular, times, 'times new roman', serif
 
 $border = 2px solid $midgray
@@ -296,8 +296,14 @@ nav a:hover
   font-size 3.0em
   color #fff
   text-align center
-  padding 35px 50px
+  
+  padding 18px 0
+  
   border $border
+  
+  img
+    width 700px
+    margin 0 auto
 
 /* home-points */
 #home-points section
@@ -427,7 +433,10 @@ a#build-button:hover
   
 #pre-footer h3
   font-family $scriptfont
-  font-size 2.2em
+  font-size 2.8em
+  line-height 1em
+  margin 0
+  padding 0
   
 #pre-footer ul 
   font-size 1.2em
@@ -473,10 +482,15 @@ h2
   font-size 3.0em
   
 h3
-  font-family $sansfont
+  font-family $seriffont
   text-align left
-  font-size 1.5em
-  line-height 2em
+  font-size 2.0em
+  margin-top 1em
+  
+  .button-box
+    font-family $sansfont
+    font-size .5em
+    margin-left 10px
   
 h4, h5
   font-weight bold
@@ -500,7 +514,7 @@ h5
   font-size 1.3em
   
 #sub-content p
-  padding 10px
+  padding 10px 0
   
 #sub-content li
   margin-bottom .5em
@@ -574,6 +588,7 @@ legend
   border $border
   float left
   
+  
 /* USERS */
 ul.user-values 
   
@@ -589,6 +604,25 @@ ul.user-values
       padding-left 5px
  
 /* PROFILE VIEW */
+.user-profile-view
+
+  #profile-info
+  
+    .profilediv
+      margin 10px 0
+      padding 10px 0
+      border-top 5px solid $teal
+  
+    h4
+      font-family $seriffont
+      font-weight normal
+      font-size 1.8em
+      margin-bottom .5em
+      
+    h5
+      margin 1em 0 .5em 0
+
+/*
 .user-profile-view
 
   h3
@@ -609,7 +643,7 @@ ul.user-values
       
     p
       padding 10px 0
- 
+*/ 
  
 /* LOOKUPS */
 .lookup-info

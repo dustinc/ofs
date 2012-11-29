@@ -9,9 +9,9 @@ block sub_content
       when "Teacher"
 
         if profile.user_id
-          h3 Profile Info for #{user.name.full}
-          ul.sub-menu
-            li: a(href="/user/#{user._id}/profile/edit") Edit Profile
+          h3 
+            | Profile Info for #{user.name.full} 
+            a(href="/user/#{user._id}/profile/edit", class='button-box') Edit Profile
           include teacher/index
 
         else
