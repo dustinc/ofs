@@ -16,7 +16,7 @@ mixin commentform(comment_id, hide)
         textarea(name='comment[comment]', rows='5', cols='45')
         input(type='submit', value='Save Comment')
   else
-    a(href='/login') Login
+    a(href='/login') Login 
     | to comment.
 
 
@@ -33,24 +33,28 @@ mixin comment(comment)
 extends ../layout
 
 block content
-  div(id=article._id).article
-    - if(typeof s_user !== 'undefined' && s_user.is_admin)
-      a(href='/admin/article/'+article._id+'/edit') Edit
-    h4= article.title
-    .article-body
-      !{article.content}
 
-  .files
-    for file in article.files
-      a(href='/file/'+file._id, target='blank') #{file.name}
-    else
-      p No Files
+  #sub-content
+    div(id=article._id).article
+      
+      h4= article.title
+      - if(typeof s_user !== 'undefined' && s_user.is_admin)
+        a(href='/admin/article/'+article._id+'/edit') Edit
+        
+      .article-body
+        !{article.content}
+
+    .files
+      for file in article.files
+        a(href='/file/'+file._id, target='blank') #{file.name}
+      else
+        p No Files
 
 
-  #comments
-    for comment in article.comments
-      +comment(comment)
-    else
-      p.no-comment No Comments
+    #comments
+      for comment in article.comments
+        +comment(comment)
+      else
+        p.no-comment No Comments
 
-    +commentform(false, false)
+      +commentform(false, false)
