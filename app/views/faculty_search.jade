@@ -64,11 +64,20 @@ block content
                     a(href=page_url+(page-1)).float-left Prev
                   if total_results > page_total
                     a(href=page_url+(page+1)).float-right Next
+          
           tbody
             for result in search_results
+              
+              //-Probably a cleaner way to write this
+              -var name_displayed
+              if result.user_id.display_name
+                name_displayed = result.user_id.display_name
+              else
+                name_displayed = result.user_id.user_name
+                
               tr
                 td 
-                  a(href='/user/'+result.user_id.key+'/profile') #{result.user_id.display_name}
+                  a(href='/user/'+result.user_id._id+'/profile') #{name_displayed}
                 td #{result.experience.delivery_mode}
                 td #{result.experience.years_teaching}
                 td #{result.experience.years_teaching_online}
