@@ -3,7 +3,7 @@ extends layout
 block content
   h2 Search Database
 
-  #sub-content
+  #sub-content.database
     block sub_content
 
       form(action='/faculty/search', method='get')#search-form
@@ -36,12 +36,11 @@ block content
             for v in lookups.degree_types.values
               option(value=v, selected=v == search_query['education.degrees.degree_type']) #{v}
 
-        br
-        div
-          input(type='submit')
         
-        div
-          a(href='/search/faculty') Clear Search
+        input(type='submit', value='Search')
+        
+        
+        a(href='/search/faculty') Clear Search
 
       .clearfix
 
@@ -68,7 +67,8 @@ block content
           tbody
             for result in search_results
               tr
-                td #{result.user_id.display_name}
+                td 
+                  a(href='/user/'+result.user_id.key+'/profile') #{result.user_id.display_name}
                 td #{result.experience.delivery_mode}
                 td #{result.experience.years_teaching}
                 td #{result.experience.years_teaching_online}
