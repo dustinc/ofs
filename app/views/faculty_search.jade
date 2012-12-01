@@ -40,7 +40,7 @@ block content
         input(type='submit', value='Search')
         
         
-        a(href='/search/faculty') Clear Search
+        a(href='/faculty/search') Clear Search
 
       .clearfix
 
@@ -73,7 +73,7 @@ block content
               if result.user_id.display_name
                 name_displayed = result.user_id.display_name
               else
-                name_displayed = result.user_id.user_name
+                name_displayed = result.user_id.username
                 
               tr
                 td 
