@@ -422,7 +422,20 @@ controller.job_details = function(req, res, next) {
               .replace(/<br clear="all">/, '')
               .replace('style="padding:0 30px;"', '')
               .replace(/^\s+|\s+$/, '')
+              .replace(/<h2>More Information.+?<\/h2>/gm, '')
+              .replace(/<div id="instProfile">[^]+?<\/div>/gm, '')
               .slice(0, -6);
+
+        // Get all imgs
+        var imgs = job_details.match(/<img src=".+?".+?>/g);
+
+        // Fix img src
+        _.each(imgs, function(img) {
+          var src = img.match(/src="(.+?)"/);
+          if(src != null) {
+            job_details = job_details.replace(src[1], 'http://www.higheredjobs.com'+src[1]);
+          }
+        });
 
         // Render
         return res.render('job_details', { job_title: job_title, job_details: job_details });
