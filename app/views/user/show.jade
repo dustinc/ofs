@@ -6,7 +6,7 @@ block content
   #sub-content.user-profile-view
 
     block user_menu
-      - if(typeof s_user != 'undefined' && s_user != false && (s_user._id == profile.user_id || s_user.is_admin))
+      - if(typeof s_user != 'undefined' && s_user != false && (s_user._id == user._id || s_user.is_admin))
         include _usersubmenu
 
     block sub_content
