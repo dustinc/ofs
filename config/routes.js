@@ -141,6 +141,10 @@ module.exports = function(app) {
   app.get('/jobs?/details', main.job_details);
 
 
+  // Newsletter
+  app.get('/newsletter/signup', main.newsletter_signup);
+
+
   // xhr markdown
   app.get('/markdown', function(req, res, next) {
     var md = require('discount');

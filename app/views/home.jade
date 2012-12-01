@@ -67,8 +67,8 @@ block content
       section#join-our-newsletter
         h2 Join Our Newsletter
         p Stay up to date on the latest resources and job postings.
-        form(action='POST')
-          input(type='text', value='email address')
+        form(action='/newsletter/signup', method='get', id='newsletter-signup')
+          input(type='text', name='newsletter[email]', value='email address', id='newsletter-email')
           input(type='submit', id='social-input', value='Sign Up')
           
       section#find-us-on-facebook

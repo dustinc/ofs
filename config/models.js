@@ -13,4 +13,5 @@ module.exports = function() {
   mongoose.model('Job', require('../app/models/job'));
   mongoose.model('Institution', require('../app/models/institution'));
   mongoose.model('Forgot', require('../app/models/forgot'));
+  mongoose.model('Target', require('../app/models/target'));
 };

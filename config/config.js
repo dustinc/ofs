@@ -60,7 +60,8 @@ module.exports = function(app) {
           'files': db.model('File'),
           'jobs': db.model('Job'),
           'institutions': db.model('Institution'),
-          'forgots': db.model('Forgot')
+          'forgots': db.model('Forgot'),
+          'targets': db.model('Target')
         }
       )
   });

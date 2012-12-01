@@ -458,6 +458,21 @@ controller.file = function(req, res, next) {
   });
 };
 
+// Newsletter Signup
+
+controller.newsletter_signup = function(req, res, next) {
+  var Target = db.targets,
+      t = new Target({ email: req.query.newsletter.email });
+  t.save(function(err) {
+    if(err) {
+      req.flash('error', 'Problem saving email');
+      return next(err);
+    }
+    req.flash('info', 'Email Saved');
+    return res.redirect('/');
+  });
+};
+
 // load fixtures - temp controller
 
 controller.loadfixtures = function(req, res, next) {

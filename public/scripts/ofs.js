@@ -205,4 +205,27 @@ $('#JobCat').click(function(e) {
   }
 });
 
+// Newsletter Signup
+
+$('form#newsletter-signup input[type=text]').focus(function() {
+  $(this).val('');
+}).blur(function() {
+  if($(this).val() == '') {
+    $(this).val('email address');
+  }
+});
+
+$('form#newsletter-signup').submit(function() {
+
+  $('span.error').remove();
+  var $email = $(this).find('input#newsletter-email');
+
+  // validate email
+  if(!email_regex.test($email.val())) {
+    $email.after('<span class="error">Email Not Valid</span>');
+    return false;
+  }
+
+});
+
 });
