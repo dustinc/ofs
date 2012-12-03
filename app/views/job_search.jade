@@ -7,9 +7,13 @@ block content
 
     fieldset
       legend Job Category
+      p.job-categories
+        span.remaining 30
+        |  selection
+        span.plural s
+        |  remaining
       select(name='JobCat', id='JobCat', size='12', multiple='multiple')
         option(value='') -- Search in All Categories --
-        option(value='91') Faculty - Liberal Arts - Psychology
         option(value='141') Admin - Academic Advising
         option(value='14') Admin - Admissions and Enrollment
         option(value='219') Admin - Adult and Continuing Education Programs
@@ -174,6 +178,7 @@ block content
         option(value='88') Faculty - Liberal Arts - Linguistics
         option(value='89') Faculty - Liberal Arts - Philosophy
         option(value='90') Faculty - Liberal Arts - Political Science
+        option(value='91') Faculty - Liberal Arts - Psychology
         option(value='209') Faculty - Liberal Arts - Public Administration & Policy
         option(value='92') Faculty - Liberal Arts - Religious Studies & Theology
         option(value='222') Faculty - Liberal Arts - Security Studies

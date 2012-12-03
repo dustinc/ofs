@@ -422,7 +422,20 @@ controller.job_details = function(req, res, next) {
               .replace(/<br clear="all">/, '')
               .replace('style="padding:0 30px;"', '')
               .replace(/^\s+|\s+$/, '')
+              .replace(/<h2>More Information.+?<\/h2>/gm, '')
+              .replace(/<div id="instProfile">[^]+?<\/div>/gm, '')
               .slice(0, -6);
+
+        // Get all imgs
+        var imgs = job_details.match(/<img src=".+?".+?>/g);
+
+        // Fix img src
+        _.each(imgs, function(img) {
+          var src = img.match(/src="(.+?)"/);
+          if(src != null) {
+            job_details = job_details.replace(src[1], 'http://www.higheredjobs.com'+src[1]);
+          }
+        });
 
         // Render
         return res.render('job_details', { job_title: job_title, job_details: job_details });
@@ -442,6 +455,21 @@ controller.file = function(req, res, next) {
     res.contentType(_file.type);
     console.log(_file.body);
     return res.end(_file.body.buffer);
+  });
+};
+
+// Newsletter Signup
+
+controller.newsletter_signup = function(req, res, next) {
+  var Target = db.targets,
+      t = new Target({ email: req.query.newsletter.email });
+  t.save(function(err) {
+    if(err) {
+      req.flash('error', 'Problem saving email');
+      return next(err);
+    }
+    req.flash('info', 'Email Saved');
+    return res.redirect('/');
   });
 };
 

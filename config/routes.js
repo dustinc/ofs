@@ -88,7 +88,7 @@ module.exports = function(app) {
   app.post('/user/:user_id/update', authenticatedUser, user.update);
 
   //user profile
-  app.get('/user/:user_id/profile', authenticatedUser, user.profile);
+  app.get('/user/:user_id/profile', user.profile);
   app.get('/user/:user_id/profile/edit', authenticatedUser, user.profile.edit);
   app.post('/user/:user_id/profile/save', authenticatedUser, user.profile.save);
 
@@ -139,6 +139,10 @@ module.exports = function(app) {
 
   // Jobs
   app.get('/jobs?/details', main.job_details);
+
+
+  // Newsletter
+  app.get('/newsletter/signup', main.newsletter_signup);
 
 
   // xhr markdown

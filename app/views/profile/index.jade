@@ -11,7 +11,8 @@ block sub_content
         if profile.user_id
           h3 
             | Profile Info for #{user.name.full} 
-            a(href="/user/#{user._id}/profile/edit", class='button-box') Edit Profile
+            - if(typeof s_user != 'undefined' && s_user != false && (s_user._id == profile.user_id || s_user.is_admin))
+              a(href="/user/#{user._id}/profile/edit", class='button-box') Edit Profile
           include teacher/index
 
         else

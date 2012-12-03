@@ -20,7 +20,7 @@ module.exports = function(app) {
   app.configure('production', function() {
     app
       .set('host', '')
-      .set('port', port)
+      .set('port', 80)
       .set('env', 'production')
   });
 

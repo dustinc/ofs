@@ -187,4 +187,45 @@ $('#comments').on('click', '.comment-reply', function() {
   return false;
 });
 
+
+// Job Search
+$('#JobCat').click(function(e) {
+  var selected_count = $(this).find('option').filter(':selected').length,
+      remaining = (30 - selected_count);
+  if(selected_count > 30) {
+    $(this).closest('form').find('input[type=submit]').attr('disabled', 'disabled');
+  } else {
+    $(this).closest('form').find('input[type=submit]').removeAttr('disabled');
+  }
+  $('p.job-categories span.remaining').text(remaining);
+  if(remaining == 1) {
+    $('p.job-categories span.plural').hide();
+  } else {
+    $('p.job-categories span.plural').show();
+  }
+});
+
+// Newsletter Signup
+
+$('form#newsletter-signup input[type=text]').focus(function() {
+  $(this).val('');
+}).blur(function() {
+  if($(this).val() == '') {
+    $(this).val('email address');
+  }
+});
+
+$('form#newsletter-signup').submit(function() {
+
+  $('span.error').remove();
+  var $email = $(this).find('input#newsletter-email');
+
+  // validate email
+  if(!email_regex.test($email.val())) {
+    $email.after('<span class="error">Email Not Valid</span>');
+    return false;
+  }
+
+});
+
 });
