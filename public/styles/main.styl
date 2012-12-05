@@ -195,6 +195,7 @@ $scriptfont = AlexBrushRegular, 'brush script std', serif
 $seriffont = BergamoStdRegular, times, 'times new roman', serif
 
 $border = 2px solid $midgray
+$tealborder = 2px solid $darkteal
 /* END VARIABLES */
 
 /** BEGIN DOCUMENT CSS **/
@@ -236,6 +237,10 @@ input[type='submit']
 input[type='submit']:hover
   background-color #ccc
   cursor pointer
+  
+.centered
+  display block
+  margin 0 auto
   
 /* HEADER */
 #header h1 
@@ -489,6 +494,9 @@ h3
     font-family $sansfont
     font-size .5em
     margin-left 10px
+    
+#sub-content h3 
+  margin-bottom .8em
   
 h4, h5
   font-weight bold
@@ -674,6 +682,29 @@ ul.user-values
     
     th
       font-weight bold
+ 
+/* JOB SEARCH RESULTS */
+#jobResults
+  border $tealborder
+  padding 5px
+  
+  table
+    border $tealborder
+    padding 5px
+  
+    td
+      padding 5px
+    
+#jobSearchForm fieldset
+  display block
+  float left
+  
+fieldset.jobCategory
+  border-right 2px solid $lightgray
+  margin-bottom 5px
+
+.jobTitle, .instName
+  font-size 1.3em
  
 /* ARTICLES */
  
