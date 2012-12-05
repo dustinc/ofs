@@ -35,7 +35,7 @@ Article.virtual('excerpt').get(function() {
   var md = require('discount');
 
   if(this.body.length > 20) {
-    return md.parse(this.body.substring(0, this.body.lastIndexOf(' ', 20))
+    return md.parse(this.body.substring(0, this.body.lastIndexOf(' ', 150))
       + '...' + "<a href='/article/"+this._id+"'>read more</a>");
   }
 
