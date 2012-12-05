@@ -37,7 +37,7 @@ block content
   #sub-content
     div(id=article._id).article
       
-      h4= article.title
+      h2= article.title
       - if(typeof s_user !== 'undefined' && s_user.is_admin)
         a(href='/admin/article/'+article._id+'/edit') Edit
         

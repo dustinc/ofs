@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  h3 #{job_title}
-  if job_details
-    !{job_details}
-  else
-    p No Details
+  #sub-content
+    h3 #{job_title}
+    if job_details
+      !{job_details}
+    else
+      p No Details

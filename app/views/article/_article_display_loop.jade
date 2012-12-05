@@ -1,0 +1,11 @@
+
+for article in articles
+  div(id=article._id).article
+    h3: a(href='/article/'+article._id) #{article.title}
+    .article-body
+      !{article.excerpt}
+      
+  .teal-divider
+    
+else
+  p No Articles
