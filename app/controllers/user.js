@@ -93,6 +93,7 @@ controller.update = function(req, res, next) {
     _user.email = user.email;
     _user.username = user.username;
     _user.display_name = user.display_name;
+    _user.is_admin = user.is_admin;
 
     _user.user_type = user.user_type;
 
