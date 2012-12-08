@@ -67,7 +67,8 @@ module.exports = function(app) {
     }
 
   }, article.save);
-  app.post('/comment', article.comment);
+  app.post('/comment', authenticatedUser, article.comment);
+  app.get('/comment/delete', authenticatedAdmin, article.comment_delete);
 
 
   // lookups

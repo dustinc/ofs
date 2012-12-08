@@ -2,7 +2,8 @@
 var Schema = require('mongoose').Schema,
     ObjectId = Schema.ObjectId,
     Comment = require('./comment'),
-    TimeStamp = require('./timestamp');
+    TimeStamp = require('./timestamp'),
+    _ = require('underscore');
 
 
 /*
@@ -48,6 +49,40 @@ Article.virtual('content').get(function() {
     return md.parse(this.body);
   return '';
 });
+
+
+/*
+ * Methods and Statics
+ */
+
+Article.methods.removeComment = function(comment_id, callback) {
+  // this whole things feels like a complete hack
+  var findAndRemove = function(comments, comment_id) {
+
+    var new_comments,
+        removed = false;
+
+    // Loop this set of comments
+    _.each(comments, function(c) {
+
+      if(c._id == comment_id) {
+        new_comments = _.without(comments, c);
+        removed = true;
+      } else if(!removed && _.isArray(c.comments) && c.comments.length > 0) {
+        c.comments = findAndRemove(c.comments, comment_id);
+        new_comments = comments;
+      }
+
+    });
+    return new_comments;
+  };
+
+  this.comments = findAndRemove(this.comments, comment_id);
+
+  return callback(this.comments);
+};
+
+
 
 /*
  * Pre and Post

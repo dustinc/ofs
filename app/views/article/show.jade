@@ -20,14 +20,18 @@ mixin commentform(comment_id, hide)
     | to comment.
 
 
-mixin comment(comment)
-  div.comment
-    p #{comment.person}
+mixin comment(comment, parent_id)
+  div(id=comment._id).comment
+    div.header
+      a(href='#') #{comment.person}
+      span.float-right
+        a(href='/comment/delete?article_id='+article._id+'&comment_id='+comment._id+'&parent_id='+parent_id, title='Remove Comment') x
     if comment.comment
-      p #{comment.comment}
+      div.comment-body #{comment.comment}
     mixin commentform(comment._id, true)
-    for reply in comment.comments
-      mixin comment(reply)
+    div.replies
+      for reply in comment.comments
+        mixin comment(reply, comment._id)
 
 
 extends ../layout
@@ -53,8 +57,9 @@ block content
 
     #comments
       for comment in article.comments
-        +comment(comment)
+        +comment(comment, '')
       else
         p.no-comment No Comments
 
+    #comment-form
       +commentform(false, false)

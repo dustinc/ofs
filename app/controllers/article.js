@@ -262,3 +262,31 @@ controller.comment = function(req, res, next) {
   }
 
 };
+
+controller.comment_delete = function(req, res, next) {
+
+
+  db.articles.findOne( { _id: req.query.article_id }, function(err, _article) {
+    if(err) return next(err);
+
+    if(_article == null) return res.send('Found Nothing');
+
+    // Find and remove comment
+    _article.removeComment(req.query.comment_id, function(comments) {
+
+      _article.comments = comments;
+
+      _article.markModified('comments');
+
+      _article.save(function(err) {
+        if(err) return next(err);
+        return res.redirect(req.header('Referrer'));
+      });
+
+    });
+
+
+
+  });
+
+};

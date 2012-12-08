@@ -8,7 +8,7 @@ del, dfn, em, font, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td 
+table, caption, tbody, tfoot, thead, tr, th, td
   margin 0
   padding 0
   border 0
@@ -18,47 +18,47 @@ table, caption, tbody, tfoot, thead, tr, th, td
   font-size 100%
   font-family inherit
   vertical-align baseline
- 
+
 /* remember to define focus styles! */
-a, *focus, *active  
+a, *focus, *active
   outline 0
- 
+
 /* for FireFox */
 input[type="submit"]-moz-focus-inner, input[type="button"]-moz-focus-inner
   border  0px
-  
+
 /* for IE8 */
 input[type="submit"]focus, input[type="button"]focus
   outline  none
-  
-body  
+
+body
   line-height 1
   color black
   background white
- 
-ol, ul  
+
+ol, ul
   list-style none
- 
+
 /* tables still need 'cellspacing="0"' in the markup */
-table  
+table
   border-collapse separate
   border-spacing 0
- 
-caption, th, td  
+
+caption, th, td
   text-align left
   font-weight normal
- 
+
 blockquote:before, blockquote:after,
-q:before, q:after  
+q:before, q:after
   content ""
- 
-blockquote, q  
+
+blockquote, q
   quotes "" ""
- 
+
 /** End Meyer Reset **/
 
 /** BEGIN @FONT-FACE **/
-@font-face 
+@font-face
     font-family 'AlexBrushRegular'
     src url('/fonts/alex-brush-webfont/AlexBrush-Regular-OTF-webfont.eot');
     src url('/fonts/alex-brush-webfont/AlexBrush-Regular-OTF-webfont.eot?#iefix') format('embedded-opentype'),
@@ -68,7 +68,7 @@ blockquote, q
     font-weight normal
     font-style normal
 
-@font-face 
+@font-face
     font-family 'BergamoStdRegular'
     src url('/fonts/bergamo-std-webfont/BergamoStd-Regular-webfont.eot')
     src url('/fonts/bergamo-std-webfont/BergamoStd-Regular-webfont.eot?iefix') format('eot'),
@@ -77,8 +77,8 @@ blockquote, q
          url('/fonts/bergamo-std-webfont/BergamoStd-Regular-webfont.svg#webfontJwE6WVIU') format('svg')
     font-weight normal
     font-style normal
-    
-@font-face 
+
+@font-face
     font-family 'BergamoStdItalic'
     src url('/fonts/bergamo-std-webfont/BergamoStd-Italic-webfont.eot')
     src url('/fonts/bergamo-std-webfont/BergamoStd-Italic-webfont.eot?iefix') format('eot'),
@@ -87,8 +87,8 @@ blockquote, q
          url('/fonts/bergamo-std-webfont/BergamoStd-Italic-webfont.svg#webfontYjq6Uu7v') format('svg')
     font-weight normal
     font-style normal
-    
-@font-face 
+
+@font-face
     font-family 'BergamoStdBold'
     src url('/fonts/bergamo-std-webfont/BergamoStd-Bold-webfont.eot')
     src url('/fonts/bergamo-std-webfont/BergamoStd-Bold-webfont.eot?iefix') format('eot'),
@@ -97,8 +97,8 @@ blockquote, q
          url('/fonts/bergamo-std-webfont/BergamoStd-Bold-webfont.svg#webfont4jVlxogg') format('svg')
     font-weight normal
     font-style normal
-    
-@font-face 
+
+@font-face
     font-family 'BergamoStdBoldItalic'
     src url('/fonts/bergamo-std-webfont/BergamoStd-BoldItalic-webfont.eot')
     src url('/fonts/bergamo-std-webfont/BergamoStd-BoldItalic-webfont.eot?iefix') format('eot'),
@@ -117,16 +117,16 @@ blockquote, q
   height 0
   clear both
   visibility hidden
- 
+
 /** End Clearfix **/
 
 /** Begin Font Fix */
-body  
+body
   font-size 62.5%
- 
-input, select, th, td, p  
+
+input, select, th, td, p
   font-size 1em
- 
+
 /** End Font Fix **/
 
 /** Classes **/
@@ -146,11 +146,11 @@ input, select, th, td, p
   width 500px
 
 /** HTML5 **/
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section   
-  display block  
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
+  display block
 
 /** ACCESSIBILITY **/
-#skip  
+#skip
   font-family Arial, sans-serif
   position absolute
   left 0
@@ -160,13 +160,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   text-align center
   font-size 2.0em
 
-  #skip a  
+  #skip a
     position absolute
     left -9999px
     top -75px
     display block
-   
-  #skip a:focus, #skip a:active  
+
+  #skip a:focus, #skip a:active
     position relative
     left 0
     z-index 9999
@@ -176,10 +176,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     background #fff
     border 1px solid #dedede
     outline none
-    
-.accessibility  
+
+.accessibility
   position absolute
-  
+
 /** END ACCESSIBILITY **/
 
 /* VARIABLES */
@@ -204,17 +204,17 @@ body
   font-family $sansfont
   line-height 1.6em
 
-#container 
+#container
   width 900px
   margin 10px auto 0
-  
+
 a
   color $teal
-  
+
 a:hover
   color $darkteal
-  
-h2 
+
+h2
   font-family $seriffont
   line-height 1.6em
 
@@ -225,7 +225,7 @@ input
   margin 0 5px
   padding 2px 5px
   border 1px solid $lightgray
-  
+
 input[type='submit']
   background $darkgray
   color #fff
@@ -233,17 +233,17 @@ input[type='submit']
   border 0
   outline 0
   padding 6px
-  
+
 input[type='submit']:hover
   background-color #ccc
   cursor pointer
-  
+
 .centered
   display block
   margin 0 auto
-  
+
 /* HEADER */
-#header h1 
+#header h1
   display block
   width 540px
   height 142px
@@ -254,28 +254,28 @@ input[type='submit']:hover
   width 360px
   float right
   color $lightgray
-  
+
 #login form
   float right
-  
-#login input 
+
+#login input
   color $lightgray
-  
+
 #login input#login-button
   margin-right 0
   color $darkgray
-  
-#login p 
+
+#login p
   font-size 1.2em
   line-height 2.5em
   text-align right
-  
-#login p a 
+
+#login p a
   color $lightgray
-  
+
 #login p a:hover
   color $darkgray
-  
+
 /* NAV */
 nav
   font-size 19.5px
@@ -285,14 +285,14 @@ nav
 nav ul li
   display inline
   margin 0 10px
-  
-nav a 
+
+nav a
   text-decoration none
   color $darkgray
-  
-nav a:hover 
+
+nav a:hover
   color $teal
-  
+
 /* HOME PAGE */
 /* tagline */
 #tagline
@@ -303,7 +303,7 @@ nav a:hover
   text-align center
   padding 25px 0
   border $border
-  
+
   img
     width 700px
     margin 0 auto
@@ -313,11 +313,11 @@ nav a:hover
   border $border
   padding 10px 15px
 
-#home-points img 
+#home-points img
   display block
 
 /* help-colleges-find-you */
-#home-points section#help-colleges-find-you 
+#home-points section#help-colleges-find-you
   text-align center
   margin-bottom 20px
   padding 0 15px
@@ -325,11 +325,11 @@ nav a:hover
 
 #help-colleges-find-you h2
   font-size 3.0em
-  
+
 #help-colleges-find-you p
   font-size 1.4em
   margin-bottom 30px
-  
+
 a#build-button
   background $teal
   color #fff
@@ -337,17 +337,17 @@ a#build-button
   padding 10px
   margin 0 10px
   text-decoration none
-  
+
 a#build-button:hover
   cursor pointer
   background-color $lightteal
-  	
-#help-colleges-find-you img 
+
+#help-colleges-find-you img
   margin 0 auto
   padding-top 5px
 
 /* fab-four */
-#fab-four section 
+#fab-four section
   text-align left
   width 417px
   height 175px
@@ -356,29 +356,29 @@ a#build-button:hover
 
 #home-points section#learn-the-basics
   border-width 2px 1px 1px 2px
-  
+
 #home-points section#expand-your-skills
   border-width 2px 2px 1px 1px
-  
+
 #home-points section#join-a-community
   border-width 1px 1px 2px 2px
-  
+
 #home-points section#find-a-position
   border-width 1px 2px 2px 1px
-  
-#fab-four div 
+
+#fab-four div
   width 200px
   float left
-  
-#fab-four img 
+
+#fab-four img
   float right
-  
+
 #fab-four p, #social-ctas p
   font-size 1.2em
-  
+
 #fab-four h2, #social-ctas h2
   font-size 2.4em
-  
+
 /* social-ctas */
 #social-ctas
   margin-top 20px
@@ -388,19 +388,19 @@ a#build-button:hover
   width 417px
   float left
   height 150px
-  
-#social-ctas p 
+
+#social-ctas p
   font-size 1.6em
-  
+
 #home-points section#join-our-newsletter
   border-width 2px 1px 2px 2px
-  
+
 #home-points section#join-our-newsletter input[type='text']
   display block
   width 250px
   margin 20px auto 0
   font-size 1.6em
-  
+
 #home-points section#join-our-newsletter input[type='submit']
   display block
   margin 10px auto
@@ -408,16 +408,16 @@ a#build-button:hover
   background-color $teal
   color #fff
   font-size 1.6em
-  
+
 #home-points section#join-our-newsletter input[type='submit']:hover
   background-color $lightteal
-  
+
 #home-points section#find-us-on-facebook
   border-width 2px 2px 2px 1px
 
-#social-ctas img 
+#social-ctas img
   margin 10px auto
-  
+
 /* END HOME PAGE */
 
 /* FOOTER */
@@ -428,44 +428,44 @@ a#build-button:hover
   padding 20px 15px
   border $border
   margin-top 20px
-  
+
 #pre-footer section
   width 268px
   padding 0 10px
   float left
-  
+
 #pre-footer h3
   font-family $scriptfont
   font-size 2.8em
   line-height 1em
   margin 0
   padding 0
-  
-#pre-footer ul 
+
+#pre-footer ul
   font-size 1.2em
-  
+
 #pre-footer li
   margin 10px 0
-  
-#pre-footer a 
+
+#pre-footer a
   color #fff
   text-decoration none
-  
+
 #pre-footer a:hover
   text-decoration underline
-  
+
 /* copyright footer */
 footer
   text-align center
   padding 20px
   font-family $seriffont
   font-size 1.3em
-  
+
 footer a
   color $darkgray
-  
+
 /* END FOOTER */
-  
+
 /* GENERAL PAGES */
 strong
   font-weight bold
@@ -478,33 +478,33 @@ em
   width 100%
   height 25px
   border $border
-  
-h2 
+
+h2
   font-family $seriffont
   text-align center
   font-size 3.0em
-  
+
 h3
   font-family $seriffont
   text-align left
   font-size 2.0em
   margin-top 1em
-  
+
   .button-box
     font-family $sansfont
     font-size .5em
     margin-left 10px
-    
-#sub-content h3 
+
+#sub-content h3
   margin-bottom .8em
-  
+
 h4, h5
   font-weight bold
   margin 2px 0
   text-transform capitalize
   font-size 1.2em
-  
-  a 
+
+  a
     text-decoration none
 
 h5
@@ -515,32 +515,32 @@ h5
   border $border
   border-top none
   padding 10px
-  
+
 #sub-content
   font-size 1.3em
-  
+
 #sub-content p
   padding 10px 0
-  
+
 #sub-content li
   margin-bottom .5em
   margin-left 20px
   list-style-position outside
   list-style-type disc
-  
-form div 
+
+form div
   padding 5px 0
-  
+
 .teal-divider, form .teal-divider
   height 5px
   margin 10px 0
   padding 0
   background $teal
-  
+
 /* END GENERAL PAGES */
 
-/* ADMIN */ 
-.admin 
+/* ADMIN */
+.admin
 
   label
     font-weight bold
@@ -556,16 +556,16 @@ a.button-box
 a.button-box:hover
   background-color $lightteal
   cursor pointer
-  
+
 #name-value-edit
   line-height 3em
-  
+
 #sub-content ul.sub-menu
-  
+
   li
     display inline
     margin-left 0
-    
+
     a
       background-color $teal
       padding 5px
@@ -573,15 +573,15 @@ a.button-box:hover
       color #fff
       margin-right 10px
       line-height 3em
-    
+
     a:hover
       background-color $lightteal
-  
+
 fieldset
   margin-top 20px
   border-width 0
   padding 10px
-  
+
 legend
   font-family $seriffont
   font-size 2.0em
@@ -593,41 +593,41 @@ legend
   margin-top 10px
   border $border
   float left
-  
-  
+
+
 /* USERS */
-ul.user-values 
-  
+ul.user-values
+
   li
     padding 10px
     margin 0
-  
+
   li:nth-child(odd)
     background-color #ccc
-    
+
     .tester
       background-color #fff
       padding-left 5px
- 
+
 /* PROFILE VIEW */
 .user-profile-view
 
   #profile-info
-  
+
     .profilediv
       margin 10px 0
       padding 10px 0
       border-top 5px solid $teal
-  
+
     h4
       font-family $seriffont
       font-weight normal
       font-size 1.8em
       margin-bottom .5em
-      
+
     h5
       margin 1em 0 .5em 0
- 
+
 /* LOOKUPS */
 .lookup-info
   margin-top 10px
@@ -635,84 +635,84 @@ ul.user-values
 #lookups
   margin-top 10px
   font-weight bold
-  
+
 #sub-content #lookup-values-edit
   line-height 3em
-  
+
   ul li
     list-style-type none
     margin-left 0
-  
+
   ul li:nth-child(odd)
     background-color #ccc
-  
-#sub-content #lookup-info 
+
+#sub-content #lookup-info
   font-weight bold
 
   ul li ul, ul li ul li
     display inline
-  
+
   .key, .sub-thing
     margin-right 10px
-  
-  .key:after 
+
+  .key:after
     content ":"
-  
+
   .sub-thing
     font-weight normal
-    
+
 /* SEARCH FORM */
 #sub-content form#search-form div
   display inline
   margin 0 10px
-  
+
 /* FACULTY DATABASE SEARCH RESULTS */
 .database
-  
+
   table
     width 100%
     border 1px solid $lightgray
     border-bottom 0
     margin-top 10px
     font-size .9em
-    
+
     th, td
       border-bottom 1px solid $lightgray
       padding 5px
-    
+
     th
       font-weight bold
- 
+
 /* JOB SEARCH RESULTS */
 #jobResults
   border $tealborder
   padding 5px
-  
+
   table
     border $tealborder
     padding 5px
-  
+
     td
       padding 5px
-    
+
 #jobSearchForm fieldset
   display block
   float left
-  
+
 fieldset.jobCategory
   border-right 2px solid $lightgray
   margin-bottom 5px
 
 .jobTitle, .instName
   font-size 1.3em
- 
+
 /* ARTICLES */
- 
+
 .article
-  
+
   h4
     font-size 1.5em
- 
+
  /* DUSTINS TERRIBLE STYLES */
 
 img.add-new
@@ -760,16 +760,35 @@ table#adjunct-search-results
 // md text editor
 
 .md-editor-panel
-  
+
   span
     cursor pointer
-  
+
 .error
   color red
 
 // article comments
-.comment
-  padding-left: 10px
+#comments
+
+  > .comment
+    border 3px solid #ccc
+    margin-bottom 10px
+  .comment
+    background-color: #fff
+
+    .replies
+      .comment
+        border 1px solid #ccc
+        padding-left 15px
+
+    .header
+      background-color #A4CFD1
+      height 24px
+    p
+      padding 0px
+
+  > .comment:nth-child(even)
+    border 3px solid #ccc
 
 span.ui-helper-hidden-accessible
   display none
