@@ -24,8 +24,9 @@ mixin comment(comment, parent_id)
   div(id=comment._id).comment
     div.header
       a(href='#') #{comment.person}
-      span.float-right
-        a(href='/comment/delete?article_id='+article._id+'&comment_id='+comment._id+'&parent_id='+parent_id, title='Remove Comment') x
+      - if(typeof s_user !== 'undefined' && s_user.is_admin)
+        span.float-right
+          a(href='/comment/delete?article_id='+article._id+'&comment_id='+comment._id+'&parent_id='+parent_id, title='Remove Comment') x
     if comment.comment
       div.comment-body #{comment.comment}
     mixin commentform(comment._id, true)
