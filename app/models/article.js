@@ -56,7 +56,9 @@ Article.virtual('content').get(function() {
  */
 
 Article.methods.removeComment = function(comment_id, callback) {
-  // this whole things feels like a complete hack
+
+  // This whole things feels like a complete hack
+
   var findAndRemove = function(comments, comment_id) {
 
     var new_comments,
@@ -66,22 +68,26 @@ Article.methods.removeComment = function(comment_id, callback) {
     _.each(comments, function(c) {
 
       if(c._id == comment_id) {
+        // Comment found - now remove
         new_comments = _.without(comments, c);
         removed = true;
       } else if(!removed && _.isArray(c.comments) && c.comments.length > 0) {
+        // Search next branch
         c.comments = findAndRemove(c.comments, comment_id);
         new_comments = comments;
       }
 
     });
+
     return new_comments;
   };
 
+  // Remove Needle from Haystack
   this.comments = findAndRemove(this.comments, comment_id);
 
+  // Return Haystack
   return callback(this.comments);
 };
-
 
 
 /*
