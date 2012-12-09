@@ -98,21 +98,25 @@ module.exports = function(app) {
    * Viewable By All
   */
 
+
   // login
   app.get('/login', main.login);
   app.post('/login', main.login);
   app.get('/logout', main.logout);
 
+
   // create new user
   app.get('/signup', main.signup);
   app.post('/user/create', user.create);
 
+  // Forgot Password
   app.get('/forgotpassword', main.forgotpassword);
   app.post('/forgotpassword', main.forgotpassword);
 
+
   // general
   app.get('/', main.index);
-  app.get('/forums', function(req, res, next) {next()});
+
 
   // articles
   app.get('/articles?', article.index);
@@ -120,14 +124,23 @@ module.exports = function(app) {
   app.get('/articles?/:article_id', article.show);
 
   app.get('/personalized-help', function(req, res, next) {
+    req.query.page_title = 'Personalized Help';
     req.query.categories = ['Personalized Help'];
     next();
   }, article.index);
 
   app.get('/tutorials-and-templates', function(req, res, next) {
+    req.query.page_title = 'Tutorials And Templates';
     req.query.categories = ['Tutorials And Templates', 'Tutorial', 'Template'];
     next();
   }, article.index);
+
+  app.get('/discussion-boards', function(req, res, next) {
+    req.query.page_title = 'Discussion Boards';
+    req.query.categories = ['Discussion Boards', 'Discussion'];
+    next();
+  }, article.index);
+
 
   // file
   app.get('/file/:file_id', main.file);

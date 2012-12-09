@@ -18,15 +18,13 @@ controller.index = function(req, res, next) {
   var articles = db.articles.find(),
       article_id = req.params.article_id || false,
       categories = req.query.categories || [],
-      n = false;
+      response_vars = { n: false };
+
+
+  response_vars.page_title = (req.query.page_title) ? req.query.page_title: 'Articles';
+  response_vars.n = (req.query.page_title) ? req.query.page_title: 'new_page';
 
   if(!article_id) {
-
-    // load pages
-    if(req.query.is_page) {
-      articles.where('is_page', true);
-      n = 'new_page';
-    }
 
     // by categories
     if(categories.length > 0) {
@@ -37,9 +35,6 @@ controller.index = function(req, res, next) {
         })
       });
 
-      if(_.indexOf(categories, 'Tutorials And Templates') != -1) {
-        n = 'new_tat';
-      }
       articles.in('categories', categories);
     }
 
@@ -50,12 +45,14 @@ controller.index = function(req, res, next) {
 
   articles.desc('sequence');
 
+  response_vars.articles = articles;
+
   if(req.session.user && req.session.user.is_admin) {
     // extends admin page
-    return res.render('article/admin', { articles: articles, n: n });
+    return res.render('article/admin', response_vars);
   }
 
-  return res.render('article', { articles: articles });
+  return res.render('article', response_vars);
 };
 
 // Show Single
@@ -81,10 +78,6 @@ controller.show = function(req, res, next) {
       article.in('categories', req.query.categories);
     }
 
-    // marked as a page
-    if(req.query.is_page) {
-      article.where('is_page', true);
-    }
 
   } else {
     article.where('_id', article_id);
@@ -102,7 +95,7 @@ controller.show = function(req, res, next) {
 // Load Page
 
 controller.page = function(req, res, next) {
-  db.main.model('Article').findOne({ 'slug': req.params.slug, 'is_page': true }, function(err, _article) {
+  db.main.model('Article').findOne({ 'slug': req.params.slug }, function(err, _article) {
     if(_article == null) return next();
     return res.render('article/show', { article: _article });
   });
@@ -112,23 +105,16 @@ controller.page = function(req, res, next) {
 
 controller.form = function(req, res, next) {
   var article_id = req.params.article_id || false,
-      Article = db.articles,
-      a = false;
+      Article = db.articles;
 
   if(article_id) {
     article = Article.findOne({ '_id': article_id });
   } else {
 
-    if(req.query.new_page) {
-      a = { is_page: true };
-    } else if(req.query.new_tat) {
-      a = { categories: ['Tutorials And Templates'] };
-    }
-
-    if(!a) {
-      article = new Article();
+    if(req.query.n) {
+      article = new Article({ categories: [req.query.n] });
     } else {
-      article = new Article(a);
+     article = new Article();
     }
   }
 
@@ -182,7 +168,7 @@ controller.save = function(req, res, next) {
 
       _article.title      = a.title;
       _article.body       = a.body;
-      _article.is_page    = a.is_page;
+      _article.allow_comments    = a.allow_comments;
       _article.is_active  = a.is_active;
 
       if(a.categories) {

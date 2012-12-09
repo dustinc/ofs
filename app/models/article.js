@@ -22,7 +22,7 @@ var Article = module.exports = new Schema({
     name: { type: String, required: true }
   }],
   has_files: { type: Boolean, default: false },
-  is_page: { type: Boolean, default: false },
+  allow_comments: { type: Boolean, default: true },
   is_active : { type: Boolean, default: true }
 });
 
