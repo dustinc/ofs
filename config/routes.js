@@ -141,6 +141,9 @@ module.exports = function(app) {
     next();
   }, article.index);
 
+  app.get('/top-articles', article.top_articles);
+  app.get('/popular-discussions', article.popular_discussions);
+
 
   // file
   app.get('/file/:file_id', main.file);

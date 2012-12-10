@@ -10,6 +10,17 @@ var flashTimeout = function() {
 };
 
 
+var load_articles = function(load_key) {
+  $.get('/'+load_key, function(data) {
+    if(data.error) return false;
+    _.each(data.articles, function(article) {
+      $('#'+load_key).append('<li><a href="'+article.slug+'">'+article.title+'</a></li>');
+    });
+  }, 'json');
+};
+
+
+// Doc Ready
 $(function() {
 
 // init flash timeout
@@ -226,6 +237,9 @@ $('form#newsletter-signup').submit(function() {
     return false;
   }
 
+// Load Top Articles and Popular Discussions
+load_articles('top-articles');
+load_articles('popular-discussions');
 });
 
 });

@@ -271,7 +271,21 @@ controller.comment_delete = function(req, res, next) {
 };
 
 
+// Footer Link Articles
 
+controller.top_articles = function(req, res, next) {
+  db.articles.find().select('title', 'slug').where('categories').in(['Tutorials And Templates']).sort('created_at', -1).limit(3).exec(function(err, _articles) {
+    data = { error: false, articles: _articles };
+    if(err) data.error = err;
+    return res.json(data);
   });
+};
 
+
+controller.popular_discussions = function(req, res, next) {
+  db.articles.find().in('categories', ['Discussion Boards']).sort('modified_at', -1).limit(3).exec(function(err, _articles) {
+    data = { error: false, articles: _articles };
+    if(err) data.error = err;
+    return res.json(data);
+  });
 };
