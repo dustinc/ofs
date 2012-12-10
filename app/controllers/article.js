@@ -202,11 +202,13 @@ controller.comment = function(req, res, next) {
   var Comment = db.main.model('Comment'),
       comment = new Comment(req.body.comment);
 
-  if(req.body.in_reply_to) {
+
+  db.articles.findOne({ _id: req.body.article_id }, function(err, _article) {
+    if(err) return next(err);
+
 
     // Reply to comment
-    db.articles.findOne({ _id: req.body.article_id }, function(err, _article) {
-      if(err) return next(err);
+    if(req.body.in_reply_to) {
 
       var reply = function(comments) {
 
@@ -230,22 +232,16 @@ controller.comment = function(req, res, next) {
         _article.markModified('comments');
       }
 
-      _article.save(function(err) {
-        if(err) next(err);
-        return res.redirect(req.header('Referrer')+'#'+comment._id);
-      });
+    } else {
+      _article.comments.push(comment);
+    }
 
-    });
-
-  } else {
-
-    // Push new comment
-    db.articles.update({ '_id': req.body.article_id }, { $push: { 'comments': comment }}, function(err) {
-      if(err) return next(err);
+    _article.save(function(err) {
+      if(err) next(err);
       return res.redirect(req.header('Referrer')+'#'+comment._id);
     });
 
-  }
+  });
 
 };
 
@@ -269,6 +265,10 @@ controller.comment_delete = function(req, res, next) {
       });
 
     });
+
+  });
+
+};
 
 
 
