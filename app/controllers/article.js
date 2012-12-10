@@ -232,7 +232,7 @@ controller.comment = function(req, res, next) {
 
       _article.save(function(err) {
         if(err) next(err);
-        return res.redirect(req.header('Referrer'));
+        return res.redirect(req.header('Referrer')+'#'+comment._id);
       });
 
     });
@@ -242,7 +242,7 @@ controller.comment = function(req, res, next) {
     // Push new comment
     db.articles.update({ '_id': req.body.article_id }, { $push: { 'comments': comment }}, function(err) {
       if(err) return next(err);
-      return res.redirect(req.header('Referrer'));
+      return res.redirect(req.header('Referrer')+'#'+comment._id);
     });
 
   }
@@ -250,7 +250,6 @@ controller.comment = function(req, res, next) {
 };
 
 controller.comment_delete = function(req, res, next) {
-
 
   db.articles.findOne( { _id: req.query.article_id }, function(err, _article) {
     if(err) return next(err);
@@ -266,7 +265,7 @@ controller.comment_delete = function(req, res, next) {
 
       _article.save(function(err) {
         if(err) return next(err);
-        return res.redirect(req.header('Referrer'));
+        return res.redirect(req.header('Referrer')+'#'+(req.query.parent_id || 'comments'));
       });
 
     });
