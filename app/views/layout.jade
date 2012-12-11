@@ -11,6 +11,9 @@ html
   body
     #container
       include _messages
+      .accessibility
+        #skip
+          a(href='#main-content') Skip to main content
       #header.clearfix
         h1 
           a(href='/', title='Online Faculty Support')
@@ -48,6 +51,7 @@ html
       block divider
         .top-divider
           
+      #main-content
       block content
      
       block footer

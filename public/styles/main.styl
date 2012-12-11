@@ -155,20 +155,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   position absolute
   left 0
   top 0
-  width 100%
   margin-left 0
   text-align center
   font-size 2.0em
+  width 900px
+  height 2px
 
-  #skip a
+  a
     position absolute
     left -9999px
     top -75px
     display block
 
-  #skip a:focus, #skip a:active
+  a:focus, a:active
     position relative
     left 0
+    top 100px
     z-index 9999
     width 400px
     margin 0 auto
@@ -178,7 +180,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     outline none
 
 .accessibility
-  position absolute
+  position relative
+  width 900px
+  height 2px
 
 /** END ACCESSIBILITY **/
 
@@ -207,6 +211,7 @@ body
 #container
   width 900px
   margin 10px auto 0
+  position relative
 
 a
   color $teal
