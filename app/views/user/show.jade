@@ -14,6 +14,16 @@ block content
       h3 Account Info for #{user.name.full}
       ul.sub-menu
         li: a(href="/user/#{user._id}/edit") Edit Account
+
+      if user.img_path
+        img(src=user.img_path, title='Click to edit profile image')#edit-profile-img.pointer
+        form_class = 'hide'
+      else
+        form_class = 'show'
+
+      form(action='/user/#{user._id}/profile/img-upload', method='post', enctype='multipart/form-data', class=form_class)#profile-img-form
+        input(type='file', name='profile_image')
+        input(type='submit', value='upload image')
         
       p <strong>Email:</strong> #{user.email}
       p

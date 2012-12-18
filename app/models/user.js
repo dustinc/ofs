@@ -16,18 +16,19 @@ var User = module.exports = new Schema({
   email: {
     type: String,
     required: true,
-    index: {unique: true, sparse: true}
+    index: { unique: true, sparse: true }
   },
   username: {
     type: String,
     required: true,
-    index: {unique: true, sparse: true}
+    index: { unique: true, sparse: true }
   },
   display_name: { type: String, required: false },
   password: String,
-  user_type: {type: String, required: true},
-  is_admin: {type: Boolean, required: false, default: 0},
-  roles: Array
+  user_type: { type: String, required: true },
+  is_admin: { type: Boolean, required: false, default: 0 },
+  roles: Array,
+  img_path: { type: String }
 });
 
 // timestamp plugin

@@ -49,5 +49,9 @@ $(function() {
     });
   });
 
+  $('#edit-profile-img').click(function() {
+    $('#profile-img-form').slideToggle();
+  });
+
 
 });

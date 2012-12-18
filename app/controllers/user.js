@@ -25,7 +25,7 @@ controller.index = function(req, res, next) {
 
 controller.show = function(req, res, next) {
   return res.render('user/show',
-    {user: db.users.findOne({'_id': req.param('user_id')}) }
+    {user: db.users.findOne({'_id': req.param('user_id')}), scripts: ['/scripts/profile.js'] }
   );
 };
 
@@ -210,6 +210,41 @@ controller.profile = function(req, res, next) {
 
   });
 
+};
+
+// Profile Img Upload
+controller.profile.img_upload = function(req, res, next) {
+  var convert = require('netpbm').convert;
+
+  db.users.findOne({ _id: req.params.user_id }, function(err, _user) {
+    if(err) return next(err);
+    if(_user == null) return next(new Error('Invalid User Id'));
+
+    var profile_img_name = '/images/profile/' + _user._id + '-thumb.png';
+
+    // Convert img to png of said size
+    convert(req.files.profile_image.path,
+      __dirname + '/../../public' + profile_img_name,
+      { width: 160, height: 160 },
+      function(err) {
+        if(err) {
+          req.flash('error', 'Error uploading profile image');
+          return next(new Error('Error uploading profile image'));
+        }
+        _user.img_path = profile_img_name;
+        _user.markModified('img_path');
+        _user.save(function(err) {
+          if(err) {
+            req.flash('error', 'Error saving profile image');
+            return next(err);
+          }
+          req.flash('info', 'Profile image uploaded');
+          return res.redirect('/user/'+_user._id);
+        });
+      }
+    );
+
+  });
 };
 
 // Edit
