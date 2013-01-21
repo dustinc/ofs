@@ -91,6 +91,7 @@ module.exports = function(app) {
   //user profile
   app.get('/user/:user_id/profile', user.profile);
   app.get('/user/:user_id/profile/edit', authenticatedUser, user.profile.edit);
+  app.post('/user/:user_id/profile/img-upload', authenticatedUser, user.profile.img_upload);
   app.post('/user/:user_id/profile/save', authenticatedUser, user.profile.save);
 
 
