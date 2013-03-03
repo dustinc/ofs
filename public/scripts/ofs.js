@@ -20,6 +20,13 @@ var load_articles = function(load_key) {
 };
 
 
+var putFBStatus = function() {
+  $.get('/fbstatus', function(data) {
+      $('#join-our-newsletter p').text(data);
+  },'json');
+};
+
+
 // Doc Ready
 $(function() {
 
@@ -35,6 +42,8 @@ $(function() {
     return confirm('Are you sure you want to permanently delete?');
   });
 
+
+  putFBStatus();
 
 
   /*

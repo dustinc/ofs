@@ -61,6 +61,10 @@ User.statics.getUsers = function(callback) {
 };
 
 
+User.methods.verifyPassword = function(password) {
+  
+};
+
 // pre init
 
 User.pre('init', function(next) {

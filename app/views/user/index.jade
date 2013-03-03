@@ -14,8 +14,12 @@ block sub_content
               |  
               if s_user.is_admin
                 a(href='/admin/user/#{user._id}/delete').delete.button-box delete
-              p <strong>Email:</strong> #{user.email} 
-              p <strong>Name:</strong> #{user.firstname} #{user.lastname}
+              p
+                strong Email:
+                |  #{user.email}
+              p
+                strong Name:
+                |  #{user.firstname} #{user.lastname}
         else
           li
             p No Users

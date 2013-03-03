@@ -1,6 +1,6 @@
 module.exports = function(app) {
   
-  var port = process.env.PORT || 3000;
+  var port = process.env.PORT || (process.env.NODE_ENV == 'production') ? 80 : 3000;
 
   // All Environments
   app.configure(function() {

@@ -8,7 +8,7 @@ module.exports = function(app) {
     }
 
     err.status = res.statusCode;
-    err.header = error_header[err.status];
+    err.header = error_header[err.status] || typeof err;
     res.render('error', {error: err});
   });
 

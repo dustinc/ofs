@@ -25,7 +25,9 @@ html
               input(type='text', id='user-name', name='username', value='username')
               input(type='password', id='password', name='password', value='password')
               input(type='submit', id='login-button', name='Login', value='Login')
-              p: a(href='/forgotpassword') Forgot password
+              p
+                a(href='/auth/facebook') Facebook
+                a(href='/forgotpassword') Forgot password
             .clearfix
             p
               a(href='/signup') Create an account

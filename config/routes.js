@@ -7,6 +7,7 @@ module.exports = function(app) {
       lookup = require('../app/controllers/lookup')(app),
       article = require('../app/controllers/article')(app),
       db = app.set('db'),
+      passport = require('passport'),
 
       // middleware
       middleware = require('../lib/middleware')(app),
@@ -101,8 +102,29 @@ module.exports = function(app) {
 
 
   // login
-  app.get('/login', main.login);
-  app.post('/login', main.login);
+  app.get('/login', function(req, res, next) {
+    return res.redirect('/');
+  });
+  app.post('/login',
+    passport.authenticate('local',{
+      failureRedirect: '/login',
+      failureFlash: true
+    }), function(req, res, next) {
+      return res.redirect(req.header('Referrer'));
+    }
+  );
+//   app.get('/auth/facebook',
+//     passport.authenticate('facebook'),
+//     function(req, res){
+//       // The request will be redirected to Facebook for authentication, so this
+//       // function will not be called.
+//   });
+//   app.get('/auth/facebook/callback',
+//     passport.authenticate('facebook', { failureRedirect: '/login' }),
+//     function(req, res) {
+//       res.redirect('/');
+//   });
+  app.get('/fbstatus', main.fbstatuses);
   app.get('/logout', main.logout);
 
 

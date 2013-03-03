@@ -36,7 +36,7 @@ controller.create = function(req, res, next) {
   var User = db.main.model('User'),
       user = req.body.user,
       verr = false;
-
+console.log(user);
   if(user.email == '') {
     verr = true;
     req.flash('error', 'Email Required');
@@ -321,7 +321,7 @@ controller.profile.save = function(req, res, next) {
 
       // Save
       _profile.save(function(err) {
-        if(err) return next(err);
+        if(err) {console.log(err); return next(err);}
         return res.redirect('/user/'+_profile.user_id+'/profile/');
       });
 

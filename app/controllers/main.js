@@ -27,6 +27,39 @@ controller.index = function(req, res, next) {
   res.render('home');
 };
 
+
+controller.fbstatuses = function(req, res, next) {
+
+  client_id = '438552086192944';
+  secret = 'Bodie123'
+
+  var token_url = 'https://graph.facebook.com/oauth/access_token?client_id='+client_id+'&client_secret='+secret+'&grant_type=fb_exchange_token&fb_exchange_token='.access_token
+
+
+'https://graph.facebook.com/oauth/access_token?client_id='+client_id+'&client_secret='+secret+'&grant_type=client_credentials
+
+
+
+  var access_token = 'AAACEdEose0cBAEbNTUgZANzhsNtx5dyypjV2miYeHckrFheZAqoyu7qNQldk2MbrWZBEgUvZCCrTuoVVuF33TiEz3wy3gWNVnQTOQRfxYfKvWBL82oA1',
+      fields = 'statuses.fields(message).limit(1)',
+      fb_url = 'https://graph.facebook.com/438552086192944?fields='+fields+'&access_token='+access_token;
+
+  var request = require('request');
+
+  request(fb_url, function(err, response, data) {
+    if(err) return next(err);
+    if(response.statusCode != 200) {
+      
+    }
+    var ret = JSON.parse(data);
+    console.log(ret.statuses.data[0].message);
+    return res.send('hi');
+    //return res.json(ret.statuses.data[0].message);
+  });
+
+}
+
+
 // login
 
 controller.login = function(req, res, next) {
@@ -69,7 +102,7 @@ controller.login = function(req, res, next) {
 // Logout
 
 controller.logout = function(req, res, next) {
-  req.session.destroy();
+  req.logout();
   return res.redirect('/');
 };
 
@@ -307,7 +340,7 @@ controller.signup = function(req, res, next) {
   return res.render('signup', {user_types: user_types});
 };
 
-// adjunct search
+// Adjunct Search
 
 controller.faculty_search = function(req, res, next) {
 
@@ -547,21 +580,19 @@ controller.loadfixtures = function(req, res, next) {
 
   var user = new User(user_fixture);
   user.save(function(err) {
-    //if(err) return next(err);
 
     Lookup.collection.remove(function(err) {
       if(err) return next(err);
       var total = lookup_fixtures.length,
           count = 0;
 
-      lookup_fixtures.forEach(function(fixture) {
+      _.each(lookup_fixtures, function(fixture) {
         var lookup = new Lookup(fixture);
         lookup.save(function(err) {
-          if(err) return next(err);
           count++;
           if(count == total) {
             req.flash('info', 'Fixures Loaded');
-            return res.redirect(req.header('Referrer'));
+            return res.redirect('/');
           }
         });
       });

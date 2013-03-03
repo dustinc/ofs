@@ -103,10 +103,12 @@ Teacher.virtual('highest_degree').get(function() {
 
 Teacher.pre('save', function(next) {
 
+  // Push 'Eligible Areas' to Lookups
   if(_.isArray(this.experience.eligible_areas)) {
     this.model('Lookup').pushToLookup(this.experience.eligible_areas, 'Eligible Areas');
   }
 
+  // Push 'Courses Taught' to Lookups
   if(_.isArray(this.experience.courses_taught)) {
     this.model('Lookup').pushToLookup(this.experience.courses_taught, 'Courses Taught');
   }
