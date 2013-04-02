@@ -3,7 +3,7 @@
 mixin category(cat)
   div.item
     input(type='text', name='article[categories]', value=cat)
-    a(title='Remove Category', class='button-box').remove_item Remove This Category
+    a(title='Remove Category', class='button-box').remove-item Remove This Category
 
 
 extends ../admin/index
@@ -46,7 +46,7 @@ block sub_content
       else
         +category()
 
-      a(title='Add Category', class='button-box').add_item Add Category
+      a(title='Add Category', class='button-box').add-item Add Category
 
     div
       label Allow Comments

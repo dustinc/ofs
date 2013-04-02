@@ -24,7 +24,7 @@ controller.load = function(template, req, res, next) {
 // index
 
 controller.index = function(req, res, next) {
-  res.render('home');
+  res.render('home', { weekly_thought: db.articles.findOne({ categories: 'Weekly Thought' }).sort('created_at', -1) });
 };
 
 // login

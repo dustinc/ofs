@@ -142,6 +142,12 @@ module.exports = function(app) {
     next();
   }, article.index);
 
+  app.get('/weekly-thoughts', function(req, res, next) {
+    req.query.page_title = 'Weekly Thoughts';
+    req.query.categories = ['Weekly Thought'];
+    next()
+  }, article.index);
+
   app.get('/top-articles', article.top_articles);
   app.get('/popular-discussions', article.popular_discussions);
 
