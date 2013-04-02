@@ -21,6 +21,7 @@
       , "request"           : "2.12.0"
       , "xml2js"            : "0.2.2"
       , "netpbm"            : "0.1.1"
+      , "sitemap"           : "0.6.0"
     }
   , "main"    : "server.js"
   , "engines" : { 

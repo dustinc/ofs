@@ -14,7 +14,7 @@ module.exports = function(app) {
       authenticatedAdmin = middleware.authenticatedAdmin,
       authenticatedUser = middleware.authenticatedUser;
 
-
+  var sm = require('sitemap');
 
   // set local auth var for all pages.
   app.get('/*', isLoggedIn);
@@ -158,6 +158,30 @@ module.exports = function(app) {
   // Jobs
   app.get('/jobs?/details', main.job_details);
 
+  sitemap = sm.createSitemap ({
+    hostname: 'http://onlinefacultysupport.com',
+    cacheTime: 600000,
+    urls: [
+      { url: '/' },
+      { url: '/articles' },
+      { url: '/personalized-help' },
+      { url: '/tutorials-and-templates' },
+      { url: '/discussion-boards' },
+      { url: '/top-articles' },
+      { url: '/popular-discussions' },
+      { url: '/faculty/search' },
+      { url: '/jobs/search' },
+      { url: '/jobs/details' }
+    ]
+  });
+
+  app.get('/sitemap.xml', function(req, res) {
+    sitemap.toXML( function (xml) {
+        res.header('Content-Type', 'application/xml');
+        res.send( xml );
+    });
+  });
+
 
   // Newsletter
   app.get('/newsletter/signup', main.newsletter_signup);
@@ -173,8 +197,6 @@ module.exports = function(app) {
     return res.send(md.parse(req.query.markdown));
   });
 
-  // temp
-  app.get('/loadfixtures', main.loadfixtures);
 
 
   /*
