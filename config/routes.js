@@ -144,7 +144,7 @@ module.exports = function(app) {
 
   app.get('/weekly-thoughts', function(req, res, next) {
     req.query.page_title = 'Weekly Thoughts';
-    req.query.categories = ['Weekly Thought'];
+    req.query.categories = ['Weekly Thoughts'];
     next()
   }, article.index);
 

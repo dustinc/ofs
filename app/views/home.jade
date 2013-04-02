@@ -67,7 +67,8 @@ block content
     #social-ctas.clearfix
       section#join-our-newsletter
         h2 Thoughts from an Online Faculty Member
-        p#weekly-thought= weekly_thought
+        div#weekly-thought
+          !{weekly_thought.content}
         div.drj
           img(src='/images/drj.jpg')
           span --Dr. J
