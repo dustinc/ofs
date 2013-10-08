@@ -8,8 +8,8 @@ block sub_content
       ul.user-values
         for user in users
           li
-            h4: a(href='#', id=user.username, class='toggle') #{user.username}
-            div(class=user.username + ' hide')
+            h4: a(href='#', id=user.username.replace(/\s/g, '').toLowerCase(), class='toggle') #{user.username}
+            div(class=user.username.replace(/\s/g, '').toLowerCase() + ' hide')
               a(href='/user/#{user._id}').button-box edit
               |  
               if s_user.is_admin
