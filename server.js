@@ -14,7 +14,7 @@ if(!process.env.NODE_ENV) {
 }
 
 var app = require('./config/app')();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 80;
 
 app.listen(port);
 
