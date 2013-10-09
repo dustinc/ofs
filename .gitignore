@@ -1,4 +1,5 @@
 node_modules
+public/images/profile
 npm-debug.log
 *.css
 *.swp
