@@ -95,7 +95,7 @@ controller.show = function(req, res, next) {
 // Load Page
 
 controller.page = function(req, res, next) {
-  db.main.model('Article').findOne({ 'slug': req.params.slug }, function(err, _article) {
+  db.main.model('Article').findOne({ 'slug': req.params.slug }).sort({ sequence: -1 }).exec(function(err, _article) {
     if(_article == null) return next();
     return res.render('article/show', { article: _article });
   });
@@ -150,6 +150,7 @@ controller.save = function(req, res, next) {
       db.counters.update({ _id: 'blogSequence' }, { $inc: { c: 1 } }, { upsert: true }, function() {
         db.counters.findOne({ _id: 'blogSequence' }, function(err, _counter) {
           a.sequence = _counter.c;
+          a.created_at = new Date();
           _article = new Article(a);
           _article.save(function(err) {
             if(err) {
