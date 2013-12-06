@@ -360,7 +360,7 @@ controller.job_search = function(req, res, next) {
   // Search
   if(query_string != '') {
 
-    var request_url = 'http://www.higheredjobs.com/search/advanced_action.cfm'+query_string;
+    var request_url = 'http://www.higheredjobs.com/search/remote.cfm'+query_string;
 
     // Send request
     request(request_url, function(err, response, data) {

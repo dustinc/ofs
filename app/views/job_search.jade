@@ -6,6 +6,12 @@ block content
 
     form(action='/jobs/search', method='get', id='jobSearchForm')
 
+      div
+
+        input(type='hidden', name='Remote', value='2')
+        input(type='hidden', name='SortBy', value='1')
+        input(type='hidden', name='NumJobs', value='100')
+
       fieldset.jobCategory
         legend Job Category
         p Hold the "Ctrl" button and click to select multiple categories.
@@ -249,12 +255,6 @@ block content
           input(type='checkbox', name='InstType', value='3', checked='checked')
           label Outside Higher Education
 
-        div
-          input(type='hidden', name='Remote', value='2')
-          input(type='hidden', name='ShowAll', value='yes')
-          input(type='hidden', name='SortBy', value='1')
-
-        
     
       .clearfix
       
