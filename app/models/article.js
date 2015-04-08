@@ -36,8 +36,8 @@ Article.virtual('excerpt').get(function() {
   var md = require('markdown').markdown;
 
   if(this.body.length > 20) {
-    return md.toHTML(this.body.substring(0, this.body.lastIndexOf(' ', 150))
-      + '...' + "<a href='/article/"+this._id+"'>read more</a>");
+    return md.toHTML(this.body.substring(0, this.body.lastIndexOf(' ', 150)))
+      + "<a href='/article/"+this._id+"'>...read more</a>";
   }
 
   return md.toHTML(this.body);
