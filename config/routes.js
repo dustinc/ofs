@@ -195,12 +195,12 @@ module.exports = function(app) {
 
   // xhr markdown
   app.get('/markdown', function(req, res, next) {
-    var md = require('discount');
+    var md = require('markdown').markdown;
     if(!req.xhr) {
       return res.send('not allowed');
     }
 
-    return res.send(md.parse(req.query.markdown));
+    return res.send(md.toHTML(req.query.markdown));
   });
 
 

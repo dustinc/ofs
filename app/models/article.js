@@ -33,20 +33,20 @@ Article.plugin(TimeStamp);
  */
 
 Article.virtual('excerpt').get(function() {
-  var md = require('discount');
+  var md = require('markdown').markdown;
 
   if(this.body.length > 20) {
-    return md.parse(this.body.substring(0, this.body.lastIndexOf(' ', 150))
+    return md.toHTML(this.body.substring(0, this.body.lastIndexOf(' ', 150))
       + '...' + "<a href='/article/"+this._id+"'>read more</a>");
   }
 
-  return md.parse(this.body);
+  return md.toHTML(this.body);
 });
 
 Article.virtual('content').get(function() {
-  var md = require('discount');
+  var md = require('markdown').markdown;
   if(this.body)
-    return md.parse(this.body);
+    return md.toHTML(this.body);
   return '';
 });
 
